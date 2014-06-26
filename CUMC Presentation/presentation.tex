@@ -77,7 +77,7 @@
   \titlepage
   \note{}} } 
 
-\begin{frame}{What is Interpolation?}
+\begin{frame}{Motivation}
 Given a set of measurments \subt{$\{f_i\}_{i=1}^N$}
 taken at corresponding data sites \subt{$\{x_i\}_{i=1}^N$}
 we want to find an interpolation function \subt{$s(x)$}
@@ -92,6 +92,20 @@ that infroms us on our system at locations different from our data sites.\\
 \item[n-D:] Machine learning, financial models, system optimization
 \end{itemize}
 
+\note{}
+\end{frame}
+
+\begin{frame}{What makes a good fit?}
+We want $s(x)$ to be a good fit to our data, but what does this mean?
+\bi
+\item Interpolation: We want $s(x)$ to \subt{exactly match} our measurments at our data sites. \\ 
+i.e. $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
+\item Approximation: We want $s(x)$ to \subt{closely match} our measurments at our data sites.\\
+i.e. $s(x_i)\approx f_i$ $\forall i\in\{0 \mathellipsis N \}$ \\
+e.g. with Least Squares 
+\ei
+
+For our purposes today, we will only consider interpolation.
 
 \note{}
 \end{frame}
