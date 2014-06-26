@@ -1,5 +1,6 @@
 \documentclass[12pt,t]{beamer}
 \usepackage{graphicx}
+\usepackage{amsmath,amssymb}
 \setbeameroption{hide notes}
 \setbeamertemplate{note page}[plain]
 
@@ -110,7 +111,14 @@ For our purposes today, we will only consider interpolation.
 \note{}
 \end{frame}
 
+\begin{frame}{Our Problem, Restated}
+\begin{vcenter}
+\subt{Interpolation of Scattered Data}
 
+Given data $(x_i,f_i)$, $i=1, \mathellipsis, N$, such that $x_i \in \mathbb{R}^n$, $y_i \in \mathbb{R}$, we want to find a continuous function $s(x)$ such that $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
+\end{vcenter}
+\note{}
+\end{frame}
 
 
 \end{document}
