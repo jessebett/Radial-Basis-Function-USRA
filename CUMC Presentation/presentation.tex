@@ -112,11 +112,38 @@ For our purposes today, we will only consider interpolation.
 \end{frame}
 
 \begin{frame}{Our Problem, Restated}
-\begin{vcenter}
+
 \subt{Interpolation of Scattered Data}
 
 Given data $(x_i,f_i)$, $i=1, \mathellipsis, N$, such that $x_i \in \mathbb{R}^n$, $y_i \in \mathbb{R}$, we want to find a continuous function $s(x)$ such that $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
-\end{vcenter}
+
+\note{}
+\end{frame}
+
+\begin{frame}{A Familiar Approach}
+\subt{Convenient Assumtption}
+
+Assume $s(x)$ is a linear combination of \subt{basis functions} $\psi_j$
+\begin{center}
+$s(x)=\sum_{j=1}^N \lambda_j \psi_j$
+\end{center}
+
+\subt{Interpolation as a Linear System}
+
+Following this assumption we have a system of linear equations
+\begin{center}
+$A\boldsymbol{\lambda}=\boldsymbol{f}$
+\end{center}
+ where
+ \bi
+\item[A] is called the \subt{interpolation matrix} whose entries are given by\\
+\begin{center}
+$A_{ij}=\psi_j(x_i)$, $i,j= 1 \mathellipsis N$
+\end{center}
+\item[$\boldsymbol{\lambda}$] $=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T$
+\item[$\boldsymbol{f}$] $=\left[ f_1, \mathellipsis, f_N \right]^T$
+\ei
+
 \note{}
 \end{frame}
 
