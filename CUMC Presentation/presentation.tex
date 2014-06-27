@@ -111,11 +111,12 @@ For our purposes today, we will only consider interpolation.
 \note{}
 \end{frame}
 
-\begin{frame}{Our Problem, Restated}
+\begin{frame}[c]{Our Problem, Restated}
 
 \subt{Interpolation of Scattered Data}
 
 Given data $(x_i,f_i)$, $i=1, \mathellipsis, N$, such that $x_i \in \mathbb{R}^n$, $y_i \in \mathbb{R}$, we want to find a continuous function $s(x)$ such that $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
+
 
 \note{}
 \end{frame}
@@ -143,6 +144,30 @@ $A_{ij}=\psi_j(x_i)$, $i,j= 1 \mathellipsis N$
 \item[$\boldsymbol{\lambda}$] $=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T$
 \item[$\boldsymbol{f}$] $=\left[ f_1, \mathellipsis, f_N \right]^T$
 \ei
+
+\note{}
+\end{frame}
+
+\begin{frame}{The Well-Posed Problem}
+\begin{center}
+$A\boldsymbol{\lambda}=\boldsymbol{f}$
+\end{center}
+
+Solving this linear system, thus finding $s(x)$, is only possible if the problem \subt{well-posed}, i.e., $\exists$ a unique soltuion. 
+\bigskip
+
+\subt{Result from introductory linear algebra:} 
+
+The problem will be well-posed if and only if the interpolation matrix A is \subt{non-singular}, i.e., $\det(A)\neq0$.
+\bigskip
+
+\subt{Note:} The non-singularity of A will depend on our choice of basis functions, $\psi_{j=1}^N$
+
+\note{}
+\end{frame}
+
+\begin{frame}{Easily Well-Posed in 1D}
+
 
 \note{}
 \end{frame}
