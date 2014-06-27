@@ -231,4 +231,28 @@ So each basis function, $\psi_j(x)$, is our basic function shifted so that the \
 \note{}
 \end{frame}
 
+\begin{frame}{Radial Basis Functions}
+
+\begin{equation*}
+\psi_j(x)=|x-x_j|, j=1, \mathellipsis, N
+\end{equation*}
+
+Notice that $\psi_k(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions}.
+\bigskip
+
+Since the basis functions only depend on distance, the interpolation matrix becomes
+\begin{equation*}
+A=
+\begin{bmatrix}
+|x_1-x_1| & |x_1-x_2| & \cdots & |x_1-x_N|\\
+|x_2-x_1| & |x_2-_2|& \cdots & |x_2-x_N|\\
+\vdots & \vdots & \ddots & \vdots\\
+|x_N-x_1| & |x_N-_2|& \cdots & |x_N-x_N
+\end{bmatrix}
+\end{equation*}
+called a \subt{distance matrix}.
+
+\note{}
+\end{frame}
+
 \end{document}
