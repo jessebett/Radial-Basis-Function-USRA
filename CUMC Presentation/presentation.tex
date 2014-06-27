@@ -83,7 +83,7 @@ Given a set of measurments \subt{$\{f_i\}_{i=1}^N$}
 taken at corresponding data sites \subt{$\{x_i\}_{i=1}^N$}
 we want to find an interpolation function \subt{$s(x)$}
 that infroms us on our system at locations different from our data sites.\\
-
+\bigskip 
 
 \subt{Examples of Data Sites and Measurments}
 \begin{itemize}
@@ -176,6 +176,22 @@ We are familiar with \subt{polynomial interpolation}, interpolating from N data 
 \begin{center}
 $\psi_{j=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \end{center}
+\note{}
+\end{frame}
+
+\begin{frame}{A Problem in Higher Dimensions}
+For n-Dimensions where $n\geq 2$ there is no such gaurentee.
+\bigskip
+
+For any set of basis functions, $\psi_{j=1}^N$ (chosen independently of the data sites) $\exists$ a set of distinct data sites $\{x_i\}_{i=1}^N$
+such that the interpolation matrix becomes singular. 
+\bigskip
+
+\subt{Implication:}
+If we choose our basis functions independently of the data, we are not guarenteed a well-posed problem.
+
+
+
 \note{}
 \end{frame}
 
