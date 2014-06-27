@@ -291,4 +291,21 @@ Our interpolant becomes
 \note{}
 \end{frame}
 
+\begin{frame}{Building a Better Basic Function}
+However, $\psi_j(x)=||x-x_j||$ has a discontinuity in its first derivative at $x_j$. This causes the interpolant to have a discontinuous first derivative at each data site. This is obviously not ideal.
+\bigskip
+
+In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic function to one with continuous derivatives.
+
+\subt{Hardy's Multiquadrc Kernel}
+\begin{equation*}
+\psi(x)=\sqrt{\epsilon^2 + x^2}
+\end{equation*}
+where $\epsilon > 0$.
+
+\subt{Note:} The case where $\epsilon=0$ is just the previous basic function.
+
+\note{}
+\end{frame}
+
 \end{document}
