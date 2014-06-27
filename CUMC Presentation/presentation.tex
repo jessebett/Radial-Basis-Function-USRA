@@ -308,4 +308,21 @@ where $\epsilon > 0$.
 \note{}
 \end{frame}
 
+\begin{frame}{Radial Basis Kernels}
+As before, we can generate our basis functions by translating Hardy's basic function to center on our data sites.
+\begin{equation*}
+\psi_j(x)=\sqrt{\epsilon^2 + (||x-x_j||)^2}
+\end{equation*}
+
+Notice that the Hardy's Multiquadric function is still radially symetric about its center, making it a Radial Basis Function (RBF). 
+All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_j||)$
+
+\subt{The RBF Method}
+\begin{equation*}
+s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
+\end{equation*}
+
+\note{}
+\end{frame}
+
 \end{document}
