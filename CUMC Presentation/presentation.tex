@@ -245,12 +245,48 @@ Since the basis functions only depend on distance, the interpolation matrix beco
 A=
 \begin{bmatrix}
 |x_1-x_1| & |x_1-x_2| & \cdots & |x_1-x_N|\\
-|x_2-x_1| & |x_2-_2|& \cdots & |x_2-x_N|\\
+|x_2-x_1| & |x_2-x_2|& \cdots & |x_2-x_N|\\
 \vdots & \vdots & \ddots & \vdots\\
-|x_N-x_1| & |x_N-_2|& \cdots & |x_N-x_N
+|x_N-x_1| & |x_N-x_2|& \cdots & |x_N-x_N|
 \end{bmatrix}
 \end{equation*}
 called a \subt{distance matrix}.
+
+\note{}
+\end{frame}
+
+\begin{frame}{The Distance Matrix}
+Distance matricies have the property that, for Euclidean distances in any dimensions, the distance matrix is non-singular.
+\bigskip
+
+This means that our interpolation problem
+
+\begin{equation*}
+\begin{bmatrix}
+||x_1-x_1|| & ||x_1-x_2|| & \cdots & ||x_1-x_N||\\
+||x_2-x_1|| & ||x_2-x_2||& \cdots & ||x_2-x_N||\\
+\vdots & \vdots & \ddots & \vdots\\
+||x_N-x_1|| & ||x_N-x_2||& \cdots & ||x_N-x_N||
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1\\
+\lambda_2\\
+\vdots\\
+\lambda_N
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_1\\
+f_2\\
+\vdots\\
+f_N
+\end{bmatrix}
+\end{equation*}
+is well-posed!
+\bigskip
+
+Our interpolant becomes 
+\subt{$s(x)=\sum_{j=1}^N \lambda_j ||x-x_j|| $}
 
 \note{}
 \end{frame}
