@@ -63,7 +63,7 @@
 \title{Introduction to Radial Basis Functions}
 \subtitle{}
 \author{\href{https://github.com/jessebett/}{Jesse Bettencourt}}
-\institute{\href{}{McMaster University}}
+\institute{McMaster University}
 \date{\href{jessebett@gmail.com}{\tt \scriptsize jessebett@gmail.com}
 \\[-4pt]
 \href{http://github.com/jessebett}{\tt \scriptsize github.com/jessebett}
@@ -76,10 +76,24 @@
 
 % title slide
 \setbeamertemplate{footline}{} % no page number here
-\frame{
+\begin{frame}
   \titlepage
-  \note{}}
+  \note{}
+\end{frame}
 
+\begin{frame}{Motivation}
+Given a set of measurments \textcolor{pink}{$\{f_i\}_{i=1}^N$}
+taken at corresponding data sites \textcolor{orange}{$\{x_i\}_{i=1}^N$}
+we want to find an interpolation function \textcolor{blue}{$s(x)$}
+that infroms us on our system at locations different from our data sites.\\
+\bigskip 
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig1.png}
+\end{figure}
+
+\note{}
+\end{frame}
 \begin{frame}{Motivation}
 Given a set of measurments \textcolor{pink}{$\{f_i\}_{i=1}^N$}
 taken at corresponding data sites \textcolor{orange}{$\{x_i\}_{i=1}^N$}
