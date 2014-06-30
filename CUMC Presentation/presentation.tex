@@ -29,6 +29,9 @@
 \definecolor{vhilight}{RGB}{255,111,207}
 \definecolor{lolight}{RGB}{155,155,155}
 %\definecolor{green}{RGB}{125,250,125}
+\definecolor{pink}{HTML}{FC0964}
+\definecolor{orange}{HTML}{FD971F}
+\definecolor{blue}{HTML}{66D9EF}
 
 % use those colors
 \setbeamercolor{titlelike}{fg=title}
@@ -72,16 +75,15 @@
 \begin{document}
 
 % title slide
-{
 \setbeamertemplate{footline}{} % no page number here
 \frame{
   \titlepage
-  \note{}} } 
+  \note{}}
 
 \begin{frame}{Motivation}
-Given a set of measurments \subt{$\{f_i\}_{i=1}^N$}
-taken at corresponding data sites \subt{$\{x_i\}_{i=1}^N$}
-we want to find an interpolation function \subt{$s(x)$}
+Given a set of measurments \textcolor{pink}{$\{f_i\}_{i=1}^N$}
+taken at corresponding data sites \textcolor{orange}{$\{x_i\}_{i=1}^N$}
+we want to find an interpolation function \textcolor{blue}{$s(x)$}
 that infroms us on our system at locations different from our data sites.\\
 \bigskip 
 
@@ -163,7 +165,7 @@ The problem will be well-posed if and only if the interpolation matrix A is \sub
 
 \subt{Note:} The non-singularity of A will depend on our choice of basis functions, $\psi_{j=1}^N$
 
-\note{}
+\note{INCLUDE WELL-Conditioned Here!}
 \end{frame}
 
 \begin{frame}{Easily Well-Posed in 1D}
@@ -228,7 +230,8 @@ So each basis function, $\psi_j(x)$, is our basic function shifted so that the \
 
 \subt{Note:} It's possible to have other choices of centers, but in most implementations the centers coincide with data sites.
 
-\note{}
+\note{Change to || ||
+Comment on Radial Symmetry}
 \end{frame}
 
 \begin{frame}{Radial Basis Functions}
@@ -323,6 +326,23 @@ s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
 \end{equation*}
 
 \note{}
+\end{frame}
+
+\begin{frame}{Radial Basis Kernels}
+
+\subt{The RBF Method}
+\begin{equation*}
+s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
+\end{equation*}
+
+There are a few commonly used RBF Kernels:
+
+% \begin{tabular}
+% test & test\\
+% test & test
+% \end{tabular}
+
+\note{Graphs of each kernel!}
 \end{frame}
 
 \end{document}
