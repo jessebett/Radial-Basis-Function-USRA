@@ -32,6 +32,8 @@
 \definecolor{pink}{HTML}{FC0964}
 \definecolor{orange}{HTML}{FD971F}
 \definecolor{blue}{HTML}{66D9EF}
+\definecolor{green}{HTML}{7FB347}
+
 
 % use those colors
 \setbeamercolor{titlelike}{fg=title}
@@ -113,14 +115,13 @@ that infroms us on our system at locations different from our data sites.\\
 \end{frame}
 
 \begin{frame}{What makes a good fit?}
-We want $s(x)$ to be a good fit to our data, but what does this mean?
 \bi
-\item Interpolation: We want $s(x)$ to \subt{exactly match} our measurments at our data sites. \\ 
-i.e. $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
-\item Approximation: We want $s(x)$ to \subt{closely match} our measurments at our data sites.\\
-i.e. $s(x_i)\approx f_i$ $\forall i\in\{0 \mathellipsis N \}$ \\
-e.g. with Least Squares 
+\item \textcolor{orange}{Interpolation}: $s(x)$ \subt{exactly matches} our measurments at our data sites. \\ 
+\item \textcolor{green}{Approximation}: We want $s(x)$ to \subt{closely matches} our measurments at our data sites, e.g. with Least Squares 
 \ei
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig2.png}
+\end{figure}
 
 For our purposes today, we will only consider interpolation.
 
