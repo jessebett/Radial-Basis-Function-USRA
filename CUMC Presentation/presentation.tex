@@ -84,10 +84,10 @@
 \end{frame}
 
 \begin{frame}{Motivation}
-Given a set of measurments \textcolor{pink}{$\{f_i\}_{i=1}^N$}
+Given a set of measurements \textcolor{pink}{$\{f_i\}_{i=1}^N$}
 taken at corresponding data sites \textcolor{orange}{$\{x_i\}_{i=1}^N$}
 we want to find an interpolation function \textcolor{blue}{$s(x)$}
-that infroms us on our system at locations different from our data sites.\\
+that informs us on our system at locations different from our data sites.\\
 \bigskip 
 
 \begin{figure}
@@ -97,16 +97,16 @@ that infroms us on our system at locations different from our data sites.\\
 \note{}
 \end{frame}
 \begin{frame}{Motivation}
-Given a set of measurments \textcolor{pink}{$\{f_i\}_{i=1}^N$}
+Given a set of measurements \textcolor{pink}{$\{f_i\}_{i=1}^N$}
 taken at corresponding data sites \textcolor{orange}{$\{x_i\}_{i=1}^N$}
 we want to find an interpolation function \textcolor{blue}{$s(x)$}
-that infroms us on our system at locations different from our data sites.\\
+that informs us on our system at locations different from our data sites.\\
 \bigskip 
 
 \subt{Examples of Data Sites and Measurments}
 \begin{itemize}
-\item[1D:] A series of temperature measurments over a time period
-\item[2D:] Surface tempearture of a lake based on measurments collected at sample surface locations 
+\item[1D:] A series of temperature measurements over a time period
+\item[2D:] Surface temperature of a lake based on measurements collected at sample surface locations 
 \item[3D:] Distribution of temperature within a lake
 \item[n-D:] Machine learning, financial models, system optimization
 \end{itemize}
@@ -116,8 +116,8 @@ that infroms us on our system at locations different from our data sites.\\
 
 \begin{frame}{What makes a good fit?}
 \bi
-\item \textcolor{orange}{Interpolation}: $s(x)$ \subt{exactly matches} our measurments at our data sites. \\ 
-\item \textcolor{green}{Approximation}: $s(x)$ \subt{closely matches} our measurments at our data sites, e.g. with Least Squares 
+\item \textcolor{orange}{Interpolation}: $s(x)$ \subt{exactly matches} our measurements at our data sites. \\ 
+\item \textcolor{green}{Approximation}: $s(x)$ \subt{closely matches} our measurements at our data sites, e.g. with Least Squares 
 \ei
 \begin{figure}
 \includegraphics[width=0.7\textwidth, keepaspectratio]{fig2.png}
@@ -182,7 +182,7 @@ $A_{ii}=\psi_i(x_i)$, $i,i= 1 \mathellipsis N$
 $A\boldsymbol{\lambda}=\boldsymbol{f}$
 \end{center}
 
-Solving this linear system, thus finding $s(x)$, is only possible if the problem \subt{well-posed}, i.e., $\exists$ a unique soltuion. 
+Solving this linear system, thus finding $s(x)$, is only possible if the problem \subt{well-posed}, i.e., $\exists$ a unique solution 
 \bigskip
 
 \subt{Result from introductory linear algebra:} 
@@ -196,7 +196,7 @@ The problem will be well-posed if and only if the interpolation matrix A is \sub
 \end{frame}
 
 \begin{frame}{Easily Well-Posed in 1D}
-In 1D, many choices of basis functions will gauentee a well-posed problem as long as the data-sites are distinct. 
+In 1D, many choices of basis functions will guarantee a well-posed problem as long as the data-sites are distinct. 
 \bigskip
 
 \subt{Example}
@@ -213,7 +213,7 @@ $\psi_{i=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \end{frame}
 
 \begin{frame}{A Problem in Higher Dimensions}
-For n-Dimensions where $n\geq 2$ there is no such gaurentee.
+For n-Dimensions where $n\geq 2$ there is no such guarantee.
 \bigskip
 
 For any set of basis functions, $\psi_{i=1}^N$ (chosen independently of the data sites) $\exists$ a set of distinct data sites $\{x_i\}_{i=1}^N$
@@ -221,7 +221,7 @@ such that the interpolation matrix becomes singular.
 \bigskip
 
 \subt{Implication:}
-If we choose our basis functions independently of the data, we are not guarenteed a well-posed problem.
+If we choose our basis functions independently of the data, we are not guaranteed a well-posed problem.
 \bigskip
 
 \subt{Note:}
@@ -233,7 +233,7 @@ This results from the Haar-Mairhuber-Curtis Theorem
 
 \begin{frame}[c]{A Solution in Higher Dimensions}
 \subt{Implication:}
-If we choose our basis functions independently of the data, we are not guarenteed a well-posed problem.
+If we choose our basis functions independently of the data, we are not guaranteed a well-posed problem.
 \bigskip
 
 \subt{Solution?}
@@ -321,7 +321,7 @@ called a \subt{distance matrix}.
 \end{frame}
 
 \begin{frame}{The Distance Matrix}
-Distance matricies have the property that, for Euclidean distances in any dimensions, the distance matrix is non-singular.
+Distance matrices have the property that, for Euclidean distances in any dimensions, the distance matrix is non-singular.
 \bigskip
 
 This means that our interpolation problem
@@ -368,7 +368,8 @@ In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic
 \end{equation*}
 where $\epsilon > 0$.
 
-\subt{Note:} The case where $\epsilon=0$ is just the previous basic function.
+\subt{Note:} The case where $\epsilon=0$ is 
+ the previous basic function.
 
 \note{}
 \end{frame}
@@ -379,7 +380,7 @@ As before, we can generate our basis functions by translating Hardy's basic func
 \psi_i(x)=\sqrt{\epsilon^2 + (||x-x_i||)^2}
 \end{equation*}
 
-Notice that the Hardy's Multiquadric function is still radially symetric about its center, making it a Radial Basis Function (RBF). 
+Notice that the Hardy's Multiquadric function is still radially symmetric about its center, making it a Radial Basis Function (RBF). 
 All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$
 
 \subt{The RBF Method}
