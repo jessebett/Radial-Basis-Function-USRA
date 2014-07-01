@@ -31,6 +31,9 @@ def jesseaxis(ax,x,y):
     ax.set_xlim(min(x) - buf, max(x) + buf)
     ax.set_ylim(min(y) - buf, max(y) + buf)
 
+def saveimg(name):
+    plt.savefig('Images/'+name+'.png', bbox_inches='tight',
+               pad_inches=0.1, facecolor=grey, dpi=500)
 
 ####FIGURE 1####
 def makefig1():
@@ -54,8 +57,7 @@ def makefig1():
     xi = np.linspace(-6, 6, 100)
     yi = rbf(xi)
     plt.plot(xi, yi, color=blue)
-    plt.savefig('Images/fig1.png', bbox_inches='tight',
-                pad_inches=0.1, facecolor=grey, dpi=500)
+    saveimg('fig1')
     # plt.show()
 
 
@@ -77,8 +79,7 @@ def makefig2():
     plt.ylim(-2, 2)
 
     jesseaxis(ax2,x,y)
-    plt.savefig('Images/fig2.png', bbox_inches='tight',
-                pad_inches=0.1, facecolor=grey, dpi=500)
+    saveimg('fig2')
     # plt.show()
 
 ###POLYNOMIAL INTERP###
@@ -101,8 +102,7 @@ def makefig3():
     plt.ylim(-2, 2)
 
     jesseaxis(ax3,x,y)
-    plt.savefig('Images/fig3.png', bbox_inches='tight',
-                pad_inches=0.1, facecolor=grey, dpi=500)
+    saveimg('fig3')
     # plt.show()
 
 ###POLYNOMIAL INTERP###
@@ -121,8 +121,7 @@ def makefig4():
 
     jesseaxis(ax,x,np.abs(x))
     plt.ylim(-1, 3)
-    # plt.savefig('Images/fig3.png', bbox_inches='tight',
-    #            pad_inches=0.1, facecolor=grey, dpi=500)
+    saveimg('fig4')
     plt.show()
 
 makefig4()
