@@ -144,7 +144,7 @@ we will only consider interpolation.
 
 \subt{Interpolation of Scattered Data}
 
-Given data $(x_i,f_i)$, $i=1, \mathellipsis, N$, such that $x_i \in \mathbb{R}^n$, $y_i \in \mathbb{R}$, we want to find a continuous function $s(x)$ such that $s(x_i)=f_i$ $\forall i\in\{0 \mathellipsis N \}$
+Given data $(\textcolor{orange}{x_i},\textcolor{pink}{f_i})$, $i=1, \mathellipsis, N$, such that $\textcolor{orange}{x_i} \in \mathbb{R}^n$, $\textcolor{pink}{f_i} \in \mathbb{R}$, we want to find a continuous function $\textcolor{blue}{s(x)}$ such that $\textcolor{blue}{s(\textcolor{orange}{x_i})}=\textcolor{pink}{f_i}$ $\forall i\in\{0 \mathellipsis N \}$
 
 
 \note{}
@@ -153,9 +153,9 @@ Given data $(x_i,f_i)$, $i=1, \mathellipsis, N$, such that $x_i \in \mathbb{R}^n
 \begin{frame}{A Familiar Approach}
 \subt{Convenient Assumtption}
 
-Assume $s(x)$ is a linear combination of \subt{basis functions} $\psi_j$
+Assume $s(x)$ is a linear combination of \subt{basis functions} $\psi_i$
 \begin{center}
-$s(x)=\sum_{j=1}^N \lambda_j \psi_j$
+$s(x)=\sum_{i=1}^N \lambda_i \psi_i$
 \end{center}
 
 \subt{Interpolation as a Linear System}
@@ -168,7 +168,7 @@ $A\boldsymbol{\lambda}=\boldsymbol{f}$
  \bi
 \item[A] is called the \subt{interpolation matrix} whose entries are given by\\
 \begin{center}
-$A_{ij}=\psi_j(x_i)$, $i,j= 1 \mathellipsis N$
+$A_{ii}=\psi_i(x_i)$, $i,i= 1 \mathellipsis N$
 \end{center}
 \item[$\boldsymbol{\lambda}$] $=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T$
 \item[$\boldsymbol{f}$] $=\left[ f_1, \mathellipsis, f_N \right]^T$
@@ -190,7 +190,7 @@ Solving this linear system, thus finding $s(x)$, is only possible if the problem
 The problem will be well-posed if and only if the interpolation matrix A is \subt{non-singular}, i.e., $\det(A)\neq0$.
 \bigskip
 
-\subt{Note:} The non-singularity of A will depend on our choice of basis functions, $\psi_{j=1}^N$
+\subt{Note:} The non-singularity of A will depend on our choice of basis functions, $\psi_{i=1}^N$
 
 \note{INCLUDE WELL-Conditioned Here!}
 \end{frame}
@@ -203,8 +203,12 @@ In 1D, many choices of basis functions will gauentee a well-posed problem as lon
 
 We are familiar with \subt{polynomial interpolation}, interpolating from N data sites with a $(N-1)$-degree polynomial. 
 \begin{center}
-$\psi_{j=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
+$\psi_{i=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \end{center}
+\begin{figure}
+\includegraphics[width=0.4\textwidth, keepaspectratio]{fig3.png}
+\end{figure}
+\footnotesize{\textcolor{orange}{$s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$}}
 \note{}
 \end{frame}
 
@@ -212,7 +216,7 @@ $\psi_{j=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 For n-Dimensions where $n\geq 2$ there is no such gaurentee.
 \bigskip
 
-For any set of basis functions, $\psi_{j=1}^N$ (chosen independently of the data sites) $\exists$ a set of distinct data sites $\{x_i\}_{i=1}^N$
+For any set of basis functions, $\psi_{i=1}^N$ (chosen independently of the data sites) $\exists$ a set of distinct data sites $\{x_i\}_{i=1}^N$
 such that the interpolation matrix becomes singular. 
 \bigskip
 
@@ -246,13 +250,27 @@ First, consider what we call the \subt{basic function}\\
 \psi(x)=|x|
 \end{equation*}
 
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig4.png}
+\end{figure}
+
+\note{Change to || ||
+Comment on Radial Symmetry}
+\end{frame}
+
+\begin{frame}{Basis Functions Depending on Data}
+First, consider what we call the \subt{basic function}\\
+\begin{equation*}
+\psi(x)=|x|
+\end{equation*}
+
 To produce our set of basis functions, we take translates of the basic function.
 
 \begin{equation*}
-\psi_j(x)=|x-x_j|, j=1, \mathellipsis, N
+\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
 \end{equation*}
 
-So each basis function, $\psi_j(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_j$.
+So each basis function, $\psi_i(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_i$.
 \bigskip
 
 \subt{Note:} It's possible to have other choices of centers, but in most implementations the centers coincide with data sites.
@@ -261,10 +279,27 @@ So each basis function, $\psi_j(x)$, is our basic function shifted so that the \
 Comment on Radial Symmetry}
 \end{frame}
 
+\begin{frame}{Basis Functions Depending on Data}
+
+To produce our set of basis functions, we take translates of the basic function.
+
+\begin{equation*}
+\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
+\end{equation*}
+
+So each basis function, $\psi_i(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_i$.
+
+
+
+
+\note{Change to || ||
+Comment on Radial Symmetry}
+\end{frame}
+
 \begin{frame}{Radial Basis Functions}
 
 \begin{equation*}
-\psi_j(x)=|x-x_j|, j=1, \mathellipsis, N
+\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
 \end{equation*}
 
 Notice that $\psi_k(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions}.
@@ -316,13 +351,13 @@ is well-posed!
 \bigskip
 
 Our interpolant becomes 
-\subt{$s(x)=\sum_{j=1}^N \lambda_j ||x-x_j|| $}
+\subt{$s(x)=\sum_{i=1}^N \lambda_i ||x-x_i|| $}
 
 \note{}
 \end{frame}
 
 \begin{frame}{Building a Better Basic Function}
-However, $\psi_j(x)=||x-x_j||$ has a discontinuity in its first derivative at $x_j$. This causes the interpolant to have a discontinuous first derivative at each data site. This is obviously not ideal.
+However, $\psi_i(x)=||x-x_i||$ has a discontinuity in its first derivative at $x_i$. This causes the interpolant to have a discontinuous first derivative at each data site. This is obviously not ideal.
 \bigskip
 
 In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic function to one with continuous derivatives.
@@ -341,15 +376,15 @@ where $\epsilon > 0$.
 \begin{frame}{Radial Basis Kernels}
 As before, we can generate our basis functions by translating Hardy's basic function to center on our data sites.
 \begin{equation*}
-\psi_j(x)=\sqrt{\epsilon^2 + (||x-x_j||)^2}
+\psi_i(x)=\sqrt{\epsilon^2 + (||x-x_i||)^2}
 \end{equation*}
 
 Notice that the Hardy's Multiquadric function is still radially symetric about its center, making it a Radial Basis Function (RBF). 
-All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_j||)$
+All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$
 
 \subt{The RBF Method}
 \begin{equation*}
-s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
+s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
 \end{equation*}
 
 \note{}
@@ -359,7 +394,7 @@ s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
 
 \subt{The RBF Method}
 \begin{equation*}
-s(x)=\sum_{j=1}^N \lambda_j \phi(||x-x_j||)
+s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
 \end{equation*}
 
 There are a few commonly used RBF Kernels:
