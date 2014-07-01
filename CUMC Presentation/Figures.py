@@ -124,4 +124,30 @@ def makefig4():
     saveimg('fig4')
     plt.show()
 
-makefig4()
+def makefig5():
+    # Defining the data sites
+    fig1 = plt.figure(facecolor=grey)
+    ax1 = plt.axes()
+
+    x = np.linspace(-6, 6, 20)
+    y = (5 * np.sin(x) + x)
+    y = y + max(y)
+    ax1.scatter(x, y, color=pink, marker='o')
+    ax1.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax1.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    ax1.annotate('$x_i$', (-0.3, 0.4), size=30, color=orange)
+    ax1.annotate('$f_i$', (-0.30, 7.5), size=30, color=pink)
+    ax1.annotate('$\psi_i$', (4,1), size=30, color=green)
+
+    plt.plot(x, np.abs(x-x[10])-buf, '-', color=green)
+    # ax1.annotate('$s(x)$', (4, 9), size=30, color=blue)
+    jesseaxis(ax1,x,y)
+    # Defining our interpolation function from the data sites
+    # rbf = Rbf(x, y, epsilon=0.2)
+    # Applying the interpolation
+    # xi = np.linspace(-6, 6, 100)
+    # yi = rbf(xi)
+    # plt.plot(xi, yi, color=blue)
+    saveimg('fig5')
+    plt.show()
+makefig5()
