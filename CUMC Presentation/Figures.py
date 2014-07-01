@@ -18,7 +18,7 @@ red = '#D25252'
 green = '#7FB347'
 
 
-def jesseaxis(ax):
+def jesseaxis(ax,x,y):
     ax.set_axis_bgcolor(grey)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -47,7 +47,7 @@ def makefig1():
     ax1.annotate('$x_i$', (-0.3, 0.4), size=30, color=orange)
     ax1.annotate('$f_i$', (-0.30, 9), size=30, color=pink)
     ax1.annotate('$s(x)$', (4, 9), size=30, color=blue)
-    jesseaxis(ax1)
+    jesseaxis(ax1,x,y)
     # Defining our interpolation function from the data sites
     rbf = Rbf(x, y, epsilon=0.2)
     # Applying the interpolation
@@ -76,12 +76,14 @@ def makefig2():
     ax2.annotate('Approximation', (0, -0.5), size=20, color=green)
     plt.ylim(-2, 2)
 
-    jesseaxis(ax2)
+    jesseaxis(ax2,x,y)
     plt.savefig('Images/fig2.png', bbox_inches='tight',
                 pad_inches=0.1, facecolor=grey, dpi=500)
     # plt.show()
 
 ###POLYNOMIAL INTERP###
+
+
 def makefig3():
     plt.close()
     x = np.array([0.0, 1.5, 2.0, 3.0,  4.0,  4.5])
@@ -95,28 +97,32 @@ def makefig3():
     #plt.plot(xp, p(xp), '--', color=green)
     plt.plot(xp, p30(xp), '-', color=orange)
     # ax3.annotate('$s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$', (-0.2, -1.2), size=13, color=orange)
-    ax3.annotate('$s(x)$', (1.5,0.3), size=30, color=orange)
+    ax3.annotate('$s(x)$', (1.5, 0.3), size=30, color=orange)
     plt.ylim(-2, 2)
 
-    jesseaxis(ax3)
+    jesseaxis(ax3,x,y)
     plt.savefig('Images/fig3.png', bbox_inches='tight',
-               pad_inches=0.1, facecolor=grey, dpi=500)
+                pad_inches=0.1, facecolor=grey, dpi=500)
     # plt.show()
 
 ###POLYNOMIAL INTERP###
+
+
 def makefig4():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
     plt.plot(x, np.abs(x), '-', color=green)
-    plt.plot(0,0, 'o', color=pink)
-
+    plt.plot(0, 0, 'o', color=pink)
 
     # ax3.annotate('$s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$', (-0.2, -1.2), size=13, color=orange)
-    ax.annotate('Basic Function', (-1.5,2.5), size=30, color=green)
+    ax.annotate('Basic Function', (-1.9, 2.59), size=30, color=green)
+    ax.annotate('Center', (-0.9, -0.5), size=30, color=pink)
 
-    jesseaxis(ax)
-    plt.ylim(-1,3)
+    jesseaxis(ax,x,np.abs(x))
+    plt.ylim(-1, 3)
     # plt.savefig('Images/fig3.png', bbox_inches='tight',
     #            pad_inches=0.1, facecolor=grey, dpi=500)
     plt.show()
+
+makefig4()
