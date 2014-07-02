@@ -1,6 +1,8 @@
 \documentclass[12pt,t]{beamer}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
+\usepackage{colortbl}
+
 \setbeameroption{hide notes}
 \setbeamertemplate{note page}[plain]
 
@@ -492,9 +494,85 @@ Which results from a \subt{positive-definite} kernel, $\phi: \mathbb{R}^s \times
 
 \subt{Useful Properties of Positive Definite Matricies}
 \bi
-\item Non-Singular
-\item More efficent solving methods, e.g. Cholskey factorization
+\item All positive eigenvalues $\implies$ Non-Singular
+\item More efficent solving methods, e.g., Cholskey factorization
 \ei
+
+\note{}
+\end{frame}
+
+\begin{frame}{Radial Basis Kernels}
+
+
+% \begin{table}
+%   [ht] 
+  \begin{tabular}
+      {lll}  Common RBF Kernels  & $\phi(r)$\\
+      \hline \cellcolor{orange} Multiquadric & $\sqrt{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.1\textwidth]{multiquadric.png}} \\
+      \hline \cellcolor{green} Inverse Multiquadric & $\frac{1}{\sqrt{1+(\epsilon r)^2}}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.1\textwidth]{inversemultiquadric.png}} \\
+        \hline \cellcolor{green} Inverse Quadratic & $\frac{1}{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.1\textwidth]{inversequadratic.png}} \\
+       \hline \cellcolor{green} Gaussian & $e^{-(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.1\textwidth]{gaussian.png}} \\
+  \end{tabular}
+\bigskip
+
+Hardy's Multiquadric Kernel is not \textcolor{green}{positive-definite}. However, it is conditionally \textcolor{orange}{negative-definite}.
+
+\subt{Properties of Multiquadric Matrix}
+
+\bi
+\item One positive eigenvalue and $(n-1)$ negative eigenvalues $\implies$ Non-Singular
+\item Not generally subject to positive-definite solving methods
+\ei
+
+\note{}
+\end{frame}
+
+\begin{frame}{Well-Posed $\neq$ Well-Conditioned}
+We now know that our system is well-posed, so a unique solution exists.
+
+\bigskip
+
+However, this solution isn't always accessible using numerical methods, making it \subt{ill-conditioned} due to a loss of percision in computationally solving the linear system.
+
+\bigskip
+
+Radial Basis Interpolation has the propensity to be ill-conditioned, especially when choosing shape parameter, $\epsilon$.
+
+
+
+\note{}
+\end{frame}
+
+\begin{frame}{So the Pure Mathematicians Laughed}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{conditioned.png}
+\end{figure}
+
+
+\note{}
+\end{frame}
+
+\begin{frame}{So the Pure Mathematicians Laughed}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{illconditioned.png}
+\end{figure}
+
+
+\note{}
+\end{frame}
+
+\begin{frame}{So the Pure Mathematicians Laughed}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{veryillconditioned.png}
+\end{figure}
+
 
 \note{}
 \end{frame}
