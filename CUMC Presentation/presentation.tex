@@ -479,4 +479,24 @@ If interpolation matrix, A, is symetric \subt{positive-definite}, then A is nons
 \note{}
 \end{frame}
 
+\begin{frame}{Positive-Definite}
+Our matrix, A, is \subt{positive-definite} if
+\begin{align*}
+& t^TAt>0 & \forall t=\left[ t_1, t_2, \mathellipsis, t_n\right]\neq 0 \in \mathbb{R}^n
+\end{align*}
+
+Which results from a \subt{positive-definite} kernel, $\phi: \mathbb{R}^s \times \mathbb{R}^s \rightarrow \mathbb{R}$:
+\begin{align*}
+&\sum_{i=1}^N \sum_{j=1}^N \phi(||x-x_i||)t_i\bar{t_j}>0 &\forall t=\left[ t_1, t_2, \mathellipsis, t_n\right]\neq 0 \in \mathbb{C}^n
+\end{align*}
+
+\subt{Useful Properties of Positive Definite Matricies}
+\bi
+\item Non-Singular
+\item More efficent solving methods, e.g. Cholskey factorization
+\ei
+
+\note{}
+\end{frame}
+
 \end{document}
