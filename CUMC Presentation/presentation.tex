@@ -280,16 +280,16 @@ Comment on Radial Symmetry}
 \end{frame}
 
 \begin{frame}{Basis Functions Depending on Data}
-
-To produce our set of basis functions, we take translates of the basic function.
+Each basis function, \textcolor{green}{$\psi_i(x)$}, is our basic function shifted so that the \textcolor{orange}{center} is positioned on a data site, \textcolor{orange}{$x_i$}.
 
 \begin{equation*}
 \psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
 \end{equation*}
 
-So each basis function, $\psi_i(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_i$.
 
-
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig5.png}
+\end{figure}
 
 
 \note{Change to || ||
@@ -302,7 +302,7 @@ Comment on Radial Symmetry}
 \psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
 \end{equation*}
 
-Notice that $\psi_k(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions}.
+Notice that $\psi_i(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions}.
 \bigskip
 
 Since the basis functions only depend on distance, the interpolation matrix becomes
@@ -321,7 +321,7 @@ called a \subt{distance matrix}.
 \end{frame}
 
 \begin{frame}{The Distance Matrix}
-Distance matrices have the property that, for Euclidean distances in any dimensions, the distance matrix is non-singular.
+Distance matrices, with Euclidean distances, for distinct points in $\mathbb{R}^s$ are always non-singular.
 \bigskip
 
 This means that our interpolation problem
@@ -357,18 +357,37 @@ Our interpolant becomes
 \end{frame}
 
 \begin{frame}{Building a Better Basic Function}
-However, $\psi_i(x)=||x-x_i||$ has a discontinuity in its first derivative at $x_i$. This causes the interpolant to have a discontinuous first derivative at each data site. This is obviously not ideal.
-\bigskip
+Basic function
+\begin{equation*}
+\psi_i(x)=||x-x_i||
+\end{equation*}
+has a discontinuity in its first derivative at $x_i$.
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth, keepaspectratio]{fig6.png}
+\end{figure}
+This causes the interpolant to have a discontinuous first derivative at each data site. 
+
+Obviously not ideal.
+
+\note{}
+\end{frame}
+
+\begin{frame}{Building a Better Basic Function}
 
 In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic function to one with continuous derivatives.
 
 \subt{Hardy's Multiquadrc Kernel}
-\begin{equation*}
-\psi(x)=\sqrt{\epsilon^2 + x^2}
-\end{equation*}
-where $\epsilon > 0$.
+\begin{align*}
+&\psi(x)=\sqrt{c^2 + x^2} &\text{where   } &c > 0.
+\end{align*}
 
-\subt{Note:} The case where $\epsilon=0$ is 
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth, keepaspectratio]{fig7.png}
+\end{figure}
+
+\subt{Note:} The case where $c=0$ is 
  the previous basic function.
 
 \note{}
@@ -377,9 +396,16 @@ where $\epsilon > 0$.
 \begin{frame}{Radial Basis Kernels}
 As before, we can generate our basis functions by translating Hardy's basic function to center on our data sites.
 \begin{equation*}
-\psi_i(x)=\sqrt{\epsilon^2 + (||x-x_i||)^2}
+\psi_i(x)=\sqrt{c^2 + (||x-x_i||)^2}
 \end{equation*}
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig8.png}
+\end{figure}
 
+\note{}
+\end{frame}
+
+\begin{frame}{Radial Basis Kernels}
 Notice that the Hardy's Multiquadric function is still radially symmetric about its center, making it a Radial Basis Function (RBF). 
 All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$
 
@@ -393,17 +419,38 @@ s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
 
 \begin{frame}{Radial Basis Kernels}
 
-\subt{The RBF Method}
-\begin{equation*}
-s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
-\end{equation*}
 
-There are a few commonly used RBF Kernels:
+% \begin{table}
+%   [ht] 
+  \begin{tabular}
+      {lll}  Common RBF Kernels \\
+      \hline Multiquadric & $\sqrt{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.2\textwidth]{multiquadric.png}} \\
+      \hline Inverse Quadratic & $\frac{1}{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.2\textwidth]{inversequadratic.png}} \\
+      \hline Inverse Multiquadric & $\frac{1}{\sqrt{1+(\epsilon r)^2}}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.2\textwidth]{inversemultiquadric.png}} \\
+       \hline Gaussian & $e^{(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.2\textwidth]{gaussian.png}} \\
 
-% \begin{tabular}
-% test & test\\
-% test & test
+      % FDN & Yes & Dramatic & No & \parbox[c]{1em}{
+      % \includegraphics[width=0.15\textwidth]{"Figure Stimuli"/Fam-Dramatic}} \\
+      % FGM & Yes & Growth & Yes & \parbox[c]{1em}{
+      % \includegraphics[width=1in]{"Figure Stimuli"/Fam-Meta-Growth}} \\
+      % \textbf{FGN} & Yes & Growth & No & \parbox[c]{1em}{
+      % \includegraphics[width=1in]{"Figure Stimuli"/Fam-Growth}} \\
+      % FIM & Yes & Identical & Yes & \parbox[c]{1em}{
+      % \includegraphics[width=1in]{"Figure Stimuli"/Fam-Meta-ID}} \\
+      % \hline
+  \end{tabular}
+  % \tabfnt{Note: Bold categories are biologically correct growth models.}
+% \end{table}
+% \begin{table}
+% \begin{tabular}{l,l,l}
+% % Multiquadric & $\sqrt{1+(\epsilon*r)^2}$ & \parbox[c]{1em}{\includegraphics[width=0.2\textwidth, keepaspectratio]{fig8.png}}\\
+% test & test & test
 % \end{tabular}
+% \end{table}
 
 \note{Graphs of each kernel!}
 \end{frame}
