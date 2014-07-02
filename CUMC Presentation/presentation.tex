@@ -167,11 +167,14 @@ $A\boldsymbol{\lambda}=\boldsymbol{f}$
  where
  \bi
 \item[A] is called the \subt{interpolation matrix} whose entries are given by\\
-\begin{center}
-$A_{ii}=\psi_i(x_i)$, $i,i= 1 \mathellipsis N$
-\end{center}
-\item[$\boldsymbol{\lambda}$] $=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T$
-\item[$\boldsymbol{f}$] $=\left[ f_1, \mathellipsis, f_N \right]^T$
+\begin{align*}
+a_{ij}&=\psi_j(x_i) & i,j= 1 \mathellipsis N\\
+\intertext{and}
+\boldsymbol{\lambda} &=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T\\
+\boldsymbol{f} &=\left[ f_1, \mathellipsis, f_N \right]^T
+\end{align*}
+% \item[$\boldsymbol{\lambda}$] $=\left[ \lambda_1, \mathellipsis, \lambda_N \right]^T$
+% \item[$\boldsymbol{f}$] $=\left[ f_1, \mathellipsis, f_N \right]^T$
 \ei
 
 \note{}
@@ -267,7 +270,7 @@ First, consider what we call the \subt{basic function}\\
 To produce our set of basis functions, we take translates of the basic function.
 
 \begin{equation*}
-\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
+\psi_i(x)=||x-x_i||, i=1, \mathellipsis, N
 \end{equation*}
 
 So each basis function, $\psi_i(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_i$.
@@ -282,13 +285,13 @@ Comment on Radial Symmetry}
 \begin{frame}{Basis Functions Depending on Data}
 Each basis function, \textcolor{green}{$\psi_i(x)$}, is our basic function shifted so that the \textcolor{orange}{center} is positioned on a data site, \textcolor{orange}{$x_i$}.
 
-\begin{equation*}
-\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
-\end{equation*}
+\begin{align*}
+&\psi_i(x)=||x-x_i||  &i=1, \mathellipsis, N
+\end{align*}
 
 
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig5.png}
+\includegraphics[width=0.65\textwidth, keepaspectratio]{fig5.png}
 \end{figure}
 
 
@@ -298,21 +301,21 @@ Comment on Radial Symmetry}
 
 \begin{frame}{Radial Basis Functions}
 
-\begin{equation*}
-\psi_i(x)=|x-x_i|, i=1, \mathellipsis, N
-\end{equation*}
+\begin{align*}
+&\psi_i(x)=||x-x_i||     & i=1, \mathellipsis, N
+\end{align*}
 
-Notice that $\psi_i(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions}.
+Notice that $\psi_i(x)$ are radially symmetric about their centers, for this reason we call these functions \subt{Radial Basis Functions (RBF)}.
 \bigskip
 
 Since the basis functions only depend on distance, the interpolation matrix becomes
 \begin{equation*}
 A=
 \begin{bmatrix}
-|x_1-x_1| & |x_1-x_2| & \cdots & |x_1-x_N|\\
-|x_2-x_1| & |x_2-x_2|& \cdots & |x_2-x_N|\\
+||x_1-x_1|| & ||x_1-x_2|| & \cdots & ||x_1-x_N||\\
+||x_2-x_1|| & ||x_2-x_2||& \cdots & ||x_2-x_N||\\
 \vdots & \vdots & \ddots & \vdots\\
-|x_N-x_1| & |x_N-x_2|& \cdots & |x_N-x_N|
+||x_N-x_1|| & ||x_N-x_2||& \cdots & ||x_N-x_N||
 \end{bmatrix}
 \end{equation*}
 called a \subt{distance matrix}.
@@ -375,11 +378,11 @@ Obviously not ideal.
 
 \begin{frame}{Building a Better Basic Function}
 
-In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic function to one with continuous derivatives.
+In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic function so it's $C^\infty$.
 
 \subt{Hardy's Multiquadrc Kernel}
 \begin{align*}
-&\psi(x)=\sqrt{c^2 + x^2} &\text{where   } &c > 0.
+&\psi(x)=\sqrt{c^2 + x^2} &\text{where   } &c \neq 0.
 \end{align*}
 
 
@@ -387,7 +390,7 @@ In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic
 \includegraphics[width=0.5\textwidth, keepaspectratio]{fig7.png}
 \end{figure}
 
-\subt{Note:} The case where $c=0$ is 
+\subt{Note:} \textcolor{pink}{$c$} is called the shape parameter. The case when $c=0$ is 
  the previous basic function.
 
 \note{}
@@ -406,7 +409,14 @@ As before, we can generate our basis functions by translating Hardy's basic func
 \end{frame}
 
 \begin{frame}{Radial Basis Kernels}
-Notice that the Hardy's Multiquadric function is still radially symmetric about its center, making it a Radial Basis Function (RBF). 
+Hardy's Multiquadric function is still \subt{radially symmetric} about its center
+
+
+\begin{figure}
+\includegraphics[width=0.3\textwidth, keepaspectratio]{fig7.png}
+\end{figure}
+so we this a Radial Basis Kernel. 
+
 All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$
 
 \subt{The RBF Method}
@@ -426,11 +436,11 @@ s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
       {lll}  Common RBF Kernels \\
       \hline Multiquadric & $\sqrt{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
       \includegraphics[width=0.2\textwidth]{multiquadric.png}} \\
-      \hline Inverse Quadratic & $\frac{1}{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
-      \includegraphics[width=0.2\textwidth]{inversequadratic.png}} \\
       \hline Inverse Multiquadric & $\frac{1}{\sqrt{1+(\epsilon r)^2}}$  & \parbox[c]{1em}{
       \includegraphics[width=0.2\textwidth]{inversemultiquadric.png}} \\
-       \hline Gaussian & $e^{(\epsilon r)^2}$  & \parbox[c]{1em}{
+        \hline Inverse Quadratic & $\frac{1}{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
+      \includegraphics[width=0.2\textwidth]{inversequadratic.png}} \\
+       \hline Gaussian & $e^{-(\epsilon r)^2}$  & \parbox[c]{1em}{
       \includegraphics[width=0.2\textwidth]{gaussian.png}} \\
   \end{tabular}
 
