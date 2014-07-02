@@ -180,13 +180,14 @@ def makefig7():
     plt.plot(0, 0, 'o', color=orange)
     plt.vlines(0, 0.4, 0, pink, linestyles='dashed', alpha=0.7)
 
-    ax.annotate('Multiquadrc Kernel', (-2.4, 2.59), size=30, color=green)
-    ax.annotate('$x_i$', (-0.2, -0.4), size=30, color=orange)
+    ax.annotate('Multiquadrc Kernel', (-2.45, 2.59), size=30, color=green)
+    ax.annotate('Center', (-0.8, -0.4), size=30, color=orange)
     ax.annotate('$c$', (0.2, 0.1), size=30, color=pink)
     jesseaxis(ax, x, x)
     plt.ylim(-1, 3)
     saveimg('fig7')
     plt.show()
+
 
 
 def makefig8():
@@ -222,7 +223,7 @@ def makeMultiQuadric():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
-    plt.plot(x, np.sqrt(1 + (np.abs(x) * (1 / 0.8)) ** 2), '-', color=green)
+    plt.plot(x, np.sqrt(1 + (np.abs(x) * (1 / 0.8)) ** 2), '-', color=green, linewidth=3.5)
     plt.plot(0, 0, 'o', color=orange)
     jesseaxis(ax, x, x)
     ax.axis('off')
@@ -235,7 +236,7 @@ def makeGaussian():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
-    plt.plot(x, np.exp(-(np.abs(x) * 0.4) ** 2), '-', color=green)
+    plt.plot(x, np.exp(-(np.abs(x) * 0.4) ** 2), '-', color=green, linewidth=3.5)
     plt.plot(0, 0, 'o', color=orange)
     jesseaxis(ax, x, x)
     ax.axis('off')
@@ -248,7 +249,7 @@ def makeInverseQuadratic():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
-    plt.plot(x, (1 + (np.abs(x) * 0.4) ** 2) ** (-1), '-', color=green)
+    plt.plot(x, (1 + (np.abs(x) * 0.4) ** 2) ** (-1), '-', color=green, linewidth=3.5)
     plt.plot(0, 0, 'o', color=orange)
     jesseaxis(ax, x, x)
     ax.axis('off')
@@ -261,7 +262,7 @@ def makeInverseMultiQuadric():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
-    plt.plot(x, np.sqrt(1 + (np.abs(x) * 0.4) ** 2) ** (-1), '-', color=green)
+    plt.plot(x, np.sqrt(1 + (np.abs(x) * 0.4) ** 2) ** (-1), '-', color=green, linewidth=3.5)
     plt.plot(0, 0, 'o', color=orange)
     jesseaxis(ax, x, x)
     ax.axis('off')
@@ -275,4 +276,70 @@ def makekernels():
     makeInverseQuadratic()
     makeInverseMultiQuadric()
 
-makekernels()
+def quickpiece(x):
+    return np.piecewise(x,[np.abs(x)<1,np.abs(x)>=1],[1,0])
+
+def makeconditioned():
+
+    eps1=1
+    eps2=2
+    eps3=3
+
+    # Defining the data sites
+    fig1 = plt.figure(1,facecolor=grey)
+    ax1 = plt.axes()
+    x = np.linspace(-2,2,20)
+    y = quickpiece(x)
+    y = y + max(y)
+    ax1.scatter(x, y, color=pink, marker='o')
+    ax1.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax1.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    rbf = Rbf(x, y, epsilon=eps1)
+    # Applying the interpolation
+    xi = np.linspace(-2,2, 1000)
+    yi = rbf(xi)
+    ax1.annotate('$\epsilon=$'+str(eps1), (0,max(yi)), size=30, color=pink)
+    plt.plot(xi, yi, color=blue)
+    jesseaxis(ax1, x, yi)
+    saveimg('conditioned')
+    # plt.show()
+    # plt.close(1)
+
+    fig2 = plt.figure(2,facecolor=grey)
+    ax1 = plt.axes()
+    x = np.linspace(-2,2,20)
+    y = quickpiece(x)
+    y = y + max(y)
+    ax1.scatter(x, y, color=pink, marker='o')
+    ax1.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax1.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    rbf = Rbf(x, y, epsilon=eps2)
+    # Applying the interpolation
+    xi = np.linspace(-2,2, 1000)
+    yi = rbf(xi)
+    ax1.annotate('$\epsilon=$'+str(eps2), (0,max(yi)), size=30, color=pink)
+    plt.plot(xi, yi, color=blue)
+    jesseaxis(ax1, x, yi)
+    saveimg('illconditioned')
+
+    fig3 = plt.figure(3,facecolor=grey)
+    ax1 = plt.axes()
+    x = np.linspace(-2,2,20)
+    y = quickpiece(x)
+    y = y + max(y)
+    ax1.scatter(x, y, color=pink, marker='o')
+    ax1.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax1.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    rbf = Rbf(x, y, epsilon=eps3)
+    # Applying the interpolation
+    xi = np.linspace(-2,2, 1000)
+    yi = rbf(xi)
+    ax1.annotate('$\epsilon=$'+str(eps3), (0,max(yi)), size=30, color=pink)
+    plt.plot(xi, yi, color=blue)
+    jesseaxis(ax1, x, yi)
+    saveimg('veryillconditioned')
+
+
+    plt.show()
+makeconditioned()
+# makeMultiQuadric()
