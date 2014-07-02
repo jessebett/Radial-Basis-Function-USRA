@@ -229,6 +229,17 @@ If we choose our basis functions independently of the data, we are not guarantee
 
 \subt{Note:}
 This results from the Haar-Mairhuber-Curtis Theorem
+\begin{figure}[!htb]
+\minipage{0.25\textwidth}
+  \includegraphics[width=\linewidth]{Haar.jpg}
+\endminipage\hfill
+\minipage{0.25\textwidth}
+  \includegraphics[width=\linewidth]{Mairhuber-crop.jpg}
+\endminipage\hfill
+\minipage{0.25\textwidth}%
+  \includegraphics[width=\linewidth]{Curtis.jpg}
+\endminipage
+\end{figure}
 
 
 \note{}
@@ -415,14 +426,14 @@ Hardy's Multiquadric function is still \subt{radially symmetric} about its cente
 \begin{figure}
 \includegraphics[width=0.3\textwidth, keepaspectratio]{fig7.png}
 \end{figure}
-so we this a Radial Basis Kernel. 
+so we theis function a Kernel. 
 
-All RBFs are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$
+All Kernels are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$ or $\phi(r)$
 
 \subt{The RBF Method}
-\begin{equation*}
-s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
-\end{equation*}
+\begin{align*}
+&s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) &r=||x-x_i||
+\end{align*}
 
 \note{}
 \end{frame}
@@ -433,7 +444,7 @@ s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
 % \begin{table}
 %   [ht] 
   \begin{tabular}
-      {lll}  Common RBF Kernels \\
+      {lll}  Common RBF Kernels  & $\phi(r)$\\
       \hline Multiquadric & $\sqrt{1+(\epsilon r)^2}$  & \parbox[c]{1em}{
       \includegraphics[width=0.2\textwidth]{multiquadric.png}} \\
       \hline Inverse Multiquadric & $\frac{1}{\sqrt{1+(\epsilon r)^2}}$  & \parbox[c]{1em}{
@@ -444,8 +455,28 @@ s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)
       \includegraphics[width=0.2\textwidth]{gaussian.png}} \\
   \end{tabular}
 
+\subt{Note:} One of these things is not like the others.
 
 \note{Graphs of each kernel!}
+\end{frame}
+
+\begin{frame}{What About Well-Posed?}
+Our interpolation matrix is no longer the distance matrix. Can we still expect well-posed?
+\begin{equation*}
+A=
+\begin{bmatrix}
+\phi_1(x_1) & \phi_1(x_2) & \cdots & \phi_1(x_N)\\
+\phi_2(x_1) & \phi_2(x_2)& \cdots & \phi_2(x_N)\\
+\vdots & \vdots & \ddots & \vdots\\
+\phi_N(x_1) & \phi_N(x_2)& \cdots & \phi_N(x_N)
+\end{bmatrix}
+\end{equation*}
+
+\subt{A New, Less Sexy Condition:}
+
+If interpolation matrix, A, is symetric \subt{positive-definite}, then A is nonsingular and our system is well-posed.
+
+\note{}
 \end{frame}
 
 \end{document}
