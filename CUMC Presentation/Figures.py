@@ -341,5 +341,61 @@ def makeconditioned():
 
 
     plt.show()
-makeconditioned()
+
+def makebasisgaus():
+    # Defining the data sites
+    fig1 = plt.figure(facecolor=grey)
+    ax1 = plt.axes()
+
+    x = np.linspace(-6, 6, 20)
+    xi = np.linspace(-6, 6, 200)
+    y = (5 * np.sin(x) + x)
+    y = y + max(y)
+    ax1.scatter(x, y, color=pink, marker='o')
+    ax1.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax1.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    ax1.annotate('$x_i$', (-0.3, 0.4), size=30, color=orange)
+    ax1.annotate('$f_i$', (-0.30, 7.5), size=30, color=pink)
+    ax1.annotate('$\psi_i$', (4, 1), size=30, color=green)
+
+    plt.plot(xi, np.exp(-(0.4*xi)**2) - buf, '-', color=green)
+    # ax1.annotate('$s(x)$', (4, 9), size=30, color=blue)
+    jesseaxis(ax1, x, y)
+    # Defining our interpolation function from the data sites
+    # rbf = Rbf(x, y, epsilon=0.2)
+    # Applying the interpolation
+    # xi = np.linspace(-6, 6, 100)
+    # yi = rbf(xi)
+    # plt.plot(xi, yi, color=blue)
+    saveimg('basisgaus1')
+
+    fig2 = plt.figure(facecolor=grey)
+    ax2 = plt.axes()
+
+    x = np.linspace(-6, 6, 20)
+    xi = np.linspace(-6, 6, 200)
+    y = (5 * np.sin(x) + x)
+    y = y + max(y)
+    ax2.scatter(x, y, color=pink, marker='o')
+    ax2.scatter(x, [-buf] * np.size(y), color=orange, marker='o')
+    ax2.vlines(x, -buf, y, pink, linestyles='dashed', alpha=0.4)
+    ax2.annotate('$x_i$', (-0.3, 0.4), size=30, color=orange)
+    ax2.annotate('$f_i$', (-0.30, 7.5), size=30, color=pink)
+    ax2.annotate('$\psi_i$', (4, 1), size=30, color=green)
+
+    plt.plot(xi, np.exp(-(1*xi)**2) - buf, '-', color=green)
+    # ax2.annotate('$s(x)$', (4, 9), size=30, color=blue)
+    jesseaxis(ax2, x, y)
+    # Defining our interpolation function from the data sites
+    # rbf = Rbf(x, y, epsilon=0.2)
+    # Applying the interpolation
+    # xi = np.linspace(-6, 6, 100)
+    # yi = rbf(xi)
+    # plt.plot(xi, yi, color=blue)
+    saveimg('basisgaus2')
+
+
+    plt.show()
+
+makebasisgaus()
 # makeMultiQuadric()
