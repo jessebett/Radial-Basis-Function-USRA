@@ -64,10 +64,10 @@
 \newcommand{\subt}[1]{{\footnotesize \color{subtitle} {#1}}}
 
 % title info
-\title{Introduction to Radial Basis Functions}
-\subtitle{}
+\title{Introduction to Radial Basis Function Method}
+\subtitle{How to Interpolate Scattered Data with Radial Basis}
 \author{\href{https://github.com/jessebett/}{Jesse Bettencourt}}
-\institute{McMaster University}
+\institute{McMaster University\\Dr. Kevlahan}
 \date{\href{jessebett@gmail.com}{\tt \scriptsize jessebett@gmail.com}
 \\[-4pt]
 \href{http://github.com/jessebett}{\tt \scriptsize github.com/jessebett}
@@ -148,6 +148,9 @@ we will only consider interpolation.
 
 Given data $(\textcolor{orange}{x_i},\textcolor{pink}{f_i})$, $i=1, \mathellipsis, N$, such that $\textcolor{orange}{x_i} \in \mathbb{R}^n$, $\textcolor{pink}{f_i} \in \mathbb{R}$, we want to find a continuous function $\textcolor{blue}{s(x)}$ such that $\textcolor{blue}{s(\textcolor{orange}{x_i})}=\textcolor{pink}{f_i}$ $\forall i\in\{0 \mathellipsis N \}$
 
+\begin{figure}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{fig1.png}
+\end{figure}
 
 \note{}
 \end{frame}
@@ -159,7 +162,7 @@ Assume $s(x)$ is a linear combination of \subt{basis functions} $\psi_i$
 \begin{center}
 $s(x)=\sum_{i=1}^N \lambda_i \psi_i$
 \end{center}
-
+\pause
 \subt{Interpolation as a Linear System}
 
 Following this assumption we have a system of linear equations
@@ -189,11 +192,13 @@ $A\boldsymbol{\lambda}=\boldsymbol{f}$
 
 Solving this linear system, thus finding $s(x)$, is only possible if the problem \subt{well-posed}, i.e., $\exists$ a unique solution 
 \bigskip
+\pause
 
 \subt{Result from introductory linear algebra:} 
 
 The problem will be well-posed if and only if the interpolation matrix A is \subt{non-singular}, i.e., $\det(A)\neq0$.
 \bigskip
+\pause
 
 \subt{Note:} The non-singularity of A will depend on our choice of basis functions, $\psi_{i=1}^N$
 
@@ -203,6 +208,7 @@ The problem will be well-posed if and only if the interpolation matrix A is \sub
 \begin{frame}{Easily Well-Posed in 1D}
 In 1D, many choices of basis functions will guarantee a well-posed problem as long as the data-sites are distinct. 
 \bigskip
+\pause
 
 \subt{Example}
 
@@ -210,6 +216,7 @@ We are familiar with \subt{polynomial interpolation}, interpolating from N data 
 \begin{center}
 $\psi_{i=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \end{center}
+\pause
 \begin{figure}
 \includegraphics[width=0.4\textwidth, keepaspectratio]{fig3.png}
 \end{figure}
@@ -220,15 +227,18 @@ $\psi_{i=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \begin{frame}{A Problem in Higher Dimensions}
 For n-Dimensions where $n\geq 2$ there is no such guarantee.
 \bigskip
+\pause
 
 For any set of basis functions, $\psi_{i=1}^N$ (chosen independently of the data sites) $\exists$ a set of distinct data sites $\{x_i\}_{i=1}^N$
 such that the interpolation matrix becomes singular. 
 \bigskip
+\pause
 
 \subt{Implication:}
 If we choose our basis functions independently of the data, we are not guaranteed a well-posed problem.
 \bigskip
 
+\pause
 \subt{Note:}
 This results from the Haar-Mairhuber-Curtis Theorem
 \begin{figure}[!htb]
@@ -253,7 +263,7 @@ If we choose our basis functions independently of the data, we are not guarantee
 \bigskip
 
 \subt{Solution?}
-
+\pause
 Choose basis functions depending on the data!
 \bigskip
 
@@ -280,11 +290,11 @@ First, consider what we call the \subt{basic function}\\
 \psi(x)=|x|
 \end{equation*}
 
-To produce our set of basis functions, we take translates of the basic function.
+To produce our set of basis functions, we take \subt{translates} of the basic function.
 
-\begin{equation*}
-\psi_i(x)=||x-x_i||, i=1, \mathellipsis, N
-\end{equation*}
+\begin{align*}
+&\psi_i(x)=||x-x_i|| &i=1, \mathellipsis, N
+\end{align*}
 
 So each basis function, $\psi_i(x)$, is our basic function shifted so that the \subt{center} or \subt{knot} is positioned on a data site, $x_i$.
 \bigskip
@@ -428,7 +438,7 @@ Hardy's Multiquadric function is still \subt{radially symmetric} about its cente
 \begin{figure}
 \includegraphics[width=0.3\textwidth, keepaspectratio]{fig7.png}
 \end{figure}
-so we theis function a Kernel. 
+we this function a Kernel. 
 
 All Kernels are functions only of distance from center, and can be written generally as $\phi(||x-x_i||)$ or $\phi(r)$
 
@@ -457,6 +467,7 @@ All Kernels are functions only of distance from center, and can be written gener
       \includegraphics[width=0.2\textwidth]{gaussian.png}} \\
   \end{tabular}
 
+\pause
 \subt{Note:} One of these things is not like the others.
 
 \note{Graphs of each kernel!}
@@ -473,10 +484,11 @@ A=
 \phi_N(x_1) & \phi_N(x_2)& \cdots & \phi_N(x_N)
 \end{bmatrix}
 \end{equation*}
+\pause
 
 \subt{A New, Less Sexy Condition:}
 
-If interpolation matrix, A, is symetric \subt{positive-definite}, then A is nonsingular and our system is well-posed.
+If interpolation matrix, A, is symmetric \subt{positive-definite}, then A is nonsingular and our system is well-posed.
 
 \note{}
 \end{frame}
@@ -495,7 +507,7 @@ Which results from a \subt{positive-definite} kernel, $\phi: \mathbb{R}^s \times
 \subt{Useful Properties of Positive Definite Matricies}
 \bi
 \item All positive eigenvalues $\implies$ Non-Singular
-\item More efficent solving methods, e.g., Cholskey factorization
+\item More efficient solving methods, e.g., Cholskey factorization
 \ei
 
 \note{}
@@ -531,12 +543,32 @@ Hardy's Multiquadric Kernel is not \textcolor{green}{positive-definite}. However
 \note{}
 \end{frame}
 
+\begin{frame}{Visualizing the RBF Method}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{basisgaus1.png}
+\end{figure}
+
+
+\note{}
+\end{frame}
+
+\begin{frame}{Visualizing the RBF Method}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{basisgaus2.png}
+\end{figure}
+
+
+\note{}
+\end{frame}
+
 \begin{frame}{Well-Posed $\neq$ Well-Conditioned}
 We now know that our system is well-posed, so a unique solution exists.
 
 \bigskip
 
-However, this solution isn't always accessible using numerical methods, making it \subt{ill-conditioned} due to a loss of percision in computationally solving the linear system.
+However, this solution isn't always accessible using numerical methods, making it \subt{ill-conditioned} due to a loss of precision in computationally solving the linear system.
 
 \bigskip
 
@@ -547,7 +579,7 @@ Radial Basis Interpolation has the propensity to be ill-conditioned, especially 
 \note{}
 \end{frame}
 
-\begin{frame}{So the Pure Mathematicians Laughed}
+\begin{frame}{Pure Mathematicians can Leave Now}
 
 \begin{figure}
 \includegraphics[width=0.9\textwidth, keepaspectratio]{conditioned.png}
@@ -557,7 +589,7 @@ Radial Basis Interpolation has the propensity to be ill-conditioned, especially 
 \note{}
 \end{frame}
 
-\begin{frame}{So the Pure Mathematicians Laughed}
+\begin{frame}{Pure Mathematicians can Leave Now}
 
 \begin{figure}
 \includegraphics[width=0.9\textwidth, keepaspectratio]{illconditioned.png}
@@ -567,12 +599,75 @@ Radial Basis Interpolation has the propensity to be ill-conditioned, especially 
 \note{}
 \end{frame}
 
-\begin{frame}{So the Pure Mathematicians Laughed}
+\begin{frame}{Pure Mathematicians can Laugh Now}
 
 \begin{figure}
 \includegraphics[width=0.9\textwidth, keepaspectratio]{veryillconditioned.png}
 \end{figure}
 
+
+\note{}
+\end{frame}
+
+\begin{frame}{Considerations When Using RBFs}
+\bi
+\item The interpolation matrix, A, is dense $\implies$ Computationally Expensive
+\item Choosing shape parameter, $\epsilon$, often involves optimization
+\item RBF interpolation can easily be ill-conditioned
+\item Interpolation error blows up near boundaries
+\ei
+
+\begin{figure}[!htb]
+\minipage{0.50\textwidth}
+  \includegraphics[width=\linewidth]{conditioned.png}
+\endminipage\hfill
+\minipage{0.50\textwidth}
+  \includegraphics[width=\linewidth]{illconditioned.png}
+\endminipage\
+\end{figure}
+
+\note{}
+\end{frame}
+
+\begin{frame}{Considerations When Using RBFs}
+\subt{Interpolation error blows up near bounderies}
+
+Why? Because our basis functions are centered at our data and kernels will be asymmetric near boundaries.
+
+\begin{figure}[!htb]
+\minipage{0.50\textwidth}
+  \includegraphics[width=\linewidth]{conditioned.png}
+\endminipage\hfill
+\minipage{0.50\textwidth}
+  \includegraphics[width=\linewidth]{illconditioned.png}
+\endminipage\
+\end{figure}
+
+Implication? RBFs are great for interpolating data with no boundaries!
+e.g. global bathymetry data
+
+\note{}
+\end{frame}
+
+\begin{frame}{Conclusion}
+Hopefully with this talk you
+
+\bi
+\item Refreshed your memory on interpolation
+\item Recognized interpolation through linear combination of basis functions
+\item Appreciated that RBFs are simply data-dependent basis functions
+\item Understood how RBFs are proven to be Well-Posed
+\item Understood how RBFs can still be Ill-Conditioned
+\item Will feel comfortable approaching RBFs for your appropriate interpolation needs
+\ei
+
+\note{}
+\end{frame}
+
+\begin{frame}[c]{References}
+\nocite{Wright2003,Fasshauer2012,Mongillo2011,Buhmann2003}
+\bibliographystyle{plain}
+\bibliography{bib}
 
 \note{}
 \end{frame}
