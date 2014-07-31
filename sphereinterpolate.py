@@ -32,13 +32,13 @@ def colorfunction(m, n, theta, phi):
     return special.sph_harm(m, n, theta, phi).real
 norm = colors.Normalize()
 
-fun = coordinates(3,100j)
-interp = coordinates(3, 20j)
+fun = coordinates(3, 100j)
+interp = coordinates(3, 100j)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.scatter(fun.x, fun.y, fun.z)
+# ax.scatter(fun.x, fun.y, fun.z)
 ax.plot_surface(
-    fun.x, fun.y, fun.z,  rstride=1, cstride=1, facecolors=cm.jet(norm(colorfunction)))
+    fun.x, fun.y, fun.z,  rstride=1, cstride=1, facecolors=cm.jet(norm(colorfunction(1, 3, fun.theta, fun.phi))))
 fig.savefig('sphere.png')
 plt.show()
