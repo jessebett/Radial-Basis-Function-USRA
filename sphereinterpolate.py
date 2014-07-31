@@ -5,31 +5,35 @@ import numpy as np
 from scipy import special
 from collections import namedtuple
 
-# Create a sphere
+# Nice aliases
 pi = np.pi
 cos = np.cos
 sin = np.sin
-fun= spheregrid(100j)
-interpphi, interptheta = np.mgrid[0:pi:100j, 0:2 * pi:100j]
 
-def spheregrid(n):
-    Grid=namedtuple('Grid', 'phi theta')
-    phi, theta = np.mgrid[0:pi:n, 0:2*pi:n]
-    return Grid(phi,theta)
+# Sphere Making Function
 
-def coordinates(r,phi,theta):
-    Coor=namedtuple('Coor', 'x y z')
+
+def coordinates(r, n):
+    phi, theta = np.mgrid[0:pi:n, 0:2 * pi:n]
+    Coor = namedtuple('Coor', 'r phi theta x y z')
     r = r
     x = r * sin(phi) * cos(theta)
     y = r * sin(phi) * sin(theta)
     z = r * cos(phi)
-    return Coor(x,y,z)
+    return Coor(r, phi, theta, x, y, z)
 
-colorfunction = special.sph_harm(3, 4, theta, phi).real
+# Creating the sphere
+fun = coordinates(3, 100j)
+interpphi, interptheta = np.mgrid[0:pi:100j, 0:2 * pi:100j]
+
+
+# Defining function to colour sphere
+def colorfunction(m, n, theta, phi):
+    return special.sph_harm(m, n, theta, phi).real
 norm = colors.Normalize()
 
-fun=coordinates(3, funphi, funtheta)
-interp=coordinates(3, )
+fun = coordinates(3,100j)
+interp = coordinates(3, 20j)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -38,5 +42,3 @@ ax.plot_surface(
     fun.x, fun.y, fun.z,  rstride=1, cstride=1, facecolors=cm.jet(norm(colorfunction)))
 fig.savefig('sphere.png')
 plt.show()
-
-
