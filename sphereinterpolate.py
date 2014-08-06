@@ -30,47 +30,52 @@ interpphi, interptheta = np.mgrid[0:pi:100j, 0:2 * pi:100j]
 
 
 # Defining function to colour sphere
-def colorfunction(m, n, theta, phi):
+def harmonic(m, n, theta, phi):
     return special.sph_harm(m, n, theta, phi).real
 norm = colors.Normalize()
 
 fun = coordinates(1, 100j)
 interp = coordinates(1, 5j)
 
-def sphere_norm(x,y):
-    return np.arccos(np.dot(x,y))
 
-harmonic=colorfunction(1, 3, fun.theta, fun.phi)
+def sphere_norm(x, y):
+    return np.arccos(np.dot(x, y))
 
-rbf=Rbf(interp.phi, interp.theta, colorfunction(1, 3, interp.theta, interp.phi))
-interp_values=rbf(fun.phi,fun.theta)
+harmonic13 = harmonic(1, 3, fun.theta, fun.phi)
 
+rbf = Rbf(interp.phi, interp.theta, harmonic(
+    1, 3, interp.theta, interp.phi))
+interp_values = rbf(fun.phi, fun.theta)
 
-# rbf=Rbf(interp.x, interp.y, interp.z, colorfunction(1, 3, interp.theta, interp.phi))
+scalars=harmonic(1, 3, interp.theta, interp.phi)
+
+# rbf=Rbf(interp.x, interp.y, interp.z, harmonic(1, 3, interp.theta, interp.phi))
 # interp_values=rbf(fun.x,fun.y,fun.z)
 
 mlab.figure()
-mlab.mesh(fun.x, fun.y, fun.z,scalars=harmonic)
-mlab.points3d(interp.x, interp.y, interp.z,scale_factor=0.1)
+vmax, vmin = np.max(harmonic13), np.min(harmonic13)
+mlab.mesh(fun.x, fun.y, fun.z, scalars=harmonic13,vmax=vmax, vmin=vmin)
+mlab.points3d(interp.x, interp.y, interp.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
 mlab.show()
 
+mlab.figure
 
 
 # fig = plt.figure(figsize=(13,5))
 
-# #Function Figure
+# Function Figure
 # ax1 = fig.add_subplot(121, projection='3d')
 # ax1.scatter(
-#     interp.x, interp.y, interp.z, 
+#     interp.x, interp.y, interp.z,
 #     color='r', marker='o',
-#     zorder=1, 
+#     zorder=1,
 #     s=40
 #     )
 
 # ax1.plot_surface(
-#     fun.x, fun.y, fun.z,  
-#     rstride=1, 
-#     cstride=1, 
+#     fun.x, fun.y, fun.z,
+#     rstride=1,
+#     cstride=1,
 #     alpha=0.5,
 #     facecolors=cm.jet(norm(harmonic)),
 #     zorder=-1
@@ -78,9 +83,9 @@ mlab.show()
 
 # ax2 = fig.add_subplot(122, projection='3d')
 # ax2.plot_surface(
-#     fun.x, fun.y, fun.z,  
-#     rstride=1, 
-#     cstride=1, 
+#     fun.x, fun.y, fun.z,
+#     rstride=1,
+#     cstride=1,
 #     alpha=1,
 #     facecolors=cm.jet(norm(interp_values))
 #     )
