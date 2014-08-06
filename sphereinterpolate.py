@@ -12,7 +12,8 @@ pi = np.pi
 cos = np.cos
 sin = np.sin
 
-# Sphere Making Function
+# Creating a sphere in Cartesian and Sphereical
+# Saves coordinates as named tuples
 
 
 def coordinates(r, n):
@@ -24,70 +25,51 @@ def coordinates(r, n):
     z = r * cos(phi)
     return Coor(r, phi, theta, x, y, z)
 
-# Creating the sphere
-fun = coordinates(3, 100j)
-interpphi, interptheta = np.mgrid[0:pi:100j, 0:2 * pi:100j]
+# Creating a sphere
+# fine is coordinates on a fine grid
+# interp is coordinates on coarse grid for training interpolation
+fine = coordinates(1, 100j)
+interp = coordinates(1, 5j)
 
 
-# Defining function to colour sphere
+# Defining finection to colour sphere
+# Here we are using a spherical harmonic
 def harmonic(m, n, theta, phi):
     return special.sph_harm(m, n, theta, phi).real
 norm = colors.Normalize()
 
-fun = coordinates(1, 100j)
-interp = coordinates(1, 5j)
+# One example of the harmonic function, for testing
+harmonic13_fine = harmonic(1, 3, fine.theta, fine.phi)
+harmonic13_coarse = harmonic(1, 3, interp.theta, interp.phi)
 
 
-def sphere_norm(x, y):
-    return np.arccos(np.dot(x, y))
+# Train the interpolation using coarse coordinates
+rbf = Rbf(interp.phi, interp.theta, harmonic13_coarse)
+# The result of the interpolation on fine coordinates
+interp_values = rbf(fine.phi, fine.theta)
 
-harmonic13 = harmonic(1, 3, fun.theta, fun.phi)
-
-rbf = Rbf(interp.phi, interp.theta, harmonic(
-    1, 3, interp.theta, interp.phi))
-interp_values = rbf(fun.phi, fun.theta)
-
-scalars=harmonic(1, 3, interp.theta, interp.phi)
 
 # rbf=Rbf(interp.x, interp.y, interp.z, harmonic(1, 3, interp.theta, interp.phi))
-# interp_values=rbf(fun.x,fun.y,fun.z)
+# interp_values=rbf(fine.x,fine.y,fine.z)
 
+#Figure of harmoinc function on sphere in fine cordinates
+#Points3d showing interpolation training points coloured to their value
 mlab.figure()
-vmax, vmin = np.max(harmonic13), np.min(harmonic13)
-mlab.mesh(fun.x, fun.y, fun.z, scalars=harmonic13,vmax=vmax, vmin=vmin)
-mlab.points3d(interp.x, interp.y, interp.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
+vmax, vmin = np.max(harmonic13_fine), np.min(harmonic13_fine)
+mlab.mesh(fine.x, fine.y, fine.z, scalars=harmonic13_fine, vmax=vmax, vmin=vmin)
+mlab.points3d(interp.x, interp.y, interp.z, harmonic13_coarse,
+              scale_factor=0.1, scale_mode='none', vmax=vmax, vmin=vmin)
+
+#Figure showing results of rbf interpolation
+mlab.figure()
+vmax, vmin = np.max(harmonic13_fine), np.min(harmonic13_fine)
+mlab.mesh(fine.x, fine.y, fine.z, scalars=interp_values)
+# mlab.points3d(interp.x, interp.y, interp.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
+
+
 mlab.show()
 
-mlab.figure
 
-
-# fig = plt.figure(figsize=(13,5))
-
-# Function Figure
-# ax1 = fig.add_subplot(121, projection='3d')
-# ax1.scatter(
-#     interp.x, interp.y, interp.z,
-#     color='r', marker='o',
-#     zorder=1,
-#     s=40
-#     )
-
-# ax1.plot_surface(
-#     fun.x, fun.y, fun.z,
-#     rstride=1,
-#     cstride=1,
-#     alpha=0.5,
-#     facecolors=cm.jet(norm(harmonic)),
-#     zorder=-1
-#     )
-
-# ax2 = fig.add_subplot(122, projection='3d')
-# ax2.plot_surface(
-#     fun.x, fun.y, fun.z,
-#     rstride=1,
-#     cstride=1,
-#     alpha=1,
-#     facecolors=cm.jet(norm(interp_values))
-#     )
-# fig.savefig('sphere.png')
-# plt.show()
+# A different norm potentially
+def sphere_norm(x, y):
+    return np.arccos(np.dot(x, y))
