@@ -31,9 +31,6 @@ def coordinates(r, n):
 fine = coordinates(1, 100j)
 interp = coordinates(1, 6j)
 
-print interp.phi
-print interp.theta
-
 
 # Defining finection to colour sphere
 # Here we are using a spherical harmonic
@@ -51,34 +48,42 @@ rbf = Rbf(interp.phi, interp.theta, harmonic13_coarse)
 # The result of the interpolation on fine coordinates
 interp_values = rbf(fine.phi, fine.theta)
 
-error=harmonic13_fine-interp_values
-L_infinity=np.max(np.abs(error))
+error = harmonic13_fine - interp_values
+L_infinity = np.max(np.abs(error))
 
 # rbf=Rbf(interp.x, interp.y, interp.z, harmonic13_coarse)
 # interp_values=rbf(fine.x,fine.y,fine.z)
 
-#Figure of harmoinc function on sphere in fine cordinates
-#Points3d showing interpolation training points coloured to their value
-mlab.figure()
-vmax, vmin = np.max(harmonic13_fine), np.min(harmonic13_fine)
-mlab.mesh(fine.x, fine.y, fine.z, scalars=harmonic13_fine, vmax=vmax, vmin=vmin)
-mlab.points3d(interp.x, interp.y, interp.z, harmonic13_coarse,
-              scale_factor=0.1, scale_mode='none', vmax=vmax, vmin=vmin)
-# mlab.savefig('interppointssphere.png')
 
-#Figure showing results of rbf interpolation
-mlab.figure()
-mlab.mesh(fine.x, fine.y, fine.z, scalars=interp_values, vmax=vmax,vmin=vmin)
-mlab.points3d(interp.x, interp.y, interp.z, harmonic13_coarse, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
-# mlab.savefig('interpsphere.png')
+def make_figures(fine_coor, interp_coor, fine_function, coarse_function, interp_results):
+    # Figure of harmoinc function on sphere in fine cordinates
+    # Points3d showing interpolation training points coloured to their value
+    mlab.figure()
+    vmax, vmin = np.max(fine_function), np.min(fine_function)
+    mlab.mesh(fine_coor.x, fine_coor.y, fine_coor.z,
+              scalars=fine_function, vmax=vmax, vmin=vmin)
+    mlab.points3d(interp_coor.x, interp_coor.y, interp_coor.z, coarse_function,
+                  scale_factor=0.1, scale_mode='none', vmax=vmax, vmin=vmin)
+    # mlab.savefig('interppointssphere.png')
 
-mlab.figure()
-mlab.mesh(fine.x, fine.y, fine.z, scalars=error, vmax=L_infinity,vmin=-L_infinity)
-mlab.colorbar(title='Error', orientation='vertical')
-# mlab.points3d(interp.x, interp.y, interp.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
-# mlab.savefig('interpsphere.png')
+    # Figure showing results of rbf interpolation
+    mlab.figure()
+    mlab.mesh(fine_coor.x, fine_coor.y, fine_coor.z,
+              scalars=interp_results, vmax=vmax, vmin=vmin)
+    mlab.points3d(interp_coor.x, interp_coor.y, interp_coor.z, coarse_function,
+                  scale_factor=0.1, scale_mode='none', vmax=vmax, vmin=vmin)
+    # mlab.savefig('interpsphere.png')
 
-mlab.show()
+    mlab.figure()
+    mlab.mesh(fine_coor.x, fine_coor.y, fine_coor.z,
+              scalars=error, vmax=L_infinity, vmin=-L_infinity)
+    mlab.colorbar(title='Error', orientation='vertical')
+    # mlab.points3d(interp_coor.x, interp_coor.y, interp_coor.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
+    # mlab.savefig('interpsphere.png')
+
+    mlab.show()
+
+make_figures(fine, interp, harmonic13_fine, harmonic13_coarse, interp_values)
 
 
 # A different norm potentially
