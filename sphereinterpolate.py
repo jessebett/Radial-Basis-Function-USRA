@@ -2,16 +2,16 @@ import matplotlib.pyplot as plt
 from matplotlib import cm, colors
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+from numpy import pi, cos, sin
 from scipy import special
 from scipy.interpolate import Rbf
 from collections import namedtuple
 from mayavi import mlab
-from math import asin
+from math import asin, sqrt
+from math import asin, sqrt
+from dipy.core.sphere import Sphere
 
-# Nice aliases
-pi = np.pi
-cos = np.cos
-sin = np.sin
+
 
 # Creating a sphere in Cartesian and Sphereical
 # Saves coordinates as named tuples
@@ -19,22 +19,27 @@ sin = np.sin
 
 def coordinates(n_fine, n_coarse):
     def make_coor(n):
-        phi, theta = np.mgrid[0.1:pi-0.1:n, 0.1:2 * pi-0.1:n]
-        phi = np.ravel(phi)
-        theta = np.ravel(theta)
+        phi, theta = np.mgrid[0:pi:n, 0:2*pi:n]
         Coor = namedtuple('Coor', 'r phi theta x y z')
         r = 1
         x = r * sin(phi) * cos(theta)
         y = r * sin(phi) * sin(theta)
         z = r * cos(phi)
         return Coor(r, phi, theta, x, y, z)
-    def rand_sphere(n):
-         """n points distributed evenly on the surface of a unit sphere""" 
-        z = 2 * random.rand(n) - 1   # uniform in -1, 1
-        t = 2 * pi * random.rand(n)   # uniform in 0, 2*pi
-         x = sqrt(1 - z**2) * cos(t)
-         y = sqrt(1 - z**2) * sin(t)
-         return x, y, z
+
+    def uniform_spherical_distribution(N): 
+        """n points distributed evenly on the surface of a unit sphere""" 
+        pts = []   
+        r=1
+        inc = pi * (3 - sqrt(5)) 
+        off = 2 / float(N) 
+        for k in range(0, int(N)): 
+            y = k * off - 1 + (off / 2) 
+            r = sqrt(1 - y*y) 
+            phi = k * inc 
+            pts.append([cos(phi)*r, y, sin(phi)*r])   
+        return np.array(pts)
+
     def appendSpherical_np(xyz):
         ptsnew = np.hstack((xyz, np.zeros(xyz.shape)))
         xy = xyz[:,0]**2 + xyz[:,1]**2
@@ -43,11 +48,17 @@ def coordinates(n_fine, n_coarse):
         #ptsnew[:,4] = np.arctan2(xyz[:,2], np.sqrt(xy)) # for elevation angle defined from XY-plane up
         ptsnew[:,5] = np.arctan2(xyz[:,1], xyz[:,0])
         return ptsnew
-    
 
-    Coordinates= namedtuple('Coordinates', 'fine coarse')
+    def make_uni_coor(n):
+        Coor = namedtuple('Coor', 'theta phi x y z')
+        pts=uniform_spherical_distribution(n)
+        pts= appendSpherical_np(pts)
+
+        return Coor(pts[:,5], pts[:,4], pts[:,0], pts[:,1], pts[:,2])
+
+    Coordinates= namedtuple('Coordinates', 'fine coarse ')
     # return Coordinates(make_coor(n_fine),make_coor(n_coarse))
-    return Coordinates(rand(n_fine),make_coor(n_coarse))
+    return Coordinates(make_coor(n_fine),make_uni_coor(n_coarse))
 
 
 
@@ -61,7 +72,10 @@ def harmonic(m, n, coor):
         )
 norm = colors.Normalize()
 
-
+def angle(x1, x2):
+    xx = np.arccos((x1 * x2).sum(axis=0))
+    xx[np.isnan(xx)] = 0
+    return xx
 
 
 def spherical_dist(pos1, pos2):
@@ -76,9 +90,9 @@ def spherical_dist(pos1, pos2):
 
 def rbf_interpolate(coor, coarse_function):
     # Train the interpolation using interp coordinates
-    rbf = Rbf(coor.coarse.phi, coor.coarse.theta, coarse_function,norm=spherical_dist)
+    rbf = Rbf(coor.coarse.x, coor.coarse.y, coor.coarse.z, coarse_function,norm=angle)
     # The result of the interpolation on fine coordinates
-    return rbf(coor.fine.phi, coor.fine.theta)
+    return rbf(coor.fine.x, coor.fine.y,coor.fine.z)
 
 
 def interp_error(fine_function, interp_results):
@@ -137,15 +151,32 @@ def harmonic_combo(*args):
 # Creating a sphere
 # fine is coordinates on a fine grid
 # coarse is coordinates on coarse grid for training interpolation
-coordinates = coordinates(100j, 6j)
+coordinates = coordinates(100j, 300)
+
+sphere = Sphere(coordinates.coarse.x,coordinates.coarse.y,coordinates.coarse.z)
 
 # One example of the harmonic function, for testing
-function= harmonic(3, 4, coordinates)
+function= harmonic(1,3, coordinates)
 # harmonic12= harmonic(2, 3, coordinates)
 
 
 interp_values = rbf_interpolate(coordinates, function.coarse)
 error = interp_error(function.fine, interp_values)
+
+
+mlab.figure()
+mlab.triangular_mesh(coordinates.coarse.x, coordinates.coarse.y, coordinates.coarse.z, sphere.faces,
+    scalars = function.coarse)
+mlab.show()
+
+# mlab.figure()
+# pts = mlab.points3d(coordinates.coarse.x,coordinates.coarse.y,coordinates.coarse.z, function.coarse,
+#     scale_mode='none', scale_factor=0.2)
+# mlab.mesh(coordinates.fine.x, coordinates.fine.y, coordinates.fine.z,
+#               scalars=interp_values)
+# # mesh = mlab.pipeline.delaunay3d(pts)
+# # surf = mlab.pipeline.surface(mesh)
+# mlab.show()
 
 make_figures(coordinates, function, interp_values, error)
 
