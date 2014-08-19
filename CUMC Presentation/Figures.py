@@ -180,14 +180,13 @@ def makefig7():
     plt.plot(0, 0, 'o', color=orange)
     plt.vlines(0, 0.4, 0, pink, linestyles='dashed', alpha=0.7)
 
-    ax.annotate('Multiquadrc Kernel', (-2.45, 2.59), size=30, color=green)
+    ax.annotate('Multiquadric Kernel', (-2.45, 2.59), size=30, color=green)
     ax.annotate('Center', (-0.8, -0.4), size=30, color=orange)
     ax.annotate('$c$', (0.2, 0.1), size=30, color=pink)
     jesseaxis(ax, x, x)
     plt.ylim(-1, 3)
     saveimg('fig7')
     plt.show()
-
 
 
 def makefig8():
