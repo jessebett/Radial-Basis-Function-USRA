@@ -183,11 +183,14 @@ There are a few commonly used radial basis function kernels:
 
  - Multiquadric: $\phi(r)=\sqrt{1+(\epsilon r)^2}$![enter image description here][14]
  - Inverse Multiquadric: $\phi(r)=\frac{1}{\sqrt{1+(\epsilon r)^2}}$ ![enter image description here][15]
- - Inverse Quadratic
- - Gaussian
+ - Inverse Quadratic: $\phi(r)=\frac{1}{1+(\epsilon r)^2}$ ![enter image description here][16]
+ - Gaussian:  $\phi(r)=e^{-(\epsilon r)^2}$ ![enter image description here][17]
 
-However, by using the multiquadric kernel in
+As before, we can use translates of these functions centered on our data sites as basis for our interpolation linear system. Further, notice that the multiquadric kernel has been rearranged to replace $c$ with a **shape parameter**, $\epsilon$ consistent with the other kernels.
 
+However, by using the radial basis kernels as our basis, we change the interpolation matrix so that it is no longer the distance matrix as before.
+
+>Interpolation matrix with RBF kernels:
 \begin{equation*}
 A=
 \begin{bmatrix}
@@ -197,6 +200,54 @@ A=
 \phi_N(r_1) & \phi_N(r_2)& \cdots & \phi_N(r_N)
 \end{bmatrix}
 \end{equation*}
+
+If $N\geq2$ then we are still not interpolating in a Haar Space, and since we are no longer using a distance matrix, can we expect well-posedness?
+
+To answer this question we determine if our interpolation matrix is **positive-definite**.
+>A matrix, $A$, is positive-definite if
+\begin{align*}
+& t^TAt>0 & \forall t=\left[ t_1, t_2, ..., t_n\right]\neq 0 \in \mathbb{R}^n
+\end{align*}
+
+Using this definition we have the following condition:
+>If interpolation matrix, $A$, is symmetric, positive-definite , then $A$ is nonsingular and our system is well-posed.
+
+So we can guarantee the existence of a unique solution if we choose our kernels such that $A$ will be positive-definite. In fact, we can produce positive-definite interpolation matrices by using positive-definite kernels.
+
+>A function, $\phi: \mathbb{R}^n\times \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be positive definite if
+:
+\begin{align*}
+&\sum_{i=1}^N \sum_{j=1}^N \phi(||x-x_i||)t_i\bar{t_j}>0 &\forall t=\left[ t_1, t_2, ..., t_n\right]\neq 0 \in \mathbb{C}^n
+\end{align*}
+
+Of the common RBF kernels described above, all are positive-definite except Hardy's Multiquadric kernel. However, the multiquadric kernel is guaranteed to produce well-posed systems for other, similar reasons (that it is conditionally negative-definite). With the exception of Hardy's multiquadric kernel, by using positive-definite kernels we can produce positive-definite interpolation matrices which guarantee well-posed systems! 
+
+So, by using Radial Basis Kernels for interpolation, we have shown that there exists a unique interpolation function $s(x)$ which interpolates scattered data in N-dimensions.
+>Radial Basis Interpolation
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) 
+\end{equation*}
+
+####Well-posed v.s. Well-conditioned
+In the discussion above we have shown that radial basis interpolation is well-posed, so there exists a unique solution for the interpolation problem. However, because these systems are solved using numerical methods on computers, they are subject to computational limitations. By using computational methods we introduce a complication, just because a solution exists, doesn't mean that it is accessible through numerical methods. A common example of the limitations that can cause a solution to be inaccessible is the accumulation of rounding errors. If our solution exists, and the system behaves 'nicely' with computational solving methods, then we say the solution is **well-conditioned**.
+
+Radial basis interpolation problems, although well-posed, have the propensity to be very ill-conditioned. This is in part due the choice **shape parameter**, $\epsilon$. For some systems, small changes in $\epsilon$ may have potentially significant influences on the system. 
+
+In the two figures below we can see how increasing the value of epsilon will change the shape of the individual kernel basis functions.
+
+For $\epsilon=0.4$
+![enter image description here][18]
+
+For $\epsilon=1$
+![enter image description here][19]
+
+In the three figures below, we can see how increasing the value of epsilon will cause the interpolation system to become ill-conditioned. Keep in mind that the interpolation solution for each espilon value still exists, but the computation methods create noise and are unable to find the function.
+
+![enter image description here][20]
+
+![enter image description here][21]
+
+![enter image description here][22]
 
 
   [1]: http://cumc.math.ca/2014/
@@ -214,3 +265,10 @@ A=
   [13]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelbasis.png
   [14]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/multiquadric.png
   [15]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversemultiquadric.png
+  [16]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversequadratic.png
+  [17]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/gaussian.png
+  [18]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus1.png
+  [19]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus2.png
+  [20]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/conditioned.png
+  [21]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/illconditioned.png
+  [22]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/veryillconditioned.png
