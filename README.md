@@ -14,7 +14,7 @@ Further, we want our function, $s(x)$ to satisfy what's called the 'interpolatio
 > Interpolation Condition: $s(x_i)=f_i$ $\forall i\in\{0 ... N \}$
 
 This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. This can be achieved through different methods, e.g., Least Squares approximation. Sometimes, when accuracy at data sites is not necessary, approximation is preferred over interpolation because it can provide a 'nicer' function which could better illustrate the relationship among the data sites and measurements. For instance, approximation is heavily utilized in experimental science where measurements can contain a measurement error associated with experimental procedures. In this environment, the interpolation condition may be undesirable because it forces the interpolation to match exactly with potential measurement error, where approximation may alleviate error influence and illustrate measured correlations better. 
-![enter image description here][7]
+![TestTestTEst][7]
 
 
   [1]: http://cumc.math.ca/2014/
