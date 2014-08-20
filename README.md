@@ -50,6 +50,35 @@ However, for n-Dimensions where $n\geq2$ this is never guaranteed! That is, no m
 
 ####Haar-Mairhuber-Curtis Theorem
 ![enter image description here][9]
+Through the work of Alfréd Haar and his description of **Haar Spaces** we gain the negative result that well-posedness is not guaranteed in higher dimensional linear systems with independently chosen basis functions. To state the theorem we first define Haar spaces.
+
+>Definition of Haar Space:
+Let $\Omega \subset \mathbb{R}^N$ be a set with at least $N$ sites in it. Let $V \subset C(\Omega)$ be an $N$-dimensional subspace of continuous functions. Then, we say that $V$ is a **Haar Space** if for any collection of $N$ sites $\{x_1,...,x_N\}$ with any corresponding set of values $\{f_1,...,f_N\}$, we can find a unique function $s \in V$ such that $s(x_k)=f_k$.
+
+From this definition we have the following lemma.
+>Lemma:
+Let $\Omega \subset \mathbb{R}^N$ be a set with at least $N$ sites in it and $V \subset C(\Omega)$ be a subspace. 
+Then, $V$ is an $N$-dimensional Haar Space if and only if for any distinct sites $\{x_1,...,x_N\} \in \Omega$ and any basis of functions $\{\psi_1,...,\psi_N\} \in V$, we have $\det(\psi_j(x_i))\neq0$.
+
+In other words:
+>$V$ is a Haar Space $\iff$ any set of basis function produce well-posed system for any set of distinct data sites.
+
+For the purposes of interpolation, then, interpolating within a Haar space is ideal, because then we can choose our basis independently of our data and, as per the lemma, we are guaranteed a well-posed system and a unique solution.
+
+However, by the negative result of the Mairhuber-Curtis Theorem, there can be no Haar Spaces in $N$-Dimensions for $N \geq 2$
+>Mairhuber-Curtis Theorem:
+Let $\Omega \subset \mathbb{R}^N$, $N \geq 2$ contain an interior site. Then, there is no Haar space of dimension $N \geq 2$ for $\Omega$.
+
+So, if we are interpolating scattered data in higher dimensions, by the Haar-Mairhuber-Curtis Theorem we cannot choose our basis functions independent from our data sites. However, this does not mean we cannot interpolate in higher dimensions using our interpolation assumption.
+>If we can't guarantee well-posedness with independently chosen basis functions, we must choose our basis functions depending on our data sites. 
+
+###Basis Functions for Higher Dimension Interpolation
+One method for defining basis functions depending on our data sites is to take a single function and translate it for each site. That is, our basis functions will be **translates** of a single function for each data site. 
+
+####Translates of the Basic Function
+If our basis functions are translates of a function, which function should we translate? By answering this question we will arrive at the definition of Radial Basis Functions, but first let's consider a preliminary function: the basic function.
+>The Basic Function: $\psi(x)=|x|$
+![enter image description here][10]
 
 
   [1]: http://cumc.math.ca/2014/
@@ -61,3 +90,4 @@ However, for n-Dimensions where $n\geq2$ this is never guaranteed! That is, no m
   [7]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png
   [8]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png
   [9]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/HMC.png
+  [10]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicfun.png
