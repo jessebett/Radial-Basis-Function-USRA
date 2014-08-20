@@ -73,7 +73,7 @@
 \href{http://github.com/jessebett}{\tt \scriptsize github.com/jessebett}
 }
 
-\graphicspath{{./Images/}}
+\graphicspath{{./Figures/}}
 
 
 \begin{document}
@@ -93,7 +93,7 @@ that informs us on our system at locations different from our data sites.\\
 \bigskip 
 
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig1.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{interpdef.png}
 \end{figure}
 
 \note{}
@@ -122,7 +122,7 @@ that informs us on our system at locations different from our data sites.\\
 \item \textcolor{green}{Approximation}: $s(x)$ \subt{closely matches} our measurements at our data sites, e.g. with Least Squares 
 \ei
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig2.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{interpvsapprox.png}
 \end{figure}
 
 \note{}
@@ -135,7 +135,7 @@ we will only consider interpolation.
 \item Interpolation: $\textcolor{blue}{s(\textcolor{orange}{x_i})}=\textcolor{pink}{f_i}$ $\forall i\in\{0 \mathellipsis N \}$
 \ei
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig1.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{interpdef.png}
 \end{figure}
 
 
@@ -149,7 +149,7 @@ we will only consider interpolation.
 Given data $(\textcolor{orange}{x_i},\textcolor{pink}{f_i})$, $i=1, \mathellipsis, N$, such that $\textcolor{orange}{x_i} \in \mathbb{R}^n$, $\textcolor{pink}{f_i} \in \mathbb{R}$, we want to find a continuous function $\textcolor{blue}{s(x)}$ such that $\textcolor{blue}{s(\textcolor{orange}{x_i})}=\textcolor{pink}{f_i}$ $\forall i\in\{0 \mathellipsis N \}$
 
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig1.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{interpdef.png}
 \end{figure}
 
 \note{}
@@ -218,7 +218,7 @@ $\psi_{i=1}^N=\{1,x,x^2,x^3, \mathellipsis, x^{N-1}\}$
 \end{center}
 \pause
 \begin{figure}
-\includegraphics[width=0.4\textwidth, keepaspectratio]{fig3.png}
+\includegraphics[width=0.4\textwidth, keepaspectratio]{polyinterp.png}
 \end{figure}
 \footnotesize{\textcolor{orange}{$s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$}}
 \note{}
@@ -277,7 +277,7 @@ First, consider what we call the \subt{basic function}\\
 \end{equation*}
 
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig4.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{basicfun.png}
 \end{figure}
 
 \note{Change to || ||
@@ -314,7 +314,7 @@ Each basis function, \textcolor{green}{$\psi_i(x)$}, is our basic function shift
 
 
 \begin{figure}
-\includegraphics[width=0.65\textwidth, keepaspectratio]{fig5.png}
+\includegraphics[width=0.65\textwidth, keepaspectratio]{basicbasis.png}
 \end{figure}
 
 
@@ -390,7 +390,7 @@ Basic function
 has a discontinuity in its first derivative at $x_i$.
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth, keepaspectratio]{fig6.png}
+\includegraphics[width=0.5\textwidth, keepaspectratio]{basicfunxi.png}
 \end{figure}
 This causes the interpolant to have a discontinuous first derivative at each data site. 
 
@@ -410,7 +410,7 @@ In 1968, R.L. Hardy showed that we can remedy this problem by changing our basic
 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth, keepaspectratio]{fig7.png}
+\includegraphics[width=0.5\textwidth, keepaspectratio]{kernelfun.png}
 \end{figure}
 
 \subt{Note:} \textcolor{pink}{$c$} is called the shape parameter. The case when $c=0$ is 
@@ -425,7 +425,7 @@ As before, we can generate our basis functions by translating Hardy's basic func
 \psi_i(x)=\sqrt{c^2 + (||x-x_i||)^2}
 \end{equation*}
 \begin{figure}
-\includegraphics[width=0.7\textwidth, keepaspectratio]{fig8.png}
+\includegraphics[width=0.7\textwidth, keepaspectratio]{kernelbasis.png}
 \end{figure}
 
 \note{}
@@ -436,7 +436,7 @@ Hardy's Multiquadric function is still \subt{radially symmetric} about its cente
 
 
 \begin{figure}
-\includegraphics[width=0.3\textwidth, keepaspectratio]{fig7.png}
+\includegraphics[width=0.3\textwidth, keepaspectratio]{kernelfun.png}
 \end{figure}
 we this function a Kernel. 
 

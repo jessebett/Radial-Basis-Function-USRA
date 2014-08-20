@@ -33,7 +33,7 @@ def jesseaxis(ax, x, y):
 
 
 def saveimg(name):
-    plt.savefig('Images/' + name + '.png', bbox_inches='tight',
+    plt.savefig('Figures/' + name + '.png', bbox_inches='tight',
                 pad_inches=0.1, facecolor=grey, dpi=500)
 
 ####FIGURE SHOWING DEFINITION OF INTERPOLATION####
@@ -123,7 +123,7 @@ def makebasicfun():
     jesseaxis(ax, x, np.abs(x))
     plt.ylim(-1, 3)
     saveimg('basicfun')
-    plt.show()
+    #plt.show()
 
 ###SHOWING BASIC FUNCTION AS BASIS###
 #FIG 5#
@@ -152,7 +152,7 @@ def makebasicbasis():
     # yi = rbf(xi)
     # plt.plot(xi, yi, color=blue)
     saveimg('basicbasis')
-    plt.show()
+    #plt.show()
 
 ###BASIC FUNCTION WITH Xi AT CENTER###
 #FIG 6#
@@ -169,7 +169,7 @@ def makebasicfunxi():
     jesseaxis(ax, x, np.abs(x))
     plt.ylim(-1, 3)
     saveimg('basicfunxi')
-    plt.show()
+    #plt.show()
 
 ###MULTIQUADRIC KERNEL AS BASIC FUNCTION###
 #FIG 7#
@@ -187,12 +187,13 @@ def makekernelfun():
     jesseaxis(ax, x, x)
     plt.ylim(-1, 3)
     saveimg('kernelfun')
-    plt.show()
+    #plt.show()
 
 ###MULTIQUADRIC KERNEL AS BASIS FUNCTION##
 #FIG 8#
 def makekernelbasis():
     # Defining the data sites
+    plt.close()
     fig1 = plt.figure(facecolor=grey)
     ax1 = plt.axes()
 
@@ -217,7 +218,7 @@ def makekernelbasis():
     # yi = rbf(xi)
     # plt.plot(xi, yi, color=blue)
     saveimg('kernelbasis')
-    plt.show()
+    #plt.show()
 
 #MultiQuadric Kernel#
 def makeMultiQuadric():
@@ -344,8 +345,9 @@ def makeconditioned():
     saveimg('veryillconditioned')
 
 
-    plt.show()
+    #plt.show()
 
+#Demonstrate how epsillon changes the basis function#
 def makebasisgaus():
     # Defining the data sites
     fig1 = plt.figure(facecolor=grey)
@@ -399,7 +401,20 @@ def makebasisgaus():
     saveimg('basisgaus2')
 
 
-    plt.show()
+    #plt.show()
 
-makebasisgaus()
-# makeMultiQuadric()
+def makeallfigs():
+    makeinterpdef()
+    makeinterpvsapprox()
+    makepolyinterp()
+    makebasicfun()
+    makebasicbasis()
+    makebasicfunxi()
+    makekernelfun()
+    makekernelbasis()
+    makekernels()
+    makeconditioned()
+    makebasisgaus()
+
+makeallfigs()
+# makeGaussian()
