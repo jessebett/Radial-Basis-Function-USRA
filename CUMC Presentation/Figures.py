@@ -36,10 +36,9 @@ def saveimg(name):
     plt.savefig('Images/' + name + '.png', bbox_inches='tight',
                 pad_inches=0.1, facecolor=grey, dpi=500)
 
-####FIGURE 1####
-
-
-def makefig1():
+####FIGURE SHOWING DEFINITION OF INTERPOLATION####
+#FIG 1#
+def makeinterpdef():
     # Defining the data sites
     fig1 = plt.figure(facecolor=grey)
     ax1 = plt.axes()
@@ -60,12 +59,13 @@ def makefig1():
     xi = np.linspace(-6, 6, 100)
     yi = rbf(xi)
     plt.plot(xi, yi, color=blue)
-    saveimg('fig1')
+    saveimg('interpdef')
     # plt.show()
 
 
 ###INTERP VS APPROX###
-def makefig2():
+#FIG 2#
+def makeinterpvsapprox():
     plt.close()
     x = np.array([0.0, 1.5, 2.0, 3.0,  4.0,  4.5])
     y = np.array([0.0, 0.8, 0.9, 0.1, -0.8, -1.0])
@@ -82,13 +82,12 @@ def makefig2():
     plt.ylim(-2, 2)
 
     jesseaxis(ax2, x, y)
-    saveimg('fig2')
+    saveimg('interpvsapprox')
     # plt.show()
 
 ###POLYNOMIAL INTERP###
-
-
-def makefig3():
+#FIG 3#
+def makepolyinterp():
     plt.close()
     x = np.array([0.0, 1.5, 2.0, 3.0,  4.0,  4.5])
     y = np.array([0.0, 0.8, 0.9, 0.1, -0.8, -1.0])
@@ -105,13 +104,12 @@ def makefig3():
     plt.ylim(-2, 2)
 
     jesseaxis(ax3, x, y)
-    saveimg('fig3')
+    saveimg('polyinterp')
     # plt.show()
 
-###POLYNOMIAL INTERP###
-
-
-def makefig4():
+###BASIC FUNCTION###
+#FIG 4#
+def makebasicfun():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
@@ -124,11 +122,12 @@ def makefig4():
 
     jesseaxis(ax, x, np.abs(x))
     plt.ylim(-1, 3)
-    saveimg('fig4')
+    saveimg('basicfun')
     plt.show()
 
-
-def makefig5():
+###SHOWING BASIC FUNCTION AS BASIS###
+#FIG 5#
+def makebasicbasis():
     # Defining the data sites
     fig1 = plt.figure(facecolor=grey)
     ax1 = plt.axes()
@@ -152,11 +151,12 @@ def makefig5():
     # xi = np.linspace(-6, 6, 100)
     # yi = rbf(xi)
     # plt.plot(xi, yi, color=blue)
-    saveimg('fig5')
+    saveimg('basicbasis')
     plt.show()
 
-
-def makefig6():
+###BASIC FUNCTION WITH Xi AT CENTER###
+#FIG 6#
+def makebasicfunxi():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
@@ -168,11 +168,12 @@ def makefig6():
 
     jesseaxis(ax, x, np.abs(x))
     plt.ylim(-1, 3)
-    saveimg('fig6')
+    saveimg('basicfunxi')
     plt.show()
 
-
-def makefig7():
+###MULTIQUADRIC KERNEL AS BASIC FUNCTION###
+#FIG 7#
+def makekernelfun():
     plt.close()
     x = np.linspace(-4, 4, 1000)
     ax = plt.axes()
@@ -185,11 +186,12 @@ def makefig7():
     ax.annotate('$c$', (0.2, 0.1), size=30, color=pink)
     jesseaxis(ax, x, x)
     plt.ylim(-1, 3)
-    saveimg('fig7')
+    saveimg('kernelfun')
     plt.show()
 
-
-def makefig8():
+###MULTIQUADRIC KERNEL AS BASIS FUNCTION##
+#FIG 8#
+def makekernelbasis():
     # Defining the data sites
     fig1 = plt.figure(facecolor=grey)
     ax1 = plt.axes()
@@ -214,10 +216,10 @@ def makefig8():
     # xi = np.linspace(-6, 6, 100)
     # yi = rbf(xi)
     # plt.plot(xi, yi, color=blue)
-    saveimg('fig8')
+    saveimg('kernelbasis')
     plt.show()
 
-
+#MultiQuadric Kernel#
 def makeMultiQuadric():
     plt.close()
     x = np.linspace(-4, 4, 1000)
@@ -230,7 +232,7 @@ def makeMultiQuadric():
     saveimg('multiquadric')
     # plt.show()
 
-
+#Gaussian Kernel#
 def makeGaussian():
     plt.close()
     x = np.linspace(-4, 4, 1000)
@@ -243,7 +245,7 @@ def makeGaussian():
     saveimg('gaussian')
     # plt.show()
 
-
+#Inverse Quadratic Kernel#
 def makeInverseQuadratic():
     plt.close()
     x = np.linspace(-4, 4, 1000)
@@ -256,7 +258,7 @@ def makeInverseQuadratic():
     saveimg('inversequadratic')
     # plt.show()
 
-
+#inverse MultiQuadric Kernel#
 def makeInverseMultiQuadric():
     plt.close()
     x = np.linspace(-4, 4, 1000)
@@ -269,6 +271,7 @@ def makeInverseMultiQuadric():
     saveimg('inversemultiquadric')
     # plt.show()
 
+#Make the above kernels#
 def makekernels():
     makeGaussian()
     makeMultiQuadric()
@@ -278,6 +281,8 @@ def makekernels():
 def quickpiece(x):
     return np.piecewise(x,[np.abs(x)<1,np.abs(x)>=1],[1,0])
 
+
+#Demonstrate conditioning problems in RBF#
 def makeconditioned():
 
     eps1=1
