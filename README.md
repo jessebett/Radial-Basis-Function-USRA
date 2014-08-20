@@ -11,7 +11,12 @@ This repository contains resources and working documents associated with the pro
 Given a set of **measurements** $\{f_i\}_{i=1}^N$ taken at corresponding **data sites** $\{x_i\}_{i=1}^N$ we want to find an **interpolation function** $s(x)$ that informs us on our system at locations different from our data sites. 
 ![enter image description here][6]
 Further, we want our function, $s(x)$ to satisfy what's called the **interpolation condition** which is that we want to our interpolation function to exactly match our measurements at our data sites. 
-> Interpolation Condition: $s(x_i)=f_i$ $\forall i\in\{0 ... N \}$
+> Interpolation Condition: 
+\begin{equation*}
+s(x_i)=f_i 
+\end{equation*}
+$\forall i\in\{0 ... N \}$
+
 
 This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. This can be achieved through different methods, e.g., Least Squares approximation. Sometimes, when accuracy at data sites is not necessary, approximation is preferred over interpolation because it can provide a 'nicer' function which could better illustrate the relationship among the data sites and measurements. For instance, approximation is heavily utilized in experimental science where measurements can contain a measurement error associated with experimental procedures. In this environment, the interpolation condition may be undesirable because it forces the interpolation to match exactly with potential measurement error, where approximation may alleviate error influence and illustrate measured correlations better. 
 ![enter image description here][7]
@@ -20,21 +25,35 @@ For the purposes of this project, we focus on interpolation only.
 ###Interpolation Assumption
 Many interpolation methods rely on the convenient assumption that our interpolation function, $s(x)$, can be found through a linear combination of **basis functions**, $\psi_i(x)$.
 
->Linear Combination Assumption: $s(x)=\sum_{i=1}^N \lambda_i \psi_i$
+>Linear Combination Assumption: 
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi_i
+\end{equation*}
+
 
 This assumption is convenient as it allows us to utilize solving methods for systems of linear equations from linear algebra to find our interpolation function. As such, we can express our interpolation problem as a linear system.
 
->Interpolation as Linear System: $A\boldsymbol{\lambda}=\boldsymbol{f}$
+>Interpolation as Linear System: 
+\begin{equation*}
+A\boldsymbol{\lambda}=\boldsymbol{f}
+\end{equation*}
+
 
 Where $\boldsymbol{f}$ is the vector of datasite measurements $\left[ f_1, ..., f_N \right]^T$ and $\boldsymbol{\lambda}$ is the vector of linear combination coefficients $\left[ \lambda_1, ..., \lambda_N \right]^T$.
 
 For a system with N measurement data sites,  $A$ is an NxN-matrix called the **interpolation matrix** or **Vandermonde Matrix** The elements of A are given by the basis functions, $\psi_j$  evaluated at each data site, $x_i$. 
->Elements of $A$: $a_{ij}=\psi_j(x_i)$
+>Elements of $A$: 
+\begin{equation*}
+a_{ij}=\psi_j(x_i)
+\end{equation*}
 
 By using numerical methods and solving this linear system, we will have our interpolation function as a linear combination of our basis functions. 
 ####Familiar Example of Interpolation Basis
 A choice of basis functions, $\psi_i$, which may familiar to undergraduate students is the basis of (N-1)-degree polynomials. If we wish to find a 1-Dimensional interpolation function from N distinct data sites, we can find an (N-1)-degree polynomial which goes exactly through all sites. In other words, by choosing our basis functions to be successive powers of x up to (N-1), we can solve our interpolation system for our function.
-> Polynomial Interpolation Basis: $\psi_{i=1}^N=\{1,x,x^2,x^3, ..., x^{N-1}\}$
+> Polynomial Interpolation Basis: 
+\begin{equation*}
+\psi_{i=1}^N=\{1,x,x^2,x^3, ..., x^{N-1}\}
+\end{equation*}
 
 An example of this interpolation with 6 data sites can be seen in the figure below. Here the interpolation function, as a linear combination, is $s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$
 ![enter image description here][8]
@@ -50,6 +69,7 @@ However, for n-Dimensions where $n\geq2$ this is never guaranteed! That is, no m
 
 ####Haar-Mairhuber-Curtis Theorem
 ![enter image description here][9]
+
 Through the work of Alfréd Haar and his description of **Haar Spaces** we gain the negative result that well-posedness is not guaranteed in higher dimensional linear systems with independently chosen basis functions. To state the theorem we first define Haar spaces.
 
 >Definition of Haar Space:
@@ -77,8 +97,106 @@ One method for defining basis functions depending on our data sites is to take a
 
 ####Translates of the Basic Function
 If our basis functions are translates of a function, which function should we translate? By answering this question we will arrive at the definition of Radial Basis Functions, but first let's consider a preliminary function: the basic function.
->The Basic Function: $\psi(x)=|x|$
+>The Basic Function: 
+\begin{equation*}
+\psi_i(x)=||x-x_i||
+\end{equation*}
+
+
+Pictured below, the basic function is the absolute valued function given by the Euclidean distance from a **center point** $x_i \in \mathbb{R}^N$. The basic function has the feature that it is radially symmetric about this center point. 
+
 ![enter image description here][10]
+
+We can define our set of basis functions, $\{\psi_i(x)\}_{i=1}^N$, as translates of our basic function such that the center points are located at our data sites. 
+>Set of Basis Functions: 
+\begin{equation*}
+\{\psi_i(x)=||x-x_i||\}_{i=1}^N
+\end{equation*}
+
+In other words, our set of basis functions is composed of basic functions centered each of our data sites. We can visualize one of these centered basic functions in the figure below.
+
+![enter image description here][11]
+
+Now that we have chosen our basis functions, we can look at the linear system which it produces. For instance, our interpolation matrix, $A$, now becomes:
+\begin{equation*}
+A=
+\begin{bmatrix}
+||x_1-x_1|| & ||x_1-x_2|| & \cdots & ||x_1-x_N||\\
+||x_2-x_1|| & ||x_2-x_2||& \cdots & ||x_2-x_N||\\
+\vdots & \vdots & \ddots & \vdots\\
+||x_N-x_1|| & ||x_N-x_2||& \cdots & ||x_N-x_N||
+\end{bmatrix}
+\end{equation*}
+
+This matrix is known as the **distance matrix** with Euclidean distance. 
+
+But, if we're not interpolating in 1-D, then we know we're not in a Haar Space. How do we know that our linear interpolation system with the distance matrix is well-posed? 
+
+>Lemma from Linear Algebra: 
+Distance Matricies with Euclidean distance, for distinct points in $\mathbb{R}^n$ are always non-singular.
+
+From the above lemma we know that our interpolation matrix is non-singular. Therefore, we know our system is well-posed and that there exists a unique interpolation function! 
+
+However, the choice of $\psi_i(x)=||x-x_i||$ as our basic function is not ideal. As we can see from our above plot of the basic function centered at $x_i$, the first derivative of the basic function is discontinuous at our center point, $x_i$. This has the consequence that, at each of our data sites, the first derivative of our interpolation function will be discontinuous. This is problematic because, ideally, we would like to have a $C^\infty$ smooth interpolation function so we can use methods from calculus to analyze our function. 
+
+How can we remedy our derivative discontinuities in our interpolation function?
+
+####Building a Better Basic Function
+In 1968, R.L. Hardy suggested that by using a $C^\infty$ smooth function as our basic function, we can produce smooth interpolation functions. These functions are called **Kernels**. The kernel suggested by Hardy was the **Multiquadric Kernel**.
+
+>Hardy's Multiquadric Kernel:
+\begin{align*}
+\psi(x)=\sqrt{c^2 + x^2}
+\end{align*}
+where $c \neq 0$.
+
+Notice that if we allow $c=0$ in the multiquadric kernel then we are actually describing the basic function used above. So, in other words, Hardy's multiquadric kernel is like the basic function but smoothed with a parameter $c$. By looking at a plot of the multiquadric kernel, we can see that the discontinuity from the basic function has been addressed. In fact, the multiquadric function is, as desired, $C^\infty$ smooth.
+
+![enter image description here][12]
+
+As before, we will define our basis functions, $\{\psi_i\}_{i=1}^{N}$, as a set of multiquadric kernels translated such that they are centered at our data sites, $x_i$.
+
+>Basis of Multiquadric Kernels:
+\begin{equation*}
+\{\psi_i(x)=\sqrt{c^2 + (||x-x_i||)^2}\}_{i=1}^N
+\end{equation*}
+
+We can visualize one of these translated multiquadric kernels in the figure below. 
+
+![enter image description here][13]
+
+####Radial Basis Function Kernels
+Notice that the multiquadric kernel is also radially symmetric about its center, $x_i$. Because of this radial symmetry, the multiquadric kernel can be described as a **Radial Basis Function**. In other words, it is a basis function which depends only on the radial distance from its center. Since our basis functions $\psi_i(x)$ depend only on distance, we can re-express them as such.
+>Radial Basis Functions:
+\begin{equation*}
+\psi(||x-x_i||)= \phi(r)
+\end{equation*}
+where $r=||x-x_i||$
+
+With our interpolation assumption, we can express our interpolation function as a linear combination of these functions, as before:
+>Interpolation as Linear Combination of Radial Basis Functions:
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) 
+\end{equation*}
+
+There are a few commonly used radial basis function kernels:
+
+ - Multiquadric $\phi(r)=\sqrt{1+(\epsilon r)^2}$![enter image description here][14]
+ - Inverse Multiquadric
+ - Inverse Quadratic
+ - Gaussian
+
+However, by using the multiquadric kernel in
+
+\begin{equation*}
+A=
+\begin{bmatrix}
+\phi_1(r_1) & \phi_1(r_2) & \cdots & \phi_1(r_N)\\
+\phi_2(r_1) & \phi_2(r_2)& \cdots & \phi_2(r_N)\\
+\vdots & \vdots & \ddots & \vdots\\
+\phi_N(r_1) & \phi_N(r_2)& \cdots & \phi_N(r_N)
+\end{bmatrix}
+\end{equation*}
 
 
   [1]: http://cumc.math.ca/2014/
@@ -90,4 +208,8 @@ If our basis functions are translates of a function, which function should we tr
   [7]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png
   [8]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png
   [9]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/HMC.png
-  [10]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicfun.png
+  [10]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicfunxi.png
+  [11]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicbasis.png
+  [12]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelfun.png
+  [13]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelbasis.png
+  [14]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/multiquadric.png
