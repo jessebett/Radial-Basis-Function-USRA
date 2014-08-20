@@ -8,13 +8,37 @@ This repository contains resources and working documents associated with the pro
 
 #Radial Basis Function Interpolation
 ###What is interpolation?
-Given a set of measurements $\{f_i\}_{i=1}^N$ taken at corresponding data sites $\{x_i\}_{i=1}^N$ we want to find an interpolation function $s(x)$ that informs us on our system at locations different from our data sites. 
+Given a set of **measurements** $\{f_i\}_{i=1}^N$ taken at corresponding **data sites** $\{x_i\}_{i=1}^N$ we want to find an **interpolation function** $s(x)$ that informs us on our system at locations different from our data sites. 
 ![enter image description here][6]
-Further, we want our function, $s(x)$ to satisfy what's called the 'interpolation condition' which is that we want to our interpolation function to exactly match our measurements at our data sites. 
+Further, we want our function, $s(x)$ to satisfy what's called the **interpolation condition** which is that we want to our interpolation function to exactly match our measurements at our data sites. 
 > Interpolation Condition: $s(x_i)=f_i$ $\forall i\in\{0 ... N \}$
 
 This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. This can be achieved through different methods, e.g., Least Squares approximation. Sometimes, when accuracy at data sites is not necessary, approximation is preferred over interpolation because it can provide a 'nicer' function which could better illustrate the relationship among the data sites and measurements. For instance, approximation is heavily utilized in experimental science where measurements can contain a measurement error associated with experimental procedures. In this environment, the interpolation condition may be undesirable because it forces the interpolation to match exactly with potential measurement error, where approximation may alleviate error influence and illustrate measured correlations better. 
-![TestTestTEst][7]
+![enter image description here][7]
+For the purposes of this project, we focus on interpolation only. 
+
+###Interpolation Assumption
+Many interpolation methods rely on the convenient assumption that our interpolation function, $s(x)$, can be found through a linear combination of **basis functions**, $\psi_i(x)$.
+
+>Linear Combination Assumption: $s(x)=\sum_{i=1}^N \lambda_i \psi_i$
+
+This assumption is convenient as it allows us to utilize solving methods for systems of linear equations from linear algebra to find our interpolation function. As such, we can express our interpolation problem as a linear system.
+
+>Interpolation as Linear System: $A\boldsymbol{\lambda}=\boldsymbol{f}$
+
+Where $\boldsymbol{f}$ is the vector of datasite measurements $\left[ f_1, ..., f_N \right]^T$ and $\boldsymbol{\lambda}$ is the vector of linear combination coefficients $\left[ \lambda_1, ..., \lambda_N \right]^T$.
+
+For a system with N measurement data sites,  $A$ is an NxN-matrix called the **interpolation matrix** or **Vandermonde Matrix** The elements of A are given by the basis functions, $\psi_j$  evaluated at each data site, $x_i$. 
+>Elements of $A$: $a_{ij}=\psi_j(x_i)$
+
+By using numerical methods and solving this linear system, we will have our interpolation function as a linear combination of our basis functions. 
+####Familiar Example of Interpolation Basis
+A choice of basis functions, $\psi_i$, which may familiar to undergraduate students is the basis of (N-1)-degree polynomials. If we wish to find a 1-Dimensional interpolation function from N distinct data sites, we can find an (N-1)-degree polynomial which goes exactly through all sites. In other words, by choosing our basis functions to be succesive powers of x up to (N-1), we can solve our interpolation system for our function.
+> Polynomial Interpolation Basis: $\psi_{i=1}^N=\{1,x,x^2,x^3, ..., x^{N-1}\}$
+
+An example of this interpolation with 6 data sites can be seen in the figure below. 
+![enter image description here][8]
+
 
 
   [1]: http://cumc.math.ca/2014/
@@ -24,3 +48,4 @@ This is how interpolation differs from approximation, where approximation does n
   [5]: https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
   [6]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpdef.png
   [7]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png
+  [8]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png
