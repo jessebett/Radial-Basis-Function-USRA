@@ -33,12 +33,23 @@ For a system with N measurement data sites,  $A$ is an NxN-matrix called the **i
 
 By using numerical methods and solving this linear system, we will have our interpolation function as a linear combination of our basis functions. 
 ####Familiar Example of Interpolation Basis
-A choice of basis functions, $\psi_i$, which may familiar to undergraduate students is the basis of (N-1)-degree polynomials. If we wish to find a 1-Dimensional interpolation function from N distinct data sites, we can find an (N-1)-degree polynomial which goes exactly through all sites. In other words, by choosing our basis functions to be succesive powers of x up to (N-1), we can solve our interpolation system for our function.
+A choice of basis functions, $\psi_i$, which may familiar to undergraduate students is the basis of (N-1)-degree polynomials. If we wish to find a 1-Dimensional interpolation function from N distinct data sites, we can find an (N-1)-degree polynomial which goes exactly through all sites. In other words, by choosing our basis functions to be successive powers of x up to (N-1), we can solve our interpolation system for our function.
 > Polynomial Interpolation Basis: $\psi_{i=1}^N=\{1,x,x^2,x^3, ..., x^{N-1}\}$
 
-An example of this interpolation with 6 data sites can be seen in the figure below. 
+An example of this interpolation with 6 data sites can be seen in the figure below. Here the interpolation function, as a linear combination, is $s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$
 ![enter image description here][8]
+However, while polynomial basis is simple for 1-Dimensional interpolation, this method is not ideal for higher dimensions. To accommodate higher dimension interpolation, we must choose our basis differently.
 
+###Well-Posedness in Higher Dimensional Interpolation
+When defining our linear system we must consider whether our system is **well-posed**. That is, does there exist a solution to our interpolation problem, and if so is that solution unique? 
+>Well-Posedness in Linear Systems: Our system will be well-posed if and only if $A$ is non-singular, i.e. $\det(A)\neq0$
+
+For 1-D interpolation, many choices in basis functions will guarantee a well-posed system. In our example of polynomial interpolation, for instance, it was guaranteed that for N-distinct data sites a unique (N-1)-degree polynomial will interpolate the measurements. So without predetermining any information about our data sites (other than that they are distinct from each other), or their measurements, we can define our basis functions independently of our data and expect a unique, well-posed solution. 
+
+However, for n-Dimensions where $n\geq2$ this is never guaranteed! That is, no matter what we choose for our set of basis functions, there will always be data sites which produce ill-posed systems. The implication of this is that we can not define our basis functions independently of our data and expect a well-posed system. This results from the Haar-Mairhuber-Curtis Theorem.
+
+####Haar-Mairhuber-Curtis Theorem
+![enter image description here][9]
 
 
   [1]: http://cumc.math.ca/2014/
@@ -49,3 +60,4 @@ An example of this interpolation with 6 data sites can be seen in the figure bel
   [6]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpdef.png
   [7]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png
   [8]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png
+  [9]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/HMC.png
