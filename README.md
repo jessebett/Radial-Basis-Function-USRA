@@ -8,8 +8,17 @@ This repository contains resources and working documents associated with the pro
 
 #Radial Basis Function Interpolation
 ###What is interpolation?
-Given a set of measurements $\{f_i\}_{i=1}^N$ taken at corresponding data sites $\{x_i\}_{i=1}^N$ we want to find an interpolation function $s(x)$ that informs us on our system at locations different from our data sites.
-![enter image description here ][6]
+Given a set of measurements $\{f_i\}_{i=1}^N$ taken at corresponding data sites $\{x_i\}_{i=1}^N$ we want to find an interpolation function $s(x)$ that informs us on our system at locations different from our data sites. 
+![enter image description here][6]
+Further, we want our function, $s(x)$ to satisfy what's called the 'interpolation condition' which is that we want to our interpolation function to exactly match our measurements at our data sites. 
+> Interpolation Condition: $s(x_i)=f_i$ $\forall i\in\{0 ... N \}$
+
+This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. 
+
+
+
+
+
 
 
   [1]: http://cumc.math.ca/2014/
@@ -17,4 +26,4 @@ Given a set of measurements $\{f_i\}_{i=1}^N$ taken at corresponding data sites 
   [3]: http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf
   [4]: https://github.com/jessebett/USRA/tree/master/Interpolation%20Demonstration
   [5]: https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
-  [6]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/interpdef.png
+  [6]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpdef.png
