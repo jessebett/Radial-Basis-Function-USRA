@@ -181,8 +181,8 @@ s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r)
 
 There are a few commonly used radial basis function kernels:
 
- - Multiquadric $\phi(r)=\sqrt{1+(\epsilon r)^2}$![enter image description here][14]
- - Inverse Multiquadric
+ - Multiquadric: $\phi(r)=\sqrt{1+(\epsilon r)^2}$![enter image description here][14]
+ - Inverse Multiquadric: $\phi(r)=\frac{1}{\sqrt{1+(\epsilon r)^2}}$ ![enter image description here][15]
  - Inverse Quadratic
  - Gaussian
 
@@ -213,3 +213,4 @@ A=
   [12]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelfun.png
   [13]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelbasis.png
   [14]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/multiquadric.png
+  [15]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversemultiquadric.png
