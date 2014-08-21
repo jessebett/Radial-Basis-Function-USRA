@@ -15,6 +15,9 @@ from mayavi import mlab
 #For geometry on surface of sphere
 from dipy.core.sphere import Sphere
 
+def savefig(name):
+    mlab.savefig('Figures/'+name)
+
 def make_coor(n):
     '''Creates points on the surface of sphere using lat-lon grid points'''
     phi, theta = np.mgrid[0:pi:n, 0:2 * pi:n]
@@ -32,5 +35,5 @@ def makefinegrid():
     mlab.mesh(coor.x, coor.y, coor.z)
     mlab.points3d(coor.x, coor.y, coor.z, 
                       scale_factor=0.1)
-    mlab.savefig('finegrid.png')
+    savefig('finegrid.png')
 makefinegrid()
