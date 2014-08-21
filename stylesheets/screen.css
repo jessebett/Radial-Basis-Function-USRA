@@ -420,7 +420,7 @@ blockquote {
   margin: 20px 0;
   color: #8b786f;
   padding-left: 1.35em;
-  background: transparent url('../images/blockquote-gfx.png') 0 4px no-repeat;
+/*  background: transparent url('../images/blockquote-gfx.png') 0 4px no-repeat;*/
 }
 
 img {
