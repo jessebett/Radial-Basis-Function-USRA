@@ -27,8 +27,8 @@ def jesseaxis(ax, x, y):
     ax.get_yaxis().tick_left()
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color(white)
+    ax.spines['left'].set_color(white)
     ax.set_xlim(min(x) - buf, max(x) + buf)
     ax.set_ylim(min(y) - buf, max(y) + buf)
 
