@@ -10,7 +10,7 @@ plt.close("all")
 def rgb(colour):
     return tuple(x / 255.0 for x in colour)
 buf = 0.4
-grey = '#fff6e9' #
+grey = '#ECE4D8' #
 pink = '#cd596b' #
 orange = '#a61717' #
 blue = '#557398' #
