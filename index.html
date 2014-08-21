@@ -30,10 +30,36 @@
 <script type="text/javascript"
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+      
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script	src="js/jquery.smint.js" type="text/javascript" ></script>
+
+<script type="text/javascript">
+	
+
+$(document).ready( function() {
+    $('.subMenu').smint({
+    	'scrollSpeed' : 1000
+    });
+});
+
+
+</script>
 
     <title>Radial Basis Interpolation by jessebett</title>
   </head>
-
+<div class="subMenu" >
+	 	<div class="inner">
+	 		<a href="#sTop" class="subNavBtn">Home</a>
+	 		<a href="#s1" class="subNavBtn">Section 1</a> 
+			<a href="#s2" class="subNavBtn">Section 2</a>
+			<a href="#s3" class="subNavBtn">Section 3</a>
+			<a href="#s4" class="subNavBtn">Section 4</a>
+			<a href="#s5" class="subNavBtn">Section 5</a>
+			<a href="https://twitter.com/rabmyself" class="subNavBtn extLink end">External Link</a>
+		</div>
+</div>
   <body>
     <a id="forkme_banner" href="https://github.com/jessebett/USRA">View on GitHub</a>
     <div class="shell">
@@ -59,7 +85,8 @@
       <span class="banner-fix"></span>
 
 
-      <section id="main_content">
+
+<section id="main_content" class="section s1">
         <h2>
 <a name="about-the-usra-project" class="anchor" href="#about-the-usra-project"><span class="octicon octicon-link"></span></a>About the USRA* Project</h2>
 
@@ -80,7 +107,10 @@
 
 <p>Given a set of <strong>measurements</strong> $\{f_i\}_{i=1}^N$ taken at corresponding <strong>data sites</strong> $\{x_i\}_{i=1}^N$ we want to find an <strong>interpolation function</strong> $s(x)$ that informs us on our system at locations different from our data sites. </p>
 
-<p><img src="Figures/interpdef.png" alt="enter image description here"></p>
+<figure>
+    <img src="Figures/interpdef.png" alt="enter image description here">
+    <figcaption>This is a test caption</figcaption>
+</figure>
 
 <p>Further, we want our function, $s(x)$ to satisfy what's called the <strong>interpolation condition</strong> which is that we want to our interpolation function to exactly match our measurements at our data sites. </p>
 
