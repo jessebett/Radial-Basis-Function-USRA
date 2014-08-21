@@ -87,7 +87,8 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 body {
-  line-height: 1;
+    line-height: 1;
+    counter-reset: figures 1;
 }
 ol, ul {
   list-style: none;
@@ -176,7 +177,7 @@ header span.right-tail {
 
 header h1 {
   background-color: #7c334f;
-  font-size: 2.5em;
+  font-size: 2.3em;
   font-weight: 800;
   font-style: normal;
   text-transform: uppercase;
@@ -418,7 +419,7 @@ ul li {
 blockquote {
   font-family: 'Open Sans', Myriad, Calibri, sans-serif;
   margin: 20px 0;
-  color: #8b786f;
+  color: #7c334f;
   padding-left: 1.35em;
 /*  background: transparent url('../images/blockquote-gfx.png') 0 4px no-repeat;*/
 }
@@ -526,7 +527,7 @@ dd p:first-child {
 }
 
 .header-level-1 {
-  font-size: 1.85em;
+  font-size: 2em;
   border-bottom: .2em double #d3ccc1;
   color: #7c334f;
   text-align: center;
@@ -566,4 +567,38 @@ dd p:first-child {
   margin: .8em 0;
   font-size: .85em;
   font-style: italic;
+}
+
+.clear {
+	clear: both;
+}
+.wrap {
+	width: 100%;
+	max-width: 1600px;
+	min-width: 960px;
+	z-index: 10;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+
+}
+
+.figure{
+    counter-increment: figures;
+}
+
+figcaption:before {
+    content: 'Figure ' counter(figures) ': ';
+}
+
+figcaption {
+  font-family: 'Open Sans', Myriad, Calibri, sans-serif;
+    font-size: 0.9em;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    margin-right: 0px;
+    margin-left: 50px;
+  color: #8b786f;
+  padding-left: 1.35em;
+/*  background: transparent url('../images/blockquote-gfx.png') 0 4px no-repeat;*/
 }
