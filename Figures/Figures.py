@@ -16,6 +16,7 @@ orange = '#a61717' #
 blue = '#557398' #
 red = '#D25252'
 green = '#009926' #
+white = '#8b786f' #
 
 
 def jesseaxis(ax, x, y):
