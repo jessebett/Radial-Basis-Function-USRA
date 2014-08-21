@@ -86,5 +86,5 @@ def makecoarsegrid():
     mlab.points3d(coor.x, coor.y, coor.z, 
                       scale_factor=0.1)
     mlab.triangular_mesh(coor.x,coor.y,coor.z,sphere.faces)
-    savefig('coarserid.png')
+    savefig('coarsegrid.png')
 makecoarsegrid()
