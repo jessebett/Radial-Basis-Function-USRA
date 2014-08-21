@@ -94,7 +94,7 @@ $\forall i\in{0 ... N }$</p>
 
 <p>This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. This can be achieved through different methods, e.g., Least Squares approximation. Sometimes, when accuracy at data sites is not necessary, approximation is preferred over interpolation because it can provide a 'nicer' function which could better illustrate the relationship among the data sites and measurements. For instance, approximation is heavily utilized in experimental science where measurements can contain a measurement error associated with experimental procedures. In this environment, the interpolation condition may be undesirable because it forces the interpolation to match exactly with potential measurement error, where approximation may alleviate error influence and illustrate measured correlations better. </p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/interpvsapprox.png" alt="enter image description here"></p>
+<p><img src="Figures/interpvsapprox.png" alt="enter image description here"></p>
 
 <p>For the purposes of this project, we focus on interpolation only. </p>
 
@@ -146,7 +146,7 @@ a_{ij}=\psi_j(x_i)
 
 <p>An example of this interpolation with 6 data sites can be seen in the figure below. Here the interpolation function, as a linear combination, is $s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$</p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/polyinterp.png" alt="enter image description here"></p>
+<p><img src="Figures/polyinterp.png" alt="enter image description here"></p>
 
 <p>However, while polynomial basis is simple for 1-Dimensional interpolation, this method is not ideal for higher dimensions. To accommodate higher dimension interpolation, we must choose our basis differently.</p>
 
@@ -166,7 +166,7 @@ a_{ij}=\psi_j(x_i)
 <h3>
 <a name="haar-mairhuber-curtis-theorem" class="anchor" href="#haar-mairhuber-curtis-theorem"><span class="octicon octicon-link"></span></a>Haar-Mairhuber-Curtis Theorem</h3>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/HMC.png" alt="enter image description here"></p>
+<p><img src="Figures/HMC.png" alt="enter image description here"></p>
 
 <p>Through the work of Alfréd Haar and his description of <strong>Haar Spaces</strong> we gain the negative result that well-posedness is not guaranteed in higher dimensional linear systems with independently chosen basis functions. To state the theorem we first define Haar spaces.</p>
 
@@ -223,7 +223,7 @@ Let $\Omega \subset \mathbb{R}^N$, $N \geq 2$ contain an interior site. Then, th
 
 <p>Pictured below, the basic function is the absolute valued function given by the Euclidean distance from a <strong>center point</strong> $x_i \in \mathbb{R}^N$. The basic function has the feature that it is radially symmetric about this center point. </p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/basicfunxi.png" alt="enter image description here"></p>
+<p><img src="Figures/basicfunxi.png" alt="enter image description here"></p>
 
 <p>We can define our set of basis functions, ${\psi_i(x)}_{i=1}^N$, as translates of our basic function such that the center points are located at our data sites. </p>
 
@@ -236,7 +236,7 @@ Let $\Omega \subset \mathbb{R}^N$, $N \geq 2$ contain an interior site. Then, th
 
 <p>In other words, our set of basis functions is composed of basic functions centered each of our data sites. We can visualize one of these centered basic functions in the figure below.</p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/basicbasis.png" alt="enter image description here"></p>
+<p><img src="Figures/basicbasis.png" alt="enter image description here"></p>
 
 <p>Now that we have chosen our basis functions, we can look at the linear system which it produces. For instance, our interpolation matrix, $A$, now becomes:
 \begin{equation*}
@@ -279,7 +279,7 @@ where $c \neq 0$.</p>
 
 <p>Notice that if we allow $c=0$ in the multiquadric kernel then we are actually describing the basic function used above. So, in other words, Hardy's multiquadric kernel is like the basic function but smoothed with a parameter $c$. By looking at a plot of the multiquadric kernel, we can see that the discontinuity from the basic function has been addressed. In fact, the multiquadric function is, as desired, $C^\infty$ smooth.</p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/kernelfun.png" alt="enter image description here"></p>
+<p><img src="Figures/kernelfun.png" alt="enter image description here"></p>
 
 <p>As before, we will define our basis functions, ${\psi_i}_{i=1}^{N}$, as a set of multiquadric kernels translated such that they are centered at our data sites, $x_i$.</p>
 
@@ -292,7 +292,7 @@ where $c \neq 0$.</p>
 
 <p>We can visualize one of these translated multiquadric kernels in the figure below. </p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/kernelbasis.png" alt="enter image description here"></p>
+<p><img src="Figures/kernelbasis.png" alt="enter image description here"></p>
 
 <h3>
 <a name="radial-basis-function-kernels" class="anchor" href="#radial-basis-function-kernels"><span class="octicon octicon-link"></span></a>Radial Basis Function Kernels</h3>
@@ -319,13 +319,13 @@ s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r)
 <p>There are a few commonly used radial basis function kernels:</p>
 
 <ul>
-<li>Multiquadric: $\phi(r)=\sqrt{1+(\epsilon r)^2}$<img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/multiquadric.png" alt="enter image description here">
+<li>Multiquadric: $\phi(r)=\sqrt{1+(\epsilon r)^2}$<img src="Figures/multiquadric.png" alt="enter image description here">
 </li>
-<li>Inverse Multiquadric: $\phi(r)=\frac{1}{\sqrt{1+(\epsilon r)^2}}$ <img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/inversemultiquadric.png" alt="enter image description here">
+<li>Inverse Multiquadric: $\phi(r)=\frac{1}{\sqrt{1+(\epsilon r)^2}}$ <img src="Figures/inversemultiquadric.png" alt="enter image description here">
 </li>
-<li>Inverse Quadratic: $\phi(r)=\frac{1}{1+(\epsilon r)^2}$ <img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/inversequadratic.png" alt="enter image description here">
+<li>Inverse Quadratic: $\phi(r)=\frac{1}{1+(\epsilon r)^2}$ <img src="Figures/inversequadratic.png" alt="enter image description here">
 </li>
-<li>Gaussian:  $\phi(r)=e^{-(\epsilon r)^2}$ <img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/gaussian.png" alt="enter image description here">
+<li>Gaussian:  $\phi(r)=e^{-(\epsilon r)^2}$ <img src="Figures/gaussian.png" alt="enter image description here">
 </li>
 </ul><p>As before, we can use translates of these functions centered on our data sites as basis for our interpolation linear system. Further, notice that the multiquadric kernel has been rearranged to replace $c$ with a <strong>shape parameter</strong>, $\epsilon$ consistent with the other kernels.</p>
 
@@ -392,18 +392,18 @@ s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r)
 <p>In the two figures below we can see how increasing the value of epsilon will change the shape of the individual kernel basis functions.</p>
 
 <p>For $\epsilon=0.4$
-<img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/basisgaus1.png" alt="enter image description here"></p>
+<img src="Figures/basisgaus1.png" alt="enter image description here"></p>
 
 <p>For $\epsilon=1$
-<img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/basisgaus2.png" alt="enter image description here"></p>
+<img src="Figures/basisgaus2.png" alt="enter image description here"></p>
 
 <p>In the three figures below, we can see how increasing the value of epsilon will cause the interpolation system to become ill-conditioned. Keep in mind that the interpolation solution for each $\epsilon$ value still exists, but the computation methods create noise and are unable to find the function.</p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/conditioned.png" alt="enter image description here"></p>
+<p><img src="Figures/conditioned.png" alt="enter image description here"></p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/illconditioned.png" alt="enter image description here"></p>
+<p><img src="Figures/illconditioned.png" alt="enter image description here"></p>
 
-<p><img src="https://raw.githubusercontent.com/jessebett/USRA/gh-pages/Figures/veryillconditioned.png" alt="enter image description here"></p>
+<p><img src="Figures/veryillconditioned.png" alt="enter image description here"></p>
 
 <p>So we can see that in order to use radial basis function interpolation we must choose epsilon in such a way that the system does not become ill-conditioned. </p>
 
