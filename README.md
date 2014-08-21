@@ -292,7 +292,7 @@ The interpolation space grid, produced by the function `make_coor(n)` called wit
 ```
 The resulting points and spherical mesh can be seen in the figure below for `n_fine = 20j`
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/finegrid.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/finegrid.png)
 
 From the figure we can see that the `fine` grid produces points at a much higher density at the poles than along the 'equator'. For this reason, we cannot use these points to train our radial basis function. Instead we must use a different method to produce our data sites.
 
@@ -350,7 +350,7 @@ To do this, we use [DiPy's sphere object](http://nipy.sourceforge.net/dipy/refer
 
 We can visualize our pseudo-uniformly distributed points and their Delaunay mesh in the figure below for `n_coarse = 100`
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/coarsegrid.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/coarsegrid.png)
 
 ###Using Named Tuples
 The coordinate systems produced above use python's [namedtuples](https://docs.python.org/2/library/collections.html#collections.namedtuple) as a variable naming convention. For instance, when defining our `fine` spherical grid we first define a namedtuple:
@@ -449,7 +449,7 @@ If we preform multiple RBF interpolation, each with different values of the shap
 
 I plot the maximum error for increasing values of epsilon, colouring the optimal choice red. 
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/optimizationcurve.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/optimizationcurve.png)
 
 By RBF interpolating our function with the optimal value of epsilon, we can minimize the interpolation error.
 
@@ -471,29 +471,29 @@ First, we plot the spherical harmonic function on the sphere. We also add small 
     mlab.savefig('Figures/functionsphere.png')
 ```
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/functionsphere.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/functionsphere.png)
  
  Then, we can see the interpolated function:
  
- ![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/interpsphere.png)
+ ![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/interpsphere.png)
  
 Finally, we can see where the error occurs on our sphere by visualizing the error:
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/errorsphere.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/errorsphere.png)
 
 Note that the above interpolation uses a relatively high number of data sites (N=350). We can see how this interpolation worsens with a fewer number of sites (N=100).
 
 Again, here is the spherical harmonic we are interpolating with the 100 data sites. 
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorfunctionsphere.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/poorfunctionsphere.png)
  
 Here is the interpolation trained with fewer sites.
  
- ![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorinterpsphere.png)
+ ![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/poorinterpsphere.png)
 
 Predictably, this causes the error of the interpolation to increase.
 
-![enter image description here](https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorerrorsphere.png)
+![enter image description here](https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/Figures/poorerrorsphere.png)
 
 
 ###Conclusion
@@ -511,24 +511,24 @@ Wright, G., 2003. Radial Basis Function Interpolation: Numerical and Analytical 
 
 
   [1]: http://cumc.math.ca/2014/
-  [2]: https://github.com/jessebett/USRA/tree/master/CUMC%20Presentation
+  [2]: https://raw.githubusercontent.com/jessebett/USRA/tree/master/CUMC%20Presentation
   [3]: http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf
-  [4]: https://github.com/jessebett/USRA/tree/master/Interpolation%20Demonstration
-  [5]: https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
-  [6]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpdef.png
-  [7]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png
-  [8]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png
-  [9]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/HMC.png
-  [10]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicfunxi.png
-  [11]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicbasis.png
-  [12]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelfun.png
-  [13]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelbasis.png
-  [14]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/multiquadric.png
-  [15]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversemultiquadric.png
-  [16]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversequadratic.png
-  [17]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/gaussian.png
-  [18]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus1.png
-  [19]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus2.png
-  [20]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/conditioned.png
-  [21]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/illconditioned.png
-  [22]: https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/veryillconditioned.png
+  [4]: https://raw.githubusercontent.com/jessebett/USRA/tree/master/Interpolation%20Demonstration
+  [5]: https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
+  [6]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/interpdef.png
+  [7]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/interpvsapprox.png
+  [8]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/polyinterp.png
+  [9]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/HMC.png
+  [10]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/basicfunxi.png
+  [11]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/basicbasis.png
+  [12]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/kernelfun.png
+  [13]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/kernelbasis.png
+  [14]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/multiquadric.png
+  [15]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/inversemultiquadric.png
+  [16]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/inversequadratic.png
+  [17]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/gaussian.png
+  [18]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/basisgaus1.png
+  [19]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/basisgaus2.png
+  [20]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/conditioned.png
+  [21]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/illconditioned.png
+  [22]: https://raw.githubusercontent.com/jessebett/USRA/master/CUMC%20Presentation/Figures/veryillconditioned.png
