@@ -31,9 +31,60 @@ def make_coor(n):
 def makefinegrid():
     coor=make_coor(20j)
 
-    mlab.figure(bgcolor=None)
+    mlab.figure()
     mlab.mesh(coor.x, coor.y, coor.z)
     mlab.points3d(coor.x, coor.y, coor.z, 
                       scale_factor=0.1)
     savefig('finegrid.png')
-makefinegrid()
+
+
+def uniform_spherical_distribution(N):
+    """n points distributed evenly on the surface of a unit sphere"""
+    pts = []
+    r = 1
+    inc = pi * (3 - sqrt(5))
+    off = 2 / float(N)
+    for k in range(0, int(N)):
+        y = k * off - 1 + (off / 2)
+        r = sqrt(1 - y * y)
+        phi = k * inc
+        pts.append([cos(phi) * r, y, sin(phi) * r])
+    return np.array(pts)
+
+def appendSpherical_np(xyz):
+    '''Appends spherical coordinates to array of Cartesian coordinates'''
+    ptsnew = np.hstack((xyz, np.zeros(xyz.shape)))
+    xy = xyz[:, 0] ** 2 + xyz[:, 1] ** 2
+    ptsnew[:, 3] = np.sqrt(xy + xyz[:, 2] ** 2)
+    # for elevation angle defined from Z-axis down
+    ptsnew[:, 4] = np.arctan2(np.sqrt(xy), xyz[:, 2])
+    # ptsnew[:,4] = np.arctan2(xyz[:,2], np.sqrt(xy)) # for elevation angle
+    # defined from XY-plane up
+    ptsnew[:, 5] = np.arctan2(xyz[:, 1], xyz[:, 0])
+    return ptsnew
+
+def make_uni_coor(n):
+    '''Make named tuple of unifromly distrubed points on sphere'''
+    Coor = namedtuple('Coor', 'theta phi x y z')
+    pts = uniform_spherical_distribution(n)
+    pts = appendSpherical_np(pts)
+
+    return Coor(pts[:, 5], pts[:, 4], pts[:, 0], pts[:, 1], pts[:, 2])
+
+def make_sphere(coordinates):
+    '''Create DiPy sphere object from sphere points in R3'''
+    return Sphere(coordinates.x, coordinates.y, coordinates.z)
+
+
+
+def makecoarsegrid():
+    coor=make_uni_coor(100)
+    sphere= make_sphere(coor)
+
+
+    mlab.figure()
+    mlab.points3d(coor.x, coor.y, coor.z, 
+                      scale_factor=0.1)
+    mlab.triangular_mesh(coor.x,coor.y,coor.z,sphere.faces)
+    savefig('coarserid.png')
+makecoarsegrid()
