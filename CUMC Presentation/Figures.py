@@ -128,6 +128,7 @@ def makebasicfun():
 ###SHOWING BASIC FUNCTION AS BASIS###
 #FIG 5#
 def makebasicbasis():
+    plt.close()
     # Defining the data sites
     fig1 = plt.figure(facecolor=grey)
     ax1 = plt.axes()
@@ -285,7 +286,7 @@ def quickpiece(x):
 
 #Demonstrate conditioning problems in RBF#
 def makeconditioned():
-
+    plt.close()
     eps1=1
     eps2=2
     eps3=3

@@ -444,7 +444,7 @@ All Kernels are functions only of distance from center, and can be written gener
 
 \subt{The RBF Method}
 \begin{align*}
-&s(x)=\sum_{i=1}^N \lambda_i \phi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) &r=||x-x_i||
+&s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) &r=||x-x_i||
 \end{align*}
 
 \note{}
@@ -478,10 +478,10 @@ Our interpolation matrix is no longer the distance matrix. Can we still expect w
 \begin{equation*}
 A=
 \begin{bmatrix}
-\phi_1(x_1) & \phi_1(x_2) & \cdots & \phi_1(x_N)\\
-\phi_2(x_1) & \phi_2(x_2)& \cdots & \phi_2(x_N)\\
+\phi_1(r_1) & \phi_1(r_2) & \cdots & \phi_1(r_N)\\
+\phi_2(r_1) & \phi_2(r_2)& \cdots & \phi_2(r_N)\\
 \vdots & \vdots & \ddots & \vdots\\
-\phi_N(x_1) & \phi_N(x_2)& \cdots & \phi_N(x_N)
+\phi_N(r_1) & \phi_N(r_2)& \cdots & \phi_N(r_N)
 \end{bmatrix}
 \end{equation*}
 \pause

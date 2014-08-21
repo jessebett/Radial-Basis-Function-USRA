@@ -1,20 +1,27 @@
+#Import libraries
 import matplotlib.pyplot as plt
 from matplotlib import cm, colors
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from numpy import pi, cos, sin
+from math import asin, sqrt
+#For interpolating
 from scipy import special
 from scipy.interpolate import Rbf
+#For clean variable names
 from collections import namedtuple
+#For visualizing interpolation output
 from mayavi import mlab
-from math import asin, sqrt
+#For geometry on surface of sphere
 from dipy.core.sphere import Sphere
 
-
-# Creating a sphere in Cartesian and Sphereical
-# Saves coordinates as named tuples
+#Function to handle generation of coordinate systems
+#Coarse coordinates refer to data site coordinates for training RBF
+#Fine coordinates refer to interpolation sites
 def coordinates(n_fine, n_coarse):
+    '''Creates fine and coarse coordiante systems'''
     def make_coor(n):
+        '''Creates points on the surface of sphere using lat-lon grid points'''
         phi, theta = np.mgrid[0:pi:n, 0:2 * pi:n]
         Coor = namedtuple('Coor', 'r phi theta x y z')
         r = 1
@@ -37,6 +44,7 @@ def coordinates(n_fine, n_coarse):
         return np.array(pts)
 
     def appendSpherical_np(xyz):
+        '''Appends spherical coordinates to array of Cartesian coordinates'''
         ptsnew = np.hstack((xyz, np.zeros(xyz.shape)))
         xy = xyz[:, 0] ** 2 + xyz[:, 1] ** 2
         ptsnew[:, 3] = np.sqrt(xy + xyz[:, 2] ** 2)
@@ -48,6 +56,7 @@ def coordinates(n_fine, n_coarse):
         return ptsnew
 
     def make_uni_coor(n):
+        '''Make named tuple of unifromly distrubed points on sphere'''
         Coor = namedtuple('Coor', 'theta phi x y z')
         pts = uniform_spherical_distribution(n)
         pts = appendSpherical_np(pts)
@@ -55,61 +64,49 @@ def coordinates(n_fine, n_coarse):
         return Coor(pts[:, 5], pts[:, 4], pts[:, 0], pts[:, 1], pts[:, 2])
 
     Coordinates = namedtuple('Coordinates', 'fine coarse ')
-    # return Coordinates(make_coor(n_fine),make_coor(n_coarse))
+
     return Coordinates(make_coor(n_fine), make_uni_coor(n_coarse))
 
 def make_sphere(coordinates):
+    '''Create DiPy sphere object from sphere points in R3'''
     return Sphere(coordinates.x, coordinates.y, coordinates.z)
-# Defining finection to colour sphere
-# Here we are using a spherical harmonic
+
+#Defining the spherical harmonic to interpolate
 def harmonic(m, n, coor):
+    '''Produce m,n spherical harmonic at coarse and fine coordinates'''
     Harmonic = namedtuple('Harmonic', 'fine coarse')
     return Harmonic(
         special.sph_harm(m, n, coor.fine.theta, coor.fine.phi).real,
         special.sph_harm(m, n, coor.coarse.theta, coor.coarse.phi).real
     )
-norm = colors.Normalize()
-
 
 def angle(x1, x2):
+    '''Distance metric on the surface of the unit sphere'''
     xx = np.arccos((x1 * x2).sum(axis=0))
     xx[np.isnan(xx)] = 0
     return xx
 
-
-def spherical_dist(pos1, pos2):
-    r = 1
-    pos1 = pos1[:, None]
-    cos_lat1 = np.cos(pos1[0])
-    cos_lat2 = np.cos(pos2[0])
-    cos_lat_d = np.cos(pos1[0] - pos2[0])
-    cos_lon_d = np.cos(pos1[1] - pos2[1])
-    return r * np.arccos(cos_lat_d - cos_lat1 * cos_lat2 * (1 - cos_lon_d))[0]
-
-
 def rbf_interpolate(coor, coarse_function, epsilon=None):
+    '''Radial Basis Function Interpolation from coarse sites to fine cooridnates'''
     # Train the interpolation using interp coordinates
     rbf = Rbf(coor.coarse.x, coor.coarse.y, 
               coor.coarse.z, coarse_function, norm=angle, epsilon=epsilon)
-    print rbf.epsilon
     # The result of the interpolation on fine coordinates
     return rbf(coor.fine.x, coor.fine.y, coor.fine.z)
 
 
 def interp_error(fine_function, interp_results):
+    '''Error between interpolated function and actual function'''
     Error = namedtuple('Error', 'errors max')
     errors = fine_function - interp_results
     error_max = np.max(np.abs(errors))
     return Error(errors, error_max)
 
 
-# rbf=Rbf(interp.x, interp.y, interp.z, harmonic13_coarse)
-# interp_values=rbf(fine.x,fine.y,fine.z)
 
 
 def make_figures(coor, fun, interp_results, error):
-    # Figure of harmoinc function on sphere in fine cordinates
-    # Points3d showing interpolation training points coloured to their value
+    '''Produce MayaVi figures for interpolation results'''
     mlab.figure()
     vmax, vmin = np.max(fun.fine), np.min(fun.fine)
     mlab.mesh(coor.fine.x, coor.fine.y, coor.fine.z,
@@ -138,33 +135,28 @@ def make_figures(coor, fun, interp_results, error):
     mlab.show()
 
 
-def harmonic_combo(*args):
-    fine_combo = np.add([arg.fine for arg in args])
-    coarse_combo = np.add([arg.coarse for arg in args])
-    # for arg in args:
-    #     print np.shape(arg.fine)
-    #     print np.add(arg.fine)
-    Combo = namedtuple('Combo', 'fine coarse')
-    return Combo(fine_combo, coarse_combo)
 
-
-# Creating a sphere
-# fine is coordinates on a fine grid
-# coarse is coordinates on coarse grid for training interpolation
+# Create coordinate system
+#Fine coordinate given as complex number
 coordinates = coordinates(300j, 350)
 
+#Create sphere object
 sphere = make_sphere(coordinates.coarse)
-
-# One example of the harmonic function, for testing
+                                                                                                                                                                    
+# Harmonic function we'll interpolate
 function = harmonic(3, 4, coordinates)
-# harmonic12= harmonic(2, 3, coordinates)
 
+#Preform the RBF interpolation
 interp_values = rbf_interpolate(coordinates, function.coarse)
+
+#Test the error between function and interpolation
 error = interp_error(function.fine, interp_values)
 
+#Create the MayaVi Figures
+make_figures(coordinates, function, interp_values, error)
 
-# make_figures(coordinates, function, interp_values, error)
 
+#Optimize choice of epsilon to minimize error
 errors=[]
 epsilons = np.linspace(1.4,5,20)
 for epsilon in epsilons:
@@ -173,19 +165,18 @@ for epsilon in epsilons:
     maxerror =  error.max
     errors.append(maxerror)
 
-print errors
-print np.shape(errors)
-print np.shape(epsilons)
-ax = plt.subplots()
+fig, ax = plt.subplots()
+fig.suptitle('RBF Interpolation Epsilon Optimization')
+ax.set_xlabel('Shape Parameter, $\epsilon$')
+ax.set_ylabel('Maximum Error')
 plt.plot(epsilons,errors, 'bo')
 optimum = errors.index(np.min(errors))
 plt.plot(epsilons[optimum],errors[optimum],'ro')
-plt.savefig('optimizationcurve.png')
+plt.savefig('optimizationcurve.png')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 plt.show()
 
-print epsilons[optimum]
 
 
 interp_values = rbf_interpolate(coordinates, function.coarse, epsilon=epsilons[optimum])
 error = interp_error(function.fine, interp_values)
-make_figures(coordinates, function, interp_values, error)
+make_figures(coordinates, coarse_functionction, interp_values, error)
