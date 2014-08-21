@@ -10,12 +10,12 @@ plt.close("all")
 def rgb(colour):
     return tuple(x / 255.0 for x in colour)
 buf = 0.4
-grey = '#181818'
-pink = '#FC0964'
-orange = '#FD971F'
-blue = '#66D9EF'
+grey = '#fff6e9' #
+pink = '#cd596b' #
+orange = '#a61717' #
+blue = '#557398' #
 red = '#D25252'
-green = '#7FB347'
+green = '#009926' #
 
 
 def jesseaxis(ax, x, y):
@@ -33,7 +33,7 @@ def jesseaxis(ax, x, y):
 
 
 def saveimg(name):
-    plt.savefig('Figures/' + name + '.png', bbox_inches='tight',
+    plt.savefig(name + '.png', bbox_inches='tight',
                 pad_inches=0.1, facecolor=grey, dpi=500)
 
 ####FIGURE SHOWING DEFINITION OF INTERPOLATION####
