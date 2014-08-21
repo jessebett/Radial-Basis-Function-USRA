@@ -1,99 +1,694 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Radial Basis Interpolation : Interpolating Scattered Data in N-Dimensions">
+    <meta name="viewport" content="width=640">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
 
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-    <title>Radial Basis Interpolation</title>
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Radial Basis Interpolation by jessebett</title>
   </head>
 
   <body>
+    <a id="forkme_banner" href="https://github.com/jessebett/USRA">View on GitHub</a>
+    <div class="shell">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/jessebett/USRA">View on GitHub</a>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Radial Basis Interpolation</h1>
+            <h2>Interpolating Scattered Data in N-Dimensions</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-          <h1 id="project_title">Radial Basis Interpolation</h1>
-          <h2 id="project_tagline">Interpolating Scattered Data in N-Dimensions</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/jessebett/USRA/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/jessebett/USRA/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p></p>
-    <p>
-    Given a set of measurements \( \{f_i\}_{i=1}^N \) taken at corresponding data sites $\{x_i\}_{i=1}^N$ we want to find an interpolation function $s(x)$ that informs us on our system at locations different from our data sites.
-  
-    Here is an example MathJax inline rendering $1/x^{2}$, and here is a block rendering: 
-\[ \frac{1}{n^{2}} \]</p>
-
-<h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/jessebett/USRA/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/jessebett/USRA/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Radial Basis Interpolation maintained by <a href="https://github.com/jessebett">jessebett</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h2>
+<a name="about-the-usra-project" class="anchor" href="#about-the-usra-project"><span class="octicon octicon-link"></span></a>About the USRA* Project</h2>
+
+<p>This project explores the use of Radial Basis Functions (RBFs) in the interpolation of scattered data in N-dimensions. It was completed Summer 2014 by Jesse Bettencourt as an NSERC-USRA student under the supervision of Dr. Kevlahan in the Department of Mathematics and Statistics at McMaster University, Hamilton, Ontario, Canada. </p>
+
+<p>*<a href="http://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp">Undergraduate Student Research Awards (USRA)</a> are granted by the Natural Sciences and Engineering Research Council of Canada to 'stimulate interest in research in the natural sciences and engineering' and to encourage graduate studies and the pursuit of research careers in these fields.</p>
+
+<h2>
+<a name="about-this-repository" class="anchor" href="#about-this-repository"><span class="octicon octicon-link"></span></a>About this Repository</h2>
+
+<p>This repository contains resources and working documents associated with the project. The early stages of the project focused on reviewing the published literature on RBF interpolation. This was summarized in a presentation given at the <a href="http://cumc.math.ca/2014/">Canadian Undergraduate Mathematics Conference (CUMC) 2014 at Carelton University</a>. The pdf, LaTeX, and figures as well as the python script to generate figures from this presentation can be found in the <a href="https://github.com/jessebett/USRA/tree/master/CUMC%20Presentation">CUMC Presentation</a> folder. Following the presentation, the project shifted focus to demonstrating the <a href="http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf">SciPy implementation of RBF interpolation</a>. The <a href="https://github.com/jessebett/USRA/tree/master/Interpolation%20Demonstration">Interpolation Demonstration</a> folder contains the python files associated with this exploration. Of note, the file <a href="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py">SphericalHarmonicInterpolation.py</a> demonstrates how RBFs can be used to interpolate spherical harmonics given data sites and measurements on the surface of a sphere. This folder also contains iPython notebooks from early experimentation with SciPy's RBF and a Mathematica notebook from preliminary assessment of Mathematica implementation of RBF interpolation. </p>
+
+<h1>
+<a name="radial-basis-function-interpolation" class="anchor" href="#radial-basis-function-interpolation"><span class="octicon octicon-link"></span></a>Radial Basis Function Interpolation</h1>
+
+<h2>
+<a name="what-is-interpolation" class="anchor" href="#what-is-interpolation"><span class="octicon octicon-link"></span></a>What is interpolation?</h2>
+
+<p>Given a set of <strong>measurements</strong> ${f_i}<em>{i=1}^N$ taken at corresponding <strong>data sites</strong> ${x_i}</em>{i=1}^N$ we want to find an <strong>interpolation function</strong> $s(x)$ that informs us on our system at locations different from our data sites. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpdef.png" alt="enter image description here"></p>
+
+<p>Further, we want our function, $s(x)$ to satisfy what's called the <strong>interpolation condition</strong> which is that we want to our interpolation function to exactly match our measurements at our data sites. </p>
+
+<blockquote>
+<p>Interpolation Condition: 
+\begin{equation*}
+s(x_i)=f_i 
+\end{equation*}
+$\forall i\in{0 ... N }$</p>
+</blockquote>
+
+<p>This is how interpolation differs from approximation, where approximation does not necessitate that our function exactly equals our measurements at the data sites. This can be achieved through different methods, e.g., Least Squares approximation. Sometimes, when accuracy at data sites is not necessary, approximation is preferred over interpolation because it can provide a 'nicer' function which could better illustrate the relationship among the data sites and measurements. For instance, approximation is heavily utilized in experimental science where measurements can contain a measurement error associated with experimental procedures. In this environment, the interpolation condition may be undesirable because it forces the interpolation to match exactly with potential measurement error, where approximation may alleviate error influence and illustrate measured correlations better. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/interpvsapprox.png" alt="enter image description here"></p>
+
+<p>For the purposes of this project, we focus on interpolation only. </p>
+
+<h2>
+<a name="interpolation-assumption" class="anchor" href="#interpolation-assumption"><span class="octicon octicon-link"></span></a>Interpolation Assumption</h2>
+
+<p>Many interpolation methods rely on the convenient assumption that our interpolation function, $s(x)$, can be found through a linear combination of <strong>basis functions</strong>, $\psi_i(x)$.</p>
+
+<blockquote>
+<p>Linear Combination Assumption: 
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi_i
+\end{equation*}</p>
+</blockquote>
+
+<p>This assumption is convenient as it allows us to utilize solving methods for systems of linear equations from linear algebra to find our interpolation function. As such, we can express our interpolation problem as a linear system.</p>
+
+<blockquote>
+<p>Interpolation as Linear System: 
+\begin{equation*}
+A\boldsymbol{\lambda}=\boldsymbol{f}
+\end{equation*}</p>
+</blockquote>
+
+<p>Where $\boldsymbol{f}$ is the vector of datasite measurements $\left[ f_1, ..., f_N \right]^T$ and $\boldsymbol{\lambda}$ is the vector of linear combination coefficients $\left[ \lambda_1, ..., \lambda_N \right]^T$.</p>
+
+<p>For a system with N measurement data sites,  $A$ is an NxN-matrix called the <strong>interpolation matrix</strong> or <strong>Vandermonde Matrix</strong> The elements of A are given by the basis functions, $\psi_j$  evaluated at each data site, $x_i$. </p>
+
+<blockquote>
+<p>Elements of $A$: 
+\begin{equation*}
+a_{ij}=\psi_j(x_i)
+\end{equation*}</p>
+</blockquote>
+
+<p>By using numerical methods and solving this linear system, we will have our interpolation function as a linear combination of our basis functions. </p>
+
+<h4>
+<a name="familiar-example-of-interpolation-basis" class="anchor" href="#familiar-example-of-interpolation-basis"><span class="octicon octicon-link"></span></a>Familiar Example of Interpolation Basis</h4>
+
+<p>A choice of basis functions, $\psi_i$, which may familiar to undergraduate students is the basis of (N-1)-degree polynomials. If we wish to find a 1-Dimensional interpolation function from N distinct data sites, we can find an (N-1)-degree polynomial which goes exactly through all sites. In other words, by choosing our basis functions to be successive powers of x up to (N-1), we can solve our interpolation system for our function.</p>
+
+<blockquote>
+<p>Polynomial Interpolation Basis: 
+\begin{equation*}
+\psi_{i=1}^N={1,x,x^2,x^3, ..., x^{N-1}}
+\end{equation*}</p>
+</blockquote>
+
+<p>An example of this interpolation with 6 data sites can be seen in the figure below. Here the interpolation function, as a linear combination, is $s(x)=-0.02988 x^5 + 0.417 x^4 - 2.018 x^3 + 3.694 x^2 - 1.722 x - 5.511e^{-14}$</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/polyinterp.png" alt="enter image description here"></p>
+
+<p>However, while polynomial basis is simple for 1-Dimensional interpolation, this method is not ideal for higher dimensions. To accommodate higher dimension interpolation, we must choose our basis differently.</p>
+
+<h2>
+<a name="well-posedness-in-higher-dimensional-interpolation" class="anchor" href="#well-posedness-in-higher-dimensional-interpolation"><span class="octicon octicon-link"></span></a>Well-Posedness in Higher Dimensional Interpolation</h2>
+
+<p>When defining our linear system we must consider whether our system is <strong>well-posed</strong>. That is, does there exist a solution to our interpolation problem, and if so is that solution unique? </p>
+
+<blockquote>
+<p>Well-Posedness in Linear Systems: Our system will be well-posed if and only if $A$ is non-singular, i.e. $\det(A)\neq0$</p>
+</blockquote>
+
+<p>For 1-D interpolation, many choices in basis functions will guarantee a well-posed system. In our example of polynomial interpolation, for instance, it was guaranteed that for N-distinct data sites a unique (N-1)-degree polynomial will interpolate the measurements. So without predetermining any information about our data sites (other than that they are distinct from each other), or their measurements, we can define our basis functions independently of our data and expect a unique, well-posed solution. </p>
+
+<p>However, for n-Dimensions where $n\geq2$ this is never guaranteed! That is, no matter what we choose for our set of basis functions, there will always be data sites which produce ill-posed systems. The implication of this is that we can not define our basis functions independently of our data and expect a well-posed system. This results from the Haar-Mairhuber-Curtis Theorem.</p>
+
+<h3>
+<a name="haar-mairhuber-curtis-theorem" class="anchor" href="#haar-mairhuber-curtis-theorem"><span class="octicon octicon-link"></span></a>Haar-Mairhuber-Curtis Theorem</h3>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/HMC.png" alt="enter image description here"></p>
+
+<p>Through the work of Alfréd Haar and his description of <strong>Haar Spaces</strong> we gain the negative result that well-posedness is not guaranteed in higher dimensional linear systems with independently chosen basis functions. To state the theorem we first define Haar spaces.</p>
+
+<blockquote>
+<p>Definition of Haar Space:
+Let $\Omega \subset \mathbb{R}^N$ be a set with at least $N$ sites in it. Let $V \subset C(\Omega)$ be an $N$-dimensional subspace of continuous functions. Then, we say that $V$ is a <strong>Haar Space</strong> if for any collection of $N$ sites ${x_1,...,x_N}$ with any corresponding set of values ${f_1,...,f_N}$, we can find a unique function $s \in V$ such that $s(x_k)=f_k$.</p>
+</blockquote>
+
+<p>From this definition we have the following lemma.</p>
+
+<blockquote>
+<p>Lemma:
+Let $\Omega \subset \mathbb{R}^N$ be a set with at least $N$ sites in it and $V \subset C(\Omega)$ be a subspace. 
+Then, $V$ is an $N$-dimensional Haar Space if and only if for any distinct sites ${x_1,...,x_N} \in \Omega$ and any basis of functions ${\psi_1,...,\psi_N} \in V$, we have $\det(\psi_j(x_i))\neq0$.</p>
+</blockquote>
+
+<p>In other words:</p>
+
+<blockquote>
+<p>$V$ is a Haar Space $\iff$ any set of basis function produce well-posed system for any set of distinct data sites.</p>
+</blockquote>
+
+<p>For the purposes of interpolation, then, interpolating within a Haar space is ideal, because then we can choose our basis independently of our data and, as per the lemma, we are guaranteed a well-posed system and a unique solution.</p>
+
+<p>However, by the negative result of the Mairhuber-Curtis Theorem, there can be no Haar Spaces in $N$-Dimensions for $N \geq 2$</p>
+
+<blockquote>
+<p>Mairhuber-Curtis Theorem:
+Let $\Omega \subset \mathbb{R}^N$, $N \geq 2$ contain an interior site. Then, there is no Haar space of dimension $N \geq 2$ for $\Omega$.</p>
+</blockquote>
+
+<p>So, if we are interpolating scattered data in higher dimensions, by the Haar-Mairhuber-Curtis Theorem we cannot choose our basis functions independent from our data sites. However, this does not mean we cannot interpolate in higher dimensions using our interpolation assumption.</p>
+
+<blockquote>
+<p>If we can't guarantee well-posedness with independently chosen basis functions, we must choose our basis functions depending on our data sites. </p>
+</blockquote>
+
+<h2>
+<a name="basis-functions-for-higher-dimension-interpolation" class="anchor" href="#basis-functions-for-higher-dimension-interpolation"><span class="octicon octicon-link"></span></a>Basis Functions for Higher Dimension Interpolation</h2>
+
+<p>One method for defining basis functions depending on our data sites is to take a single function and translate it for each site. That is, our basis functions will be <strong>translates</strong> of a single function for each data site. </p>
+
+<h3>
+<a name="translates-of-the-basic-function" class="anchor" href="#translates-of-the-basic-function"><span class="octicon octicon-link"></span></a>Translates of the Basic Function</h3>
+
+<p>If our basis functions are translates of a function, which function should we translate? By answering this question we will arrive at the definition of Radial Basis Functions, but first let's consider a preliminary function: the basic function.</p>
+
+<blockquote>
+<p>The Basic Function: 
+\begin{equation*}
+\psi_i(x)=||x-x_i||
+\end{equation*}</p>
+</blockquote>
+
+<p>Pictured below, the basic function is the absolute valued function given by the Euclidean distance from a <strong>center point</strong> $x_i \in \mathbb{R}^N$. The basic function has the feature that it is radially symmetric about this center point. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicfunxi.png" alt="enter image description here"></p>
+
+<p>We can define our set of basis functions, ${\psi_i(x)}_{i=1}^N$, as translates of our basic function such that the center points are located at our data sites. </p>
+
+<blockquote>
+<p>Set of Basis Functions: 
+\begin{equation*}
+{\psi_i(x)=||x-x_i||}_{i=1}^N
+\end{equation*}</p>
+</blockquote>
+
+<p>In other words, our set of basis functions is composed of basic functions centered each of our data sites. We can visualize one of these centered basic functions in the figure below.</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basicbasis.png" alt="enter image description here"></p>
+
+<p>Now that we have chosen our basis functions, we can look at the linear system which it produces. For instance, our interpolation matrix, $A$, now becomes:
+\begin{equation*}
+A=
+\begin{bmatrix}
+||x_1-x_1|| &amp; ||x_1-x_2|| &amp; \cdots &amp; ||x_1-x_N||\
+||x_2-x_1|| &amp; ||x_2-x_2||&amp; \cdots &amp; ||x_2-x_N||\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\
+||x_N-x_1|| &amp; ||x_N-x_2||&amp; \cdots &amp; ||x_N-x_N||
+\end{bmatrix}
+\end{equation*}</p>
+
+<p>This matrix is known as the <strong>distance matrix</strong> with Euclidean distance. </p>
+
+<p>But, if we're not interpolating in 1-D, then we know we're not in a Haar Space. How do we know that our linear interpolation system with the distance matrix is well-posed? </p>
+
+<blockquote>
+<p>Lemma from Linear Algebra: 
+Distance Matricies with Euclidean distance, for distinct points in $\mathbb{R}^n$ are always non-singular.</p>
+</blockquote>
+
+<p>From the above lemma we know that our interpolation matrix is non-singular. Therefore, we know our system is well-posed and that there exists a unique interpolation function! </p>
+
+<p>However, the choice of $\psi_i(x)=||x-x_i||$ as our basic function is not ideal. As we can see from our above plot of the basic function centered at $x_i$, the first derivative of the basic function is discontinuous at our center point, $x_i$. This has the consequence that, at each of our data sites, the first derivative of our interpolation function will be discontinuous. This is problematic because, ideally, we would like to have a $C^\infty$ smooth interpolation function so we can use methods from calculus to analyze our function. </p>
+
+<p>How can we remedy our derivative discontinuities in our interpolation function?</p>
+
+<h3>
+<a name="building-a-better-basic-function" class="anchor" href="#building-a-better-basic-function"><span class="octicon octicon-link"></span></a>Building a Better Basic Function</h3>
+
+<p>In 1968, R.L. Hardy suggested that by using a $C^\infty$ smooth function as our basic function, we can produce smooth interpolation functions. These functions are called <strong>Kernels</strong>. The kernel suggested by Hardy was the <strong>Multiquadric Kernel</strong>.</p>
+
+<blockquote>
+<p>Hardy's Multiquadric Kernel:
+\begin{align*}
+\psi(x)=\sqrt{c^2 + x^2}
+\end{align*}
+where $c \neq 0$.</p>
+</blockquote>
+
+<p>Notice that if we allow $c=0$ in the multiquadric kernel then we are actually describing the basic function used above. So, in other words, Hardy's multiquadric kernel is like the basic function but smoothed with a parameter $c$. By looking at a plot of the multiquadric kernel, we can see that the discontinuity from the basic function has been addressed. In fact, the multiquadric function is, as desired, $C^\infty$ smooth.</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelfun.png" alt="enter image description here"></p>
+
+<p>As before, we will define our basis functions, ${\psi_i}_{i=1}^{N}$, as a set of multiquadric kernels translated such that they are centered at our data sites, $x_i$.</p>
+
+<blockquote>
+<p>Basis of Multiquadric Kernels:
+\begin{equation*}
+{\psi_i(x)=\sqrt{c^2 + (||x-x_i||)^2}}_{i=1}^N
+\end{equation*}</p>
+</blockquote>
+
+<p>We can visualize one of these translated multiquadric kernels in the figure below. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/kernelbasis.png" alt="enter image description here"></p>
+
+<h3>
+<a name="radial-basis-function-kernels" class="anchor" href="#radial-basis-function-kernels"><span class="octicon octicon-link"></span></a>Radial Basis Function Kernels</h3>
+
+<p>Notice that the multiquadric kernel is also radially symmetric about its center, $x_i$. Because of this radial symmetry, the multiquadric kernel can be described as a <strong>Radial Basis Function</strong>. In other words, it is a basis function which depends only on the radial distance from its center. Since our basis functions $\psi_i(x)$ depend only on distance, we can re-express them as such.</p>
+
+<blockquote>
+<p>Radial Basis Functions:
+\begin{equation*}
+\psi(||x-x_i||)= \phi(r)
+\end{equation*}
+where $r=||x-x_i||$</p>
+</blockquote>
+
+<p>With our interpolation assumption, we can express our interpolation function as a linear combination of these functions, as before:</p>
+
+<blockquote>
+<p>Interpolation as Linear Combination of Radial Basis Functions:
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) 
+\end{equation*}</p>
+</blockquote>
+
+<p>There are a few commonly used radial basis function kernels:</p>
+
+<ul>
+<li>Multiquadric: $\phi(r)=\sqrt{1+(\epsilon r)^2}$<img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/multiquadric.png" alt="enter image description here">
+</li>
+<li>Inverse Multiquadric: $\phi(r)=\frac{1}{\sqrt{1+(\epsilon r)^2}}$ <img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversemultiquadric.png" alt="enter image description here">
+</li>
+<li>Inverse Quadratic: $\phi(r)=\frac{1}{1+(\epsilon r)^2}$ <img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/inversequadratic.png" alt="enter image description here">
+</li>
+<li>Gaussian:  $\phi(r)=e^{-(\epsilon r)^2}$ <img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/gaussian.png" alt="enter image description here">
+</li>
+</ul><p>As before, we can use translates of these functions centered on our data sites as basis for our interpolation linear system. Further, notice that the multiquadric kernel has been rearranged to replace $c$ with a <strong>shape parameter</strong>, $\epsilon$ consistent with the other kernels.</p>
+
+<p>However, by using the radial basis kernels as our basis, we change the interpolation matrix so that it is no longer the distance matrix as before.</p>
+
+<blockquote>
+<p>Interpolation matrix with RBF kernels:
+\begin{equation*}
+A=
+\begin{bmatrix}
+\phi_1(r_1) &amp; \phi_1(r_2) &amp; \cdots &amp; \phi_1(r_N)\
+\phi_2(r_1) &amp; \phi_2(r_2)&amp; \cdots &amp; \phi_2(r_N)\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\
+\phi_N(r_1) &amp; \phi_N(r_2)&amp; \cdots &amp; \phi_N(r_N)
+\end{bmatrix}
+\end{equation*}</p>
+</blockquote>
+
+<p>If $N\geq2$ then we are still not interpolating in a Haar Space, and since we are no longer using a distance matrix, can we expect well-posedness?</p>
+
+<p>To answer this question we determine if our interpolation matrix is <strong>positive-definite</strong>.</p>
+
+<blockquote>
+<p>A matrix, $A$, is positive-definite if
+\begin{align*}
+&amp; t^TAt&gt;0 &amp; \forall t=\left[ t_1, t_2, ..., t_n\right]\neq 0 \in \mathbb{R}^n
+\end{align*}</p>
+</blockquote>
+
+<p>Using this definition we have the following condition:</p>
+
+<blockquote>
+<p>If interpolation matrix, $A$, is symmetric, positive-definite , then $A$ is nonsingular and our system is well-posed.</p>
+</blockquote>
+
+<p>So we can guarantee the existence of a unique solution if we choose our kernels such that $A$ will be positive-definite. In fact, we can produce positive-definite interpolation matrices by using positive-definite kernels.</p>
+
+<blockquote>
+<p>A function, $\phi: \mathbb{R}^n\times \mathbb{R}^n \rightarrow \mathbb{R}$, is said to be positive definite if
+:
+\begin{align*}
+&amp;\sum_{i=1}^N \sum_{j=1}^N \phi(||x-x_i||)t_i\bar{t_j}&gt;0 &amp;\forall t=\left[ t_1, t_2, ..., t_n\right]\neq 0 \in \mathbb{C}^n
+\end{align*}</p>
+</blockquote>
+
+<p>Of the common RBF kernels described above, all are positive-definite except Hardy's Multiquadric kernel. However, the multiquadric kernel is guaranteed to produce well-posed systems for other, similar reasons (that it is conditionally negative-definite). With the exception of Hardy's multiquadric kernel, by using positive-definite kernels we can produce positive-definite interpolation matrices which guarantee well-posed systems! </p>
+
+<p>So, by using Radial Basis Kernels for interpolation, we have shown that there exists a unique interpolation function $s(x)$ which interpolates scattered data in N-dimensions.</p>
+
+<blockquote>
+<p>Radial Basis Interpolation
+\begin{equation*}
+s(x)=\sum_{i=1}^N \lambda_i \psi(||x-x_i||)=\sum_{i=1}^N \lambda_i \phi(r) 
+\end{equation*}</p>
+</blockquote>
+
+<h3>
+<a name="well-posed-vs-well-conditioned" class="anchor" href="#well-posed-vs-well-conditioned"><span class="octicon octicon-link"></span></a>Well-posed v.s. Well-conditioned</h3>
+
+<p>In the discussion above we have shown that radial basis interpolation is well-posed, so there exists a unique solution for the interpolation problem. However, because these systems are solved using numerical methods on computers, they are subject to computational limitations. By using computational methods we introduce a complication, just because a solution exists, doesn't mean that it is accessible through numerical methods. A common example of the limitations that can cause a solution to be inaccessible is the accumulation of rounding errors. If our solution exists, and the system behaves 'nicely' with computational solving methods, then we say the solution is <strong>well-conditioned</strong>.</p>
+
+<p>Radial basis interpolation problems, although well-posed, have the propensity to be very ill-conditioned. This is in part due the choice <strong>shape parameter</strong>, $\epsilon$. For some systems, small changes in $\epsilon$ may have potentially significant influences on the system. </p>
+
+<p>In the two figures below we can see how increasing the value of epsilon will change the shape of the individual kernel basis functions.</p>
+
+<p>For $\epsilon=0.4$
+<img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus1.png" alt="enter image description here"></p>
+
+<p>For $\epsilon=1$
+<img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/basisgaus2.png" alt="enter image description here"></p>
+
+<p>In the three figures below, we can see how increasing the value of epsilon will cause the interpolation system to become ill-conditioned. Keep in mind that the interpolation solution for each $\epsilon$ value still exists, but the computation methods create noise and are unable to find the function.</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/conditioned.png" alt="enter image description here"></p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/illconditioned.png" alt="enter image description here"></p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/CUMC%20Presentation/Figures/veryillconditioned.png" alt="enter image description here"></p>
+
+<p>So we can see that in order to use radial basis function interpolation we must choose epsilon in such a way that the system does not become ill-conditioned. </p>
+
+<p>Another limitation of radial basis function interpolation is that any error that occurs, as with ill-conditioning, occurs to a greater extent near the boundaries. This can be seen in the above three figures as the solution becomes more noisy, the noise is greater at the boundaries. This is because radial basis function interpolation relies on the radial symmetry of the basis functions. Basis functions centered at data sites on or close to the boundaries of the interpolation space become asymmetric. Of course, this can be avoided entirely by using radial basis function interpolation to interpolate functions in spaces without boundaries, e.g. surface of a sphere.</p>
+
+<h2>
+<a name="demonstrating-radial-basis-interpolation-on-surface-of-sphere" class="anchor" href="#demonstrating-radial-basis-interpolation-on-surface-of-sphere"><span class="octicon octicon-link"></span></a>Demonstrating Radial Basis Interpolation on Surface of Sphere</h2>
+
+<p>As part of this project I demonstrate how <a href="http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf">SciPy's implimentation of Radial Basis Function interpolation</a> can be used to interpolate spherical harmonic functions on the surface of a sphere. The complete code for this demonstration can be found in this repository under the <code>Interpolation Demonstration</code> folder in the file <a href="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py">SphericalHarmonicInterpolation.py</a>.</p>
+
+<h3>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>To fully use the python code you need the following libraries:</p>
+
+<ul>
+<li><a href="http://www.scipy.org/">SciPy</a></li>
+<li><a href="http://nipy.org/dipy/index.html">DiPy</a></li>
+<li><a href="http://mayavi.sourceforge.net/">MayaVi</a></li>
+</ul><h3>
+<a name="setting-up-coordinates" class="anchor" href="#setting-up-coordinates"><span class="octicon octicon-link"></span></a>Setting Up Coordinates</h3>
+
+<p>There are two sets of points used throughout the code. The data sites, which is used to train the RBF interpolation, called <code>coarse</code> coordinates, and the interpolation sites, where the function is being interpolated, called <code>fine</code> coordinates. I define the function which produces both set of points</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="n">n_fine</span><span class="p">,</span> <span class="n">n_coarse</span><span class="p">):</span>
+</pre></div>
+
+<p>where <code>n_fine</code> and <code>n_coarse</code> are parameters given to define the resolution of the interpolation space and the number of data sites respectively. Because of the way the interpolation space grid is defined, <code>n_fine</code> is given as a complex number.</p>
+
+<h4>
+<a name="fine-coordinate-grid" class="anchor" href="#fine-coordinate-grid"><span class="octicon octicon-link"></span></a>Fine Coordinate Grid</h4>
+
+<p>The interpolation space grid, produced by the function <code>make_coor(n)</code> called with <code>n_fine</code> produces a grid of points on a sphere corresponding to latitude-longitude style grid points. In other words, the function creates an (n x n)-sized grid of points on the ($\phi, \theta$)-space. Then the function converts those points to Cartesian (x,y,z)-coordinates.</p>
+
+<div class="highlight highlight-python"><pre>    <span class="k">def</span> <span class="nf">make_coor</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="sd">'''Creates points on the surface of sphere using lat-lon grid points'''</span>
+        <span class="n">phi</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pi</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">Coor</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Coor'</span><span class="p">,</span> <span class="s">'r phi theta x y z'</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Coor</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+<p>The resulting points and spherical mesh can be seen in the figure below for <code>n_fine = 20j</code></p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/finegrid.png" alt="enter image description here"></p>
+
+<p>From the figure we can see that the <code>fine</code> grid produces points at a much higher density at the poles than along the 'equator'. For this reason, we cannot use these points to train our radial basis function. Instead we must use a different method to produce our data sites.</p>
+
+<h4>
+<a name="coarse-coordinate-data-sites-grid" class="anchor" href="#coarse-coordinate-data-sites-grid"><span class="octicon octicon-link"></span></a>Coarse Coordinate (Data Sites) Grid</h4>
+
+<p>For the RBF interpolation of an arbitrary function on the surface of a sphere we want to choose our points so they are equally spaced from each other. As it happens, the problem of uniformly distributing n-many points on the surface of a sphere is an open problem. For a large ($N \geq 10$) number of points, a sufficient method for pseudo-uniformly distributing $N$ points on the surface of the sphere is the <strong>Golden Section Spiral</strong> method. This algorithm places the points according to the golden spiral and can be visualized in the video below.</p>
+
+
+
+<p>This algorithm was implemented in my code as the following function</p>
+
+<div class="highlight highlight-python"><pre>    <span class="k">def</span> <span class="nf">uniform_spherical_distribution</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="sd">"""n points distributed evenly on the surface of a unit sphere"""</span>
+        <span class="n">pts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">inc</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+        <span class="n">off</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="p">)):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">off</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">off</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">inc</span>
+            <span class="n">pts</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+</pre></div>
+
+<p>However, since this only produces the Cartesian coordinates for these points and we will need the spherical coordinates, a we also append the spherical coordinates using the function:</p>
+
+<div class="highlight highlight-python"><pre>    <span class="k">def</span> <span class="nf">appendSpherical_np</span><span class="p">(</span><span class="n">xyz</span><span class="p">):</span>
+        <span class="sd">'''Appends spherical coordinates to array of Cartesian coordinates'''</span>
+        <span class="n">ptsnew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">xyz</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">xyz</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+        <span class="n">xy</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">ptsnew</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xy</span> <span class="o">+</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c"># for elevation angle defined from Z-axis down</span>
+        <span class="n">ptsnew</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xy</span><span class="p">),</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="c"># ptsnew[:,4] = np.arctan2(xyz[:,2], np.sqrt(xy)) # for elevation angle</span>
+        <span class="c"># defined from XY-plane up</span>
+        <span class="n">ptsnew</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">xyz</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ptsnew</span>
+</pre></div>
+
+<p>where parameter  <code>xyz</code> is an array of Cartesian coordinates. </p>
+
+<p>To produce our uniformly spaced coarse coordinates for interpolation, we call the function</p>
+
+<div class="highlight highlight-python"><pre>    <span class="k">def</span> <span class="nf">make_uni_coor</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="sd">'''Make named tuple of unifromly distrubed points on sphere'''</span>
+        <span class="n">Coor</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Coor'</span><span class="p">,</span> <span class="s">'theta phi x y z'</span><span class="p">)</span>
+        <span class="n">pts</span> <span class="o">=</span> <span class="n">uniform_spherical_distribution</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">pts</span> <span class="o">=</span> <span class="n">appendSpherical_np</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Coor</span><span class="p">(</span><span class="n">pts</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+<p>However, we've only generated the points of the sphere without providing information on how these points relate to each other. If we wish to plot these points as though they all belong on the surface of the sphere, we need to define a mesh. For this we use Delaunay triangulation to produce triangles between three adjacent points on the sphere. </p>
+
+<p>To do this, we use <a href="http://nipy.sourceforge.net/dipy/reference/dipy.core.sphere.html">DiPy's sphere object</a> which allows us to define a sphere using our Cartesian coordinates. The object has the method <code>faces()</code> which are an array of triangles for our Delaunay mesh. </p>
+
+<p>We can visualize our pseudo-uniformly distributed points and their Delaunay mesh in the figure below for <code>n_coarse = 100</code></p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/coarsegrid.png" alt="enter image description here"></p>
+
+<h3>
+<a name="using-named-tuples" class="anchor" href="#using-named-tuples"><span class="octicon octicon-link"></span></a>Using Named Tuples</h3>
+
+<p>The coordinate systems produced above use python's <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">namedtuples</a> as a variable naming convention. For instance, when defining our <code>fine</code> spherical grid we first define a namedtuple:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">Coor</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Coor'</span><span class="p">,</span> <span class="s">'r phi theta x y z'</span><span class="p">)</span>
+</pre></div>
+
+<p>Then, when the function is returning the coordinates, it stores them as a named tuple as follows:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">return</span> <span class="n">Coor</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+<p>As such we can address the coordinates by selecting named elements of the tuple. The parent function for the producing the coordinates stores the fine and coarse coordinates as named tuples.</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="n">n_fine</span><span class="p">,</span> <span class="n">n_coarse</span><span class="p">):</span>
+<span class="o">...</span>
+    <span class="n">Coordinates</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Coordinates'</span><span class="p">,</span> <span class="s">'fine coarse '</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Coordinates</span><span class="p">(</span><span class="n">make_coor</span><span class="p">(</span><span class="n">n_fine</span><span class="p">),</span> <span class="n">make_uni_coor</span><span class="p">(</span><span class="n">n_coarse</span><span class="p">))</span>
+</pre></div>
+
+<p>Now, if we generate our coordinates by calling this function and naming the output <code>Coor</code>.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">Coor</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">(</span><span class="n">n_fine</span><span class="p">,</span> <span class="n">n_coarse</span><span class="p">):</span>
+</pre></div>
+
+<p>We can access all our coordinate information by addressing named elements inside the tuple. For instance, if we wish to address the fine coordinate's $\phi$ component, we can do so as follows <code>Coor.fine.phi</code></p>
+
+<p>Using named tuples for variable names allows for flexible and readable python code. </p>
+
+<h3>
+<a name="interpolating-function" class="anchor" href="#interpolating-function"><span class="octicon octicon-link"></span></a>Interpolating function</h3>
+
+<p>Now that we have our coordinates we can define a function on the surface of the sphere at those coordinates. For an example function on a sphere's surface we use the real part of spherical harmonics. Specifically, we use the real part of spherical harmonic $Y^3_4$. </p>
+
+<p>To implement this, we use <a href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.special.sph_harm.html">SciPy's Spherical Harmonic Function</a> and define a function:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">harmonic</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">coor</span><span class="p">):</span>
+    <span class="sd">'''Produce m,l spherical harmonic at coarse and fine coordinates'''</span>
+    <span class="n">Harmonic</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Harmonic'</span><span class="p">,</span> <span class="s">'fine coarse'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Harmonic</span><span class="p">(</span>
+        <span class="n">special</span><span class="o">.</span><span class="n">sph_harm</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">theta</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">,</span>
+        <span class="n">special</span><span class="o">.</span><span class="n">sph_harm</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">theta</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+    <span class="p">)</span>
+</pre></div>
+
+<p>Again, we make use of the namedtuple to define a fine and coarse harmonic. Since we are using RBF to interpolate the spherical harmonic from the coarse sites, we technically only need to evaluate the harmonic at the coarse coordinates. However, we are also interested in comparing the interpolated result to the actual function, to do this we also find the values of the function at the fine coordinates.</p>
+
+<p>We call our function using our <code>coordinates</code></p>
+
+<div class="highlight highlight-python"><pre><span class="n">function</span> <span class="o">=</span> <span class="n">harmonic</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="implementing-the-radial-basis-function-interpolation" class="anchor" href="#implementing-the-radial-basis-function-interpolation"><span class="octicon octicon-link"></span></a>Implementing the Radial Basis Function Interpolation</h3>
+
+<p>We use  <a href="http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf">SciPy implementation of RBF interpolation</a> to define a function:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">rbf_interpolate</span><span class="p">(</span><span class="n">coor</span><span class="p">,</span> <span class="n">coarse_function</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">'''Radial Basis Function Interpolation from coarse sites to fine cooridnates'''</span>
+    <span class="c"># Train the interpolation using interp coordinates</span>
+    <span class="n">rbf</span> <span class="o">=</span> <span class="n">Rbf</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> 
+              <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">coarse_function</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">angle</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+    <span class="c"># The result of the interpolation on fine coordinates</span>
+    <span class="k">return</span> <span class="n">rbf</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+<p>We call our RBF interpolation using our coarse Cartesian coordinates and the value of the harmonic at those coordinates:</p>
+
+<div class="highlight highlight-python"><pre>    <span class="n">rbf</span> <span class="o">=</span> <span class="n">Rbf</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> 
+              <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">coarse_function</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">angle</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+</pre></div>
+
+<p>Notice that can we provide a value for epsilon (if given <code>None</code> SciPy will compute a default value). Further, note that we define a <code>norm</code>. This is the distance metric used to determine the radial distance from the data sites. As a default, SciPy will use the Euclidean Distance as the distance norm. However, since we are training our function using Cartesian coordinates on the surface of the unit sphere, we must use a distance metric for points on the surface of that sphere. </p>
+
+<p>For the $S^2$ distance norm we define a function to be called from our Rbf:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="sd">'''Distance metric on the surface of the unit sphere'''</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">((</span><span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">xx</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xx</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">xx</span>
+</pre></div>
+
+<p>Now once we train our radial basis function, <code>rbf()</code> we can use it to interpolate the spherical harmonic on our fine coordinates:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">return</span> <span class="n">rbf</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="optimizing-our-choice-of-epsilon" class="anchor" href="#optimizing-our-choice-of-epsilon"><span class="octicon octicon-link"></span></a>Optimizing our Choice of Epsilon</h3>
+
+<p>We can define errors of our interpolation to be the difference between the interpolated function and the actual spherical harmonic function at each of the fine coordinates. We define a python function to give us these values:</p>
+
+<div class="highlight highlight-python"><pre><span class="k">def</span> <span class="nf">interp_error</span><span class="p">(</span><span class="n">fine_function</span><span class="p">,</span> <span class="n">interp_results</span><span class="p">):</span>
+    <span class="sd">'''Error between interpolated function and actual function'''</span>
+    <span class="n">Error</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Error'</span><span class="p">,</span> <span class="s">'errors max'</span><span class="p">)</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">fine_function</span> <span class="o">-</span> <span class="n">interp_results</span>
+    <span class="n">error_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Error</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">error_max</span><span class="p">)</span>
+</pre></div>
+
+<p>Further, we can assess the overall error of the interpolation by using the maximum difference between the interpolation and the function and calling this value <code>error_max</code>. </p>
+
+<p>If we preform multiple RBF interpolation, each with different values of the shape parameter, $\epsilon$, we can see how <code>epsilon</code> effects the maximum error of the interpolation. Further, we can use this to choose the epsilon which minimizes this error.</p>
+
+<p>I plot the maximum error for increasing values of epsilon, colouring the optimal choice red. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/optimizationcurve.png" alt="enter image description here"></p>
+
+<p>By RBF interpolating our function with the optimal value of epsilon, we can minimize the interpolation error.</p>
+
+<h3>
+<a name="visualizing-the-results-of-the-interpolation" class="anchor" href="#visualizing-the-results-of-the-interpolation"><span class="octicon octicon-link"></span></a>Visualizing the Results of the Interpolation</h3>
+
+<p>Using the <a href="http://mayavi.sourceforge.net/">MayaVi scientific data visualization library</a> we can visualize the results of this interpolation.</p>
+
+<blockquote>
+<p>Note: The following images are stills from the MayaVi visualization environment, which is interactive. I highly recommend downloading and playing with these figures yourself, as you can rotate around the sphere.</p>
+</blockquote>
+
+<p>First, we plot the spherical harmonic function on the sphere. We also add small 'warts' which indicate where the data sites being used for interpolation are, coloured to the value of the function at those sites.</p>
+
+<div class="highlight highlight-python"><pre> <span class="n">mlab</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">vmax</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="n">fine</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="n">fine</span><span class="p">)</span>
+    <span class="n">mlab</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">fine</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+              <span class="n">scalars</span><span class="o">=</span><span class="n">fun</span><span class="o">.</span><span class="n">fine</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">)</span>
+    <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">coor</span><span class="o">.</span><span class="n">coarse</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">fun</span><span class="o">.</span><span class="n">coarse</span><span class="p">,</span>
+                  <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">scale_mode</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">)</span>
+    <span class="n">mlab</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">'Spherical Harmonic'</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+    <span class="n">mlab</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'Figures/functionsphere.png'</span><span class="p">)</span>
+</pre></div>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/functionsphere.png" alt="enter image description here"></p>
+
+<p>Then, we can see the interpolated function:</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/interpsphere.png" alt="enter image description here"></p>
+
+<p>Finally, we can see where the error occurs on our sphere by visualizing the error:</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/errorsphere.png" alt="enter image description here"></p>
+
+<p>Note that the above interpolation uses a relatively high number of data sites (N=350). We can see how this interpolation worsens with a fewer number of sites (N=100).</p>
+
+<p>Again, here is the spherical harmonic we are interpolating with the 100 data sites. </p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorfunctionsphere.png" alt="enter image description here"></p>
+
+<p>Here is the interpolation trained with fewer sites.</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorinterpsphere.png" alt="enter image description here"></p>
+
+<p>Predictably, this causes the error of the interpolation to increase.</p>
+
+<p><img src="https://github.com/jessebett/USRA/blob/master/Interpolation%20Demonstration/Figures/poorerrorsphere.png" alt="enter image description here"></p>
+
+<h3>
+<a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+
+<p>Radial Basis Interpolation is an effective method to interpolate high dimensional scattered data, especially if the interpolation space has no boundaries.</p>
+
+<h3>
+<a name="recommended-reading-for-radial-basis-interpolation" class="anchor" href="#recommended-reading-for-radial-basis-interpolation"><span class="octicon octicon-link"></span></a>Recommended Reading for Radial Basis Interpolation</h3>
+
+<p>Buhmann, M., 2003. Radial basis functions: theory and implementations 5th ed., Cambridge University Press.</p>
+
+<p>Fasshauer, G., 2012. Mesh Free Methods (590). Available at: <a href="http://www.math.iit.edu/%7Efass/590/notes/">http://www.math.iit.edu/~fass/590/notes/</a> [Accessed June 19, 2014].</p>
+
+<p>Mongillo, M., 2011. Choosing Basis Functions and Shape Parameters for Radial Basis Function Methods, Available at: <a href="http://www.siam.org/students/siuro/vol4/S01084.pdf">http://www.siam.org/students/siuro/vol4/S01084.pdf</a> [Accessed July 2, 2014].</p>
+
+<p>Wright, G., 2003. Radial Basis Function Interpolation: Numerical and Analytical Developments. University of Colorado. Available at: <a href="http://amath.colorado.edu/faculty/fornberg/Docs/GradyWrightThesis.pdf">http://amath.colorado.edu/faculty/fornberg/Docs/GradyWrightThesis.pdf</a> [Accessed May 14, 2014].</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/jessebett">jessebett</a> can be found on <a href="https://github.com/jessebett/USRA">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
       </footer>
+
     </div>
 
     
-
   </body>
 </html>
