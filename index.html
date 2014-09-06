@@ -151,7 +151,7 @@
 
             <figure>
                 <img src="Figures/polyinterp.png" alt="enter image description here">
-                <figcaption>Interpolation of 6 data sites by linear combination. The basis functions are succesive powers of x up to (N-1).</figcaption>
+                <figcaption>Interpolation of 6 data sites by linear combination. The basis functions are succesive powers of $x$ up to $x^5$.</figcaption>
             </figure>
 
             <p>However, while polynomial basis is simple for 1-Dimensional interpolation, this method is not ideal for higher dimensions. To accommodate higher dimension interpolation, we must choose our basis differently.</p>
@@ -241,7 +241,7 @@
                 </p>
             </blockquote>
 
-            <p>In other words, our set of basis functions is composed of basic functions centered each of our data sites. We can visualize one of these centered basic functions in the figure below.</p>
+            <p>In other words, our set of basis functions is composed of basic functions centered each of our data sites. We can visualize one of these centered basic functions in Figure 6.</p>
 
             <figure>
                 <img src="Figures/basicbasis.png" alt="enter image description here">
@@ -276,9 +276,10 @@
 
             <p>Notice that if we allow $c=0$ in the multiquadric kernel then we are actually describing the basic function used above. So, in other words, Hardy's multiquadric kernel is like the basic function but smoothed with a parameter $c$. By looking at a plot of the multiquadric kernel, we can see that the discontinuity from the basic function has been addressed. In fact, the multiquadric function is, as desired, $C^\infty$ smooth.</p>
 
-            <p>
+            <figure>
                 <img src="Figures/kernelfun.png" alt="enter image description here">
-            </p>
+                <figcaption>Hardy's Multiquadric Kernel is $C^\infty$-smooth and shaped by a parameter $c$</figcaption>
+            </figure>
 
             <p>As before, we will define our basis functions, ${\psi_i}_{i=1}^{N}$, as a set of multiquadric kernels translated such that they are centered at our data sites, $x_i$.</p>
 
@@ -289,9 +290,10 @@
 
             <p>We can visualize one of these translated multiquadric kernels in the figure below.</p>
 
-            <p>
+            <figure>
                 <img src="Figures/kernelbasis.png" alt="enter image description here">
-            </p>
+                <figcaption>In our set of basis functions $\{\psi_i(x)\}_{i=1}^N$, our $i^{th}$ function, $\psi_i(x)$, is a translation of Hardy's Multiquadric Kernel function so that it is centered on our $i^{th}$ data site, $x_i$.</figcaption>
+            </figure>
 
             <h3>
 <a name="radial-basis-function-kernels" class="anchor" href="#radial-basis-function-kernels"><span class="octicon octicon-link"></span></a>Radial Basis Function Kernels</h3>
