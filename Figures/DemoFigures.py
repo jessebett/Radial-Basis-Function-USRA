@@ -191,7 +191,7 @@ def make_figures(coor, fun, interp_results, error):
     mlab.colorbar(
         # title='Spherical Harmonic', 
         orientation='vertical')
-    mlab.savefig('poorfunctionsphere.png')
+    mlab.savefig('functionsphere.png')
     mlab.close()
 
     # Figure showing results of rbf interpolation
@@ -203,7 +203,7 @@ def make_figures(coor, fun, interp_results, error):
     mlab.colorbar(
         # title='Interpolation', 
         orientation='vertical')
-    mlab.savefig('poorinterpsphere.png')
+    mlab.savefig('interpsphere.png')
     # mlab.show()
     mlab.close()
 
@@ -214,7 +214,7 @@ def make_figures(coor, fun, interp_results, error):
         # title='Error', 
         orientation='vertical')
     # mlab.points3d(coor.coarse.x, coor.coarse.y, coor.coarse.z, scalars, scale_factor=0.1, scale_mode='none',vmax=vmax, vmin=vmin)
-    mlab.savefig('poorerrorsphere.png')
+    mlab.savefig('errorsphere.png')
     mlab.close()
 
 
