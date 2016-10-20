@@ -1,3 +1,6 @@
+# Project Site: [http://jessebett.com/Radial-Basis-Function-USRA/][http://jessebett.com/Radial-Basis-Function-USRA/]
+# Canadian Undergraduate Mathematics Conference Presentation: 
+
 ## About the USRA* Project
 This project explores the use of Radial Basis Functions (RBFs) in the interpolation of scattered data in N-dimensions. It was completed Summer 2014 by Jesse Bettencourt as an NSERC-USRA student under the supervision of Dr. Kevlahan in the Department of Mathematics and Statistics at McMaster University, Hamilton, Ontario, Canada. 
 
@@ -8,7 +11,7 @@ This repository contains resources and working documents associated with the pro
 
 
 [1]: http://cumc.math.ca/2014/
-[2]: https://raw.githubusercontent.com/jessebett/USRA/tree/master/CUMC%20Presentation
+[2]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/tree/master/CUMC%20Presentation
 [3]: http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf
-[4]: https://raw.githubusercontent.com/jessebett/USRA/tree/master/Interpolation%20Demonstration
-[5]: https://raw.githubusercontent.com/jessebett/USRA/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
+[4]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/tree/master/Interpolation%20Demonstration
+[5]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
