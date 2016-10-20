@@ -12,6 +12,6 @@ This repository contains resources and working documents associated with the pro
 
 [1]: http://cumc.math.ca/
 [2]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/tree/master/CUMC%20Presentation
-[3]: http://scipy.org/docs/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf
+[3]: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.Rbf.html#scipy.interpolate.Rbf
 [4]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/tree/master/Interpolation%20Demonstration
 [5]: https://raw.githubusercontent.com/jessebett/Radial-Basis-Function-USRA/master/Interpolation%20Demonstration/SphericalHarmonicInterpolation.py
